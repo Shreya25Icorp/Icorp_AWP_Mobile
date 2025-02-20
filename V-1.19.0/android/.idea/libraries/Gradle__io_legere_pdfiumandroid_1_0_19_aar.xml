@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: io.legere:pdfiumandroid:1.0.19@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c86132307ecf2314178ee231d57c8abb/transformed/jetified-pdfiumandroid-1.0.19/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c86132307ecf2314178ee231d57c8abb/transformed/jetified-pdfiumandroid-1.0.19/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.legere/pdfiumandroid/1.0.19/a45458acc75a4a810e1731a110069e55018d53ca/pdfiumandroid-1.0.19-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.legere/pdfiumandroid/1.0.19/35cdf5c2605fb4b950b73f694aacf2512dd61910/pdfiumandroid-1.0.19-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
