@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">943201114703</string>
+    <string name="google_api_key" translatable="false">AIzaSyD4ET66b9a0qcUzoPjbkB5RlJdSN-Rqm4Q</string>
+    <string name="google_app_id" translatable="false">1:943201114703:android:05788b7f20b62fc0f5e83a</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD4ET66b9a0qcUzoPjbkB5RlJdSN-Rqm4Q</string>
+    <string name="google_storage_bucket" translatable="false">awp-rostering.firebasestorage.app</string>
+    <string name="project_id" translatable="false">awp-rostering</string>
+</resources>

@@ -1,0 +1,679 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.activeworkforcepro.app"
+4    android:versionCode="25"
+5    android:versionName="1.19.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:3:5-67
+11-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:3:22-64
+12    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+12-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:10:5-78
+12-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:10:22-75
+13    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+13-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:4:5-81
+13-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:4:22-78
+14    <uses-permission android:name="android.permission.CAMERA" />
+14-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:5:5-65
+14-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:5:22-62
+15    <uses-permission android:name="android.permission.VIBRATE" />
+15-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:6:5-66
+15-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:6:22-63
+16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+16-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:7:5-79
+16-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:7:22-76
+17    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+17-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:8:5-80
+17-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:8:22-77
+18    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+18-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:9:5-81
+18-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:9:22-78
+19    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+19-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:12:5-72
+19-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:12:22-69
+20    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+20-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:13:5-74
+20-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:13:22-71
+21    <uses-permission android:name="android.permission.NFC" />
+21-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:15:6-63
+21-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:15:23-60
+22    <uses-permission android:name="android.permission.NFC_HCE" />
+22-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:16:2-63
+22-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:16:19-60
+23    <uses-permission android:name="android.permission.BIND_NFC_SERVICE" />
+23-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:17:2-72
+23-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:17:19-69
+24
+25    <uses-feature
+25-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:18:5-82
+26        android:name="android.hardware.nfc"
+26-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:18:19-54
+27        android:required="false" />
+27-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:18:55-79
+28
+29    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+29-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:21:5-82
+29-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:21:22-79
+30    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+30-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:23:5-77
+30-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:23:22-74
+31    <uses-permission android:name="com.google.android.c2dm.permission.SEND" /> <!-- Add SMS permission -->
+31-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:24:5-79
+31-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:24:22-76
+32    <!-- <uses-permission android:name="android.permission.RECEIVE_SMS"/> -->
+33    <!-- Add location permission -->
+34    <!--
+35 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+36    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+37    -->
+38    <!-- Optional: Background location access (Android 10 and higher) -->
+39    <!-- <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> -->
+40    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+40-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:38:5-77
+40-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:38:22-74
+41    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+41-->[com.facebook.flipper:flipper:0.182.0] C:\Users\Admin\.gradle\caches\transforms-3\19ad258afa2de9aff1a9dcc071a8676b\transformed\jetified-flipper-0.182.0\AndroidManifest.xml:16:5-76
+41-->[com.facebook.flipper:flipper:0.182.0] C:\Users\Admin\.gradle\caches\transforms-3\19ad258afa2de9aff1a9dcc071a8676b\transformed\jetified-flipper-0.182.0\AndroidManifest.xml:16:22-73
+42    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required to to download files without a notification -->
+42-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:5-68
+42-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:22-65
+43    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+43-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:32:5-88
+43-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:32:22-85
+44
+45    <queries>
+45-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-11:15
+46        <intent>
+46-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-10:18
+47            <action android:name="android.media.action.IMAGE_CAPTURE" />
+47-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-73
+47-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:21-70
+48        </intent>
+49    </queries>
+50
+51    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+51-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:26:5-110
+51-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:26:22-107
+52    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+52-->[com.google.android.gms:play-services-measurement-impl:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\631c73921ac74276d68784a12b4900ec\transformed\jetified-play-services-measurement-impl-21.1.0\AndroidManifest.xml:27:5-79
+52-->[com.google.android.gms:play-services-measurement-impl:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\631c73921ac74276d68784a12b4900ec\transformed\jetified-play-services-measurement-impl-21.1.0\AndroidManifest.xml:27:22-76
+53
+54    <permission
+54-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\e13956c0993b425fd09ad0fceb1f6252\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+55        android:name="com.activeworkforcepro.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+55-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\e13956c0993b425fd09ad0fceb1f6252\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+56        android:protectionLevel="signature" />
+56-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\e13956c0993b425fd09ad0fceb1f6252\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+57
+58    <uses-permission android:name="com.activeworkforcepro.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- for android -->
+58-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\e13956c0993b425fd09ad0fceb1f6252\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+58-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\e13956c0993b425fd09ad0fceb1f6252\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+59    <!-- <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/> -->
+60    <!-- <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/> -->
+61    <!-- <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" /> -->
+62    <!-- <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" /> -->
+63    <!-- for Samsung -->
+64    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+64-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:19:5-86
+64-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:19:22-83
+65    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" /> <!-- for htc -->
+65-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:20:5-87
+65-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:20:22-84
+66    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+66-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:23:5-81
+66-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:23:22-78
+67    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" /> <!-- for sony -->
+67-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:24:5-83
+67-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:24:22-80
+68    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+68-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:27:5-88
+68-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:27:22-85
+69    <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE" /> <!-- for apex -->
+69-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:28:5-92
+69-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:28:22-89
+70    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" /> <!-- for solid -->
+70-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:31:5-84
+70-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:31:22-81
+71    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" /> <!-- for huawei -->
+71-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:34:5-83
+71-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:34:22-80
+72    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+72-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:37:5-91
+72-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:37:22-88
+73    <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
+73-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:38:5-92
+73-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:38:22-89
+74    <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" /> <!-- for ZUK -->
+74-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:39:5-93
+74-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:39:22-90
+75    <uses-permission android:name="android.permission.READ_APP_BADGE" /> <!-- for OPPO -->
+75-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:42:5-73
+75-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:42:22-70
+76    <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS" />
+76-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:45:5-82
+76-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:45:22-79
+77    <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS" /> <!-- for EvMe -->
+77-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:46:5-83
+77-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:46:22-80
+78    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ" />
+78-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:49:5-88
+78-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:49:22-85
+79    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE" />
+79-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:50:5-89
+79-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\Admin\.gradle\caches\transforms-3\82a264c174c4cdfd4cf668c3ecfc0488\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:50:22-86
+80
+81    <application
+81-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:41:5-100:19
+82        android:name="com.activeworkforcepro.app.MainApplication"
+82-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:44:7-38
+83        android:allowBackup="false"
+83-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:48:7-34
+84        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+84-->[androidx.core:core:1.12.0] C:\Users\Admin\.gradle\caches\transforms-3\e13956c0993b425fd09ad0fceb1f6252\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+85        android:debuggable="true"
+86        android:extractNativeLibs="false"
+87        android:icon="@mipmap/awp_logo"
+87-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:47:7-38
+88        android:label="Active Workforce Pro"
+88-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:45:7-43
+89        android:requestLegacyExternalStorage="true"
+89-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:42:6-49
+90        android:theme="@style/AppTheme"
+90-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:49:7-38
+91        android:usesCleartextTraffic="true" >
+91-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:43:5-40
+92        <activity
+92-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\debug\AndroidManifest.xml:12:9-111
+93            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+93-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\debug\AndroidManifest.xml:12:19-83
+94            android:exported="false" />
+94-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\debug\AndroidManifest.xml:12:84-108
+95        <activity
+95-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:50:7-73:18
+96            android:name="com.activeworkforcepro.app.MainActivity"
+96-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:51:9-37
+97            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+97-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:53:9-118
+98            android:exported="true"
+98-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:56:9-32
+99            android:label="Active Workforce Pro"
+99-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:52:9-45
+100            android:launchMode="singleTask"
+100-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:54:9-40
+101            android:windowSoftInputMode="adjustResize" >
+101-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:55:9-51
+102            <intent-filter android:autoVerify="true" >
+102-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:58:3-64:19
+102-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:58:18-43
+103                <action android:name="android.intent.action.VIEW" />
+103-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:59:9-61
+103-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:59:17-58
+104
+105                <category android:name="android.intent.category.DEFAULT" />
+105-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:60:9-68
+105-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:60:19-65
+106                <category android:name="android.intent.category.BROWSABLE" />
+106-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:61:9-70
+106-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:61:19-67
+107
+108                <data
+108-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:62:9-135
+109                    android:host="com.activeworkforcepro.app"
+109-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:62:51-92
+110                    android:pathPrefix="/UnconfirmedShifts"
+110-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:62:93-132
+111                    android:scheme="activeworkforcepro" />
+111-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:62:15-50
+112                <data android:mimeType="*/*" />
+112-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:62:9-135
+113            </intent-filter>
+114            <intent-filter>
+114-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:65:9-68:25
+115                <action android:name="android.intent.action.MAIN" />
+115-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:66:7-59
+115-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:66:15-56
+116
+117                <category android:name="android.intent.category.LAUNCHER" />
+117-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:67:13-73
+117-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:67:23-70
+118            </intent-filter>
+119            <intent-filter>
+119-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:69:9-71:25
+120                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+120-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:70:13-73
+120-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:70:21-70
+121            </intent-filter>
+122        </activity>
+123
+124        <service android:name="com.activeworkforcepro.app.ForegroundService" />
+124-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:75:8-76:49
+124-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:76:13-46
+125        <!--
+126 <service
+127            android:name=".MyFirebaseMessagingService"
+128            android:exported="true">
+129            <intent-filter>
+130                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+131            </intent-filter>
+132        </service>
+133        -->
+134        <receiver android:name="io.invertase.firebase.notifications.RNFirebaseNotificationReceiver" />
+134-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:86:9-112
+134-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:86:19-100
+135        <receiver
+135-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:87:9-167
+136            android:name="io.invertase.firebase.notifications.RNFirebaseNotificationsRebootReceiver"
+136-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:87:67-155
+137            android:enabled="true"
+137-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:87:19-41
+138            android:exported="true" />
+138-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:87:42-65
+139
+140        <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" />
+140-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:89:9-104
+140-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:89:18-101
+141        <service
+141-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:93:9-96:35
+142            android:name="com.dieam.reactnativepushnotification.services.PushNotificationService"
+142-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:94:9-94
+143            android:exported="true"
+143-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:96:9-32
+144            android:permission="android.permission.BLUETOOTH_ADMIN" />
+144-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:95:9-64
+145        <service android:name="com.dieam.reactnativepushnotification.modules.PushNotificationService" />
+145-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:98:5-100
+145-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:98:14-98
+146
+147        <receiver
+147-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:99:5-127
+148            android:name="com.dieam.reactnativepushnotification.modules.PushNotificationReceiver"
+148-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:99:15-100
+149            android:exported="false" />
+149-->D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\android\app\src\main\AndroidManifest.xml:99:101-125
+150
+151        <service android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingHeadlessService" />
+151-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:9-111
+151-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:18-108
+152        <service
+152-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:9-19:19
+153            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingService"
+153-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-95
+154            android:exported="false" >
+154-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-37
+155            <intent-filter>
+155-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-18:29
+156                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+156-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-78
+156-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:25-75
+157            </intent-filter>
+158        </service>
+159
+160        <receiver
+160-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:9-28:20
+161            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingReceiver"
+161-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-96
+162            android:exported="true"
+162-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:13-36
+163            android:permission="com.google.android.c2dm.permission.SEND" >
+163-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-73
+164            <intent-filter>
+164-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-27:29
+165                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+165-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:17-81
+165-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:25-78
+166            </intent-filter>
+167        </receiver>
+168
+169        <meta-data
+169-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:9-32:36
+170            android:name="firebase_messaging_auto_init_enabled"
+170-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-64
+171            android:value="true" />
+171-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:32:13-33
+172        <meta-data
+172-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:33:9-35:32
+173            android:name="com.google.firebase.messaging.default_notification_channel_id"
+173-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:13-89
+174            android:value="" />
+174-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:35:13-29
+175        <meta-data
+175-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:36:9-38:47
+176            android:name="com.google.firebase.messaging.default_notification_color"
+176-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:37:13-84
+177            android:resource="@color/white" />
+177-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:38:13-44
+178        <meta-data
+178-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-10:36
+179            android:name="app_data_collection_default_enabled"
+179-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-63
+180            android:value="true" />
+180-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-33
+181
+182        <service
+182-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:9-16:19
+183            android:name="com.google.firebase.components.ComponentDiscoveryService"
+183-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:18-89
+184            android:directBootAware="true"
+184-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Admin\.gradle\caches\transforms-3\5e8f95c9ec5a1375ffe83905c753d489\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:34:13-43
+185            android:exported="false" >
+185-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:54:13-37
+186            <meta-data
+186-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-15:85
+187                android:name="com.google.firebase.components:io.invertase.firebase.app.ReactNativeFirebaseAppRegistrar"
+187-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:17-120
+188                android:value="com.google.firebase.components.ComponentRegistrar" />
+188-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:17-82
+189            <meta-data
+189-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:55:13-57:85
+190                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+190-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:56:17-119
+191                android:value="com.google.firebase.components.ComponentRegistrar" />
+191-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:57:17-82
+192            <meta-data
+192-->[com.google.firebase:firebase-datatransport:18.1.7] C:\Users\Admin\.gradle\caches\transforms-3\64ae06fe9aa18ab75ec4a04a8c8e5644\transformed\jetified-firebase-datatransport-18.1.7\AndroidManifest.xml:27:13-29:85
+193                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+193-->[com.google.firebase:firebase-datatransport:18.1.7] C:\Users\Admin\.gradle\caches\transforms-3\64ae06fe9aa18ab75ec4a04a8c8e5644\transformed\jetified-firebase-datatransport-18.1.7\AndroidManifest.xml:28:17-115
+194                android:value="com.google.firebase.components.ComponentRegistrar" />
+194-->[com.google.firebase:firebase-datatransport:18.1.7] C:\Users\Admin\.gradle\caches\transforms-3\64ae06fe9aa18ab75ec4a04a8c8e5644\transformed\jetified-firebase-datatransport-18.1.7\AndroidManifest.xml:29:17-82
+195            <meta-data
+195-->[com.google.android.gms:play-services-measurement-api:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\30d0b594dab799b287a7a71fe23196fe\transformed\jetified-play-services-measurement-api-21.1.0\AndroidManifest.xml:31:13-33:85
+196                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+196-->[com.google.android.gms:play-services-measurement-api:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\30d0b594dab799b287a7a71fe23196fe\transformed\jetified-play-services-measurement-api-21.1.0\AndroidManifest.xml:32:17-139
+197                android:value="com.google.firebase.components.ComponentRegistrar" />
+197-->[com.google.android.gms:play-services-measurement-api:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\30d0b594dab799b287a7a71fe23196fe\transformed\jetified-play-services-measurement-api-21.1.0\AndroidManifest.xml:33:17-82
+198            <meta-data
+198-->[com.google.firebase:firebase-installations:17.1.0] C:\Users\Admin\.gradle\caches\transforms-3\683e77be66630f1b3904b05f74c82903\transformed\jetified-firebase-installations-17.1.0\AndroidManifest.xml:17:13-19:85
+199                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+199-->[com.google.firebase:firebase-installations:17.1.0] C:\Users\Admin\.gradle\caches\transforms-3\683e77be66630f1b3904b05f74c82903\transformed\jetified-firebase-installations-17.1.0\AndroidManifest.xml:18:17-127
+200                android:value="com.google.firebase.components.ComponentRegistrar" />
+200-->[com.google.firebase:firebase-installations:17.1.0] C:\Users\Admin\.gradle\caches\transforms-3\683e77be66630f1b3904b05f74c82903\transformed\jetified-firebase-installations-17.1.0\AndroidManifest.xml:19:17-82
+201        </service>
+202
+203        <provider
+203-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:9-22:38
+204            android:name="io.invertase.firebase.app.ReactNativeFirebaseAppInitProvider"
+204-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-88
+205            android:authorities="com.activeworkforcepro.app.reactnativefirebaseappinitprovider"
+205-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-86
+206            android:exported="false"
+206-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-37
+207            android:initOrder="99" />
+207-->[:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-35
+208        <provider
+208-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:35:9-43:20
+209            android:name="com.ReactNativeBlobUtil.Utils.FileProvider"
+209-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:36:13-70
+210            android:authorities="com.activeworkforcepro.app.provider"
+210-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:37:13-60
+211            android:exported="false"
+211-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:38:13-37
+212            android:grantUriPermissions="true" >
+212-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:39:13-47
+213            <meta-data
+213-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:40:13-42:58
+214                android:name="android.support.FILE_PROVIDER_PATHS"
+214-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:41:17-67
+215                android:resource="@xml/provider_paths" />
+215-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:42:17-55
+216        </provider>
+217        <provider
+217-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:9-24:20
+218            android:name="com.reactnative.ivpusic.imagepicker.IvpusicImagePickerFileProvider"
+218-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-94
+219            android:authorities="com.activeworkforcepro.app.provider"
+219-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-60
+220            android:exported="false"
+220-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-37
+221            android:grantUriPermissions="true" >
+221-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-47
+222            <meta-data
+222-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:40:13-42:58
+223                android:name="android.support.FILE_PROVIDER_PATHS"
+223-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:41:17-67
+224                android:resource="@xml/ivpusic_imagepicker_provider_paths" />
+224-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:42:17-55
+225        </provider>
+226
+227        <activity
+227-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:9-28:72
+228            android:name="com.yalantis.ucrop.UCropActivity"
+228-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-60
+229            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+229-->[:react-native-image-crop-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-69
+230
+231        <provider
+231-->[:react-native-image-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-16:20
+232            android:name="com.imagepicker.ImagePickerProvider"
+232-->[:react-native-image-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-63
+233            android:authorities="com.activeworkforcepro.app.imagepickerprovider"
+233-->[:react-native-image-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-71
+234            android:exported="false"
+234-->[:react-native-image-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-37
+235            android:grantUriPermissions="true" >
+235-->[:react-native-image-picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-47
+236            <meta-data
+236-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:40:13-42:58
+237                android:name="android.support.FILE_PROVIDER_PATHS"
+237-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:41:17-67
+238                android:resource="@xml/imagepicker_provider_paths" />
+238-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:42:17-55
+239        </provider>
+240        <provider
+240-->[:react-native-webview] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-16:20
+241            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
+241-->[:react-native-webview] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-83
+242            android:authorities="com.activeworkforcepro.app.fileprovider"
+242-->[:react-native-webview] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-64
+243            android:exported="false"
+243-->[:react-native-webview] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-37
+244            android:grantUriPermissions="true" >
+244-->[:react-native-webview] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-47
+245            <meta-data
+245-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:40:13-42:58
+246                android:name="android.support.FILE_PROVIDER_PATHS"
+246-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:41:17-67
+247                android:resource="@xml/file_provider_paths" />
+247-->[:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:42:17-55
+248        </provider>
+249
+250        <receiver
+250-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:31:9-38:20
+251            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+251-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:32:13-78
+252            android:exported="true"
+252-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:33:13-36
+253            android:permission="com.google.android.c2dm.permission.SEND" >
+253-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:34:13-73
+254            <intent-filter>
+254-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-27:29
+255                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+255-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:17-81
+255-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:25-78
+256            </intent-filter>
+257        </receiver>
+258        <!--
+259             FirebaseMessagingService performs security checks at runtime,
+260             but set to not exported to explicitly avoid allowing another app to call it.
+261        -->
+262        <service
+262-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:44:9-51:19
+263            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+263-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:45:13-82
+264            android:directBootAware="true"
+264-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:46:13-43
+265            android:exported="false" >
+265-->[com.google.firebase:firebase-messaging:23.1.0] C:\Users\Admin\.gradle\caches\transforms-3\80ccd9faf9048f40093e6cf7bc457e30\transformed\jetified-firebase-messaging-23.1.0\AndroidManifest.xml:47:13-37
+266            <intent-filter android:priority="-500" >
+266-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-18:29
+267                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+267-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-78
+267-->[:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:25-75
+268            </intent-filter>
+269        </service>
+270
+271        <meta-data
+271-->[com.github.bumptech.glide:okhttp3-integration:4.12.0] C:\Users\Admin\.gradle\caches\transforms-3\35286f8bb30b2e67f3a7f7a14a327c50\transformed\jetified-okhttp3-integration-4.12.0\AndroidManifest.xml:11:9-13:43
+272            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
+272-->[com.github.bumptech.glide:okhttp3-integration:4.12.0] C:\Users\Admin\.gradle\caches\transforms-3\35286f8bb30b2e67f3a7f7a14a327c50\transformed\jetified-okhttp3-integration-4.12.0\AndroidManifest.xml:12:13-84
+273            android:value="GlideModule" />
+273-->[com.github.bumptech.glide:okhttp3-integration:4.12.0] C:\Users\Admin\.gradle\caches\transforms-3\35286f8bb30b2e67f3a7f7a14a327c50\transformed\jetified-okhttp3-integration-4.12.0\AndroidManifest.xml:13:13-40
+274
+275        <activity
+275-->[com.google.android.gms:play-services-auth:19.2.0] C:\Users\Admin\.gradle\caches\transforms-3\16c3c03e25a3728070de16a2af5d4adf\transformed\jetified-play-services-auth-19.2.0\AndroidManifest.xml:23:9-27:75
+276            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+276-->[com.google.android.gms:play-services-auth:19.2.0] C:\Users\Admin\.gradle\caches\transforms-3\16c3c03e25a3728070de16a2af5d4adf\transformed\jetified-play-services-auth-19.2.0\AndroidManifest.xml:24:13-93
+277            android:excludeFromRecents="true"
+277-->[com.google.android.gms:play-services-auth:19.2.0] C:\Users\Admin\.gradle\caches\transforms-3\16c3c03e25a3728070de16a2af5d4adf\transformed\jetified-play-services-auth-19.2.0\AndroidManifest.xml:25:13-46
+278            android:exported="false"
+278-->[com.google.android.gms:play-services-auth:19.2.0] C:\Users\Admin\.gradle\caches\transforms-3\16c3c03e25a3728070de16a2af5d4adf\transformed\jetified-play-services-auth-19.2.0\AndroidManifest.xml:26:13-37
+279            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+279-->[com.google.android.gms:play-services-auth:19.2.0] C:\Users\Admin\.gradle\caches\transforms-3\16c3c03e25a3728070de16a2af5d4adf\transformed\jetified-play-services-auth-19.2.0\AndroidManifest.xml:27:13-72
+280        <!--
+281            Service handling Google Sign-In user revocation. For apps that do not integrate with
+282            Google Sign-In, this service will never be started.
+283        -->
+284        <service
+284-->[com.google.android.gms:play-services-auth:19.2.0] C:\Users\Admin\.gradle\caches\transforms-3\16c3c03e25a3728070de16a2af5d4adf\transformed\jetified-play-services-auth-19.2.0\AndroidManifest.xml:33:9-37:51
+285            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+285-->[com.google.android.gms:play-services-auth:19.2.0] C:\Users\Admin\.gradle\caches\transforms-3\16c3c03e25a3728070de16a2af5d4adf\transformed\jetified-play-services-auth-19.2.0\AndroidManifest.xml:34:13-89
+286            android:exported="true"
+286-->[com.google.android.gms:play-services-auth:19.2.0] C:\Users\Admin\.gradle\caches\transforms-3\16c3c03e25a3728070de16a2af5d4adf\transformed\jetified-play-services-auth-19.2.0\AndroidManifest.xml:35:13-36
+287            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+287-->[com.google.android.gms:play-services-auth:19.2.0] C:\Users\Admin\.gradle\caches\transforms-3\16c3c03e25a3728070de16a2af5d4adf\transformed\jetified-play-services-auth-19.2.0\AndroidManifest.xml:36:13-107
+288            android:visibleToInstantApps="true" />
+288-->[com.google.android.gms:play-services-auth:19.2.0] C:\Users\Admin\.gradle\caches\transforms-3\16c3c03e25a3728070de16a2af5d4adf\transformed\jetified-play-services-auth-19.2.0\AndroidManifest.xml:37:13-48
+289
+290        <activity
+290-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-3\e3a72ae4ef78443138faf289975e0264\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+291            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+291-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-3\e3a72ae4ef78443138faf289975e0264\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+292            android:exported="false"
+292-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-3\e3a72ae4ef78443138faf289975e0264\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+293            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+293-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Admin\.gradle\caches\transforms-3\e3a72ae4ef78443138faf289975e0264\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+294
+295        <receiver
+295-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:29:9-33:20
+296            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+296-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:30:13-85
+297            android:enabled="true"
+297-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:31:13-35
+298            android:exported="false" >
+298-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:32:13-37
+299        </receiver>
+300
+301        <service
+301-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:35:9-38:40
+302            android:name="com.google.android.gms.measurement.AppMeasurementService"
+302-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:36:13-84
+303            android:enabled="true"
+303-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:37:13-35
+304            android:exported="false" />
+304-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:38:13-37
+305        <service
+305-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:39:9-43:72
+306            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+306-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:40:13-87
+307            android:enabled="true"
+307-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:41:13-35
+308            android:exported="false"
+308-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:42:13-37
+309            android:permission="android.permission.BIND_JOB_SERVICE" />
+309-->[com.google.android.gms:play-services-measurement:21.1.0] C:\Users\Admin\.gradle\caches\transforms-3\1f305683c9f5739682b0e5040875f628\transformed\jetified-play-services-measurement-21.1.0\AndroidManifest.xml:43:13-69
+310
+311        <provider
+311-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Admin\.gradle\caches\transforms-3\5e8f95c9ec5a1375ffe83905c753d489\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:25:9-30:39
+312            android:name="com.google.firebase.provider.FirebaseInitProvider"
+312-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Admin\.gradle\caches\transforms-3\5e8f95c9ec5a1375ffe83905c753d489\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:26:13-77
+313            android:authorities="com.activeworkforcepro.app.firebaseinitprovider"
+313-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Admin\.gradle\caches\transforms-3\5e8f95c9ec5a1375ffe83905c753d489\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:27:13-72
+314            android:directBootAware="true"
+314-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Admin\.gradle\caches\transforms-3\5e8f95c9ec5a1375ffe83905c753d489\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:28:13-43
+315            android:exported="false"
+315-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Admin\.gradle\caches\transforms-3\5e8f95c9ec5a1375ffe83905c753d489\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:29:13-37
+316            android:initOrder="100" />
+316-->[com.google.firebase:firebase-common:20.2.0] C:\Users\Admin\.gradle\caches\transforms-3\5e8f95c9ec5a1375ffe83905c753d489\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:30:13-36
+317
+318        <meta-data
+318-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\ec176508ca0cda52a6af9e3fc812ec4a\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+319            android:name="com.google.android.gms.version"
+319-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\ec176508ca0cda52a6af9e3fc812ec4a\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+320            android:value="@integer/google_play_services_version" />
+320-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Admin\.gradle\caches\transforms-3\ec176508ca0cda52a6af9e3fc812ec4a\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+321
+322        <provider
+322-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Admin\.gradle\caches\transforms-3\046e8c38947aa34594edea0f999cfcaf\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
+323            android:name="androidx.startup.InitializationProvider"
+323-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Admin\.gradle\caches\transforms-3\046e8c38947aa34594edea0f999cfcaf\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:27:13-67
+324            android:authorities="com.activeworkforcepro.app.androidx-startup"
+324-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Admin\.gradle\caches\transforms-3\046e8c38947aa34594edea0f999cfcaf\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:28:13-68
+325            android:exported="false" >
+325-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Admin\.gradle\caches\transforms-3\046e8c38947aa34594edea0f999cfcaf\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:29:13-37
+326            <meta-data
+326-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Admin\.gradle\caches\transforms-3\046e8c38947aa34594edea0f999cfcaf\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
+327                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+327-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Admin\.gradle\caches\transforms-3\046e8c38947aa34594edea0f999cfcaf\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:32:17-75
+328                android:value="androidx.startup" />
+328-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Admin\.gradle\caches\transforms-3\046e8c38947aa34594edea0f999cfcaf\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:33:17-49
+329            <meta-data
+329-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Admin\.gradle\caches\transforms-3\5f307cd5f9f4256be8d2f4f719249792\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
+330                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+330-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Admin\.gradle\caches\transforms-3\5f307cd5f9f4256be8d2f4f719249792\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
+331                android:value="androidx.startup" />
+331-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Admin\.gradle\caches\transforms-3\5f307cd5f9f4256be8d2f4f719249792\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
+332        </provider>
+333
+334        <service
+334-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\385794792855203409cf52d63c4dbbd5\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:28:9-34:19
+335            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+335-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\385794792855203409cf52d63c4dbbd5\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:29:13-103
+336            android:exported="false" >
+336-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\385794792855203409cf52d63c4dbbd5\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:30:13-37
+337            <meta-data
+337-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\385794792855203409cf52d63c4dbbd5\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:31:13-33:39
+338                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+338-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\385794792855203409cf52d63c4dbbd5\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:32:17-94
+339                android:value="cct" />
+339-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\385794792855203409cf52d63c4dbbd5\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:33:17-36
+340        </service>
+341        <service
+341-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\b0ea40473418816d3bf59e7ab7d8bd5c\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:26:9-30:19
+342            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+342-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\b0ea40473418816d3bf59e7ab7d8bd5c\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:27:13-117
+343            android:exported="false"
+343-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\b0ea40473418816d3bf59e7ab7d8bd5c\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:28:13-37
+344            android:permission="android.permission.BIND_JOB_SERVICE" >
+344-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\b0ea40473418816d3bf59e7ab7d8bd5c\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:29:13-69
+345        </service>
+346
+347        <receiver
+347-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\b0ea40473418816d3bf59e7ab7d8bd5c\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:32:9-34:40
+348            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+348-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\b0ea40473418816d3bf59e7ab7d8bd5c\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:33:13-132
+349            android:exported="false" />
+349-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Admin\.gradle\caches\transforms-3\b0ea40473418816d3bf59e7ab7d8bd5c\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:34:13-37
+350
+351        <meta-data
+351-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Admin\.gradle\caches\transforms-3\0810e8bfe82abacaa7636c399ab9b02f\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:12:9-14:37
+352            android:name="com.facebook.soloader.enabled"
+352-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Admin\.gradle\caches\transforms-3\0810e8bfe82abacaa7636c399ab9b02f\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:13:13-57
+353            android:value="false" />
+353-->[com.facebook.soloader:soloader:0.10.5] C:\Users\Admin\.gradle\caches\transforms-3\0810e8bfe82abacaa7636c399ab9b02f\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:14:13-34
+354
+355        <activity
+355-->[com.jakewharton:process-phoenix:2.1.2] C:\Users\Admin\.gradle\caches\transforms-3\c85c5b32c7d4aae57c90529f77b5a9dc\transformed\jetified-process-phoenix-2.1.2\AndroidManifest.xml:8:9-12:75
+356            android:name="com.jakewharton.processphoenix.ProcessPhoenix"
+356-->[com.jakewharton:process-phoenix:2.1.2] C:\Users\Admin\.gradle\caches\transforms-3\c85c5b32c7d4aae57c90529f77b5a9dc\transformed\jetified-process-phoenix-2.1.2\AndroidManifest.xml:9:13-73
+357            android:exported="false"
+357-->[com.jakewharton:process-phoenix:2.1.2] C:\Users\Admin\.gradle\caches\transforms-3\c85c5b32c7d4aae57c90529f77b5a9dc\transformed\jetified-process-phoenix-2.1.2\AndroidManifest.xml:10:13-37
+358            android:process=":phoenix"
+358-->[com.jakewharton:process-phoenix:2.1.2] C:\Users\Admin\.gradle\caches\transforms-3\c85c5b32c7d4aae57c90529f77b5a9dc\transformed\jetified-process-phoenix-2.1.2\AndroidManifest.xml:11:13-39
+359            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+359-->[com.jakewharton:process-phoenix:2.1.2] C:\Users\Admin\.gradle\caches\transforms-3\c85c5b32c7d4aae57c90529f77b5a9dc\transformed\jetified-process-phoenix-2.1.2\AndroidManifest.xml:12:13-72
+360    </application>
+361
+362</manifest>
