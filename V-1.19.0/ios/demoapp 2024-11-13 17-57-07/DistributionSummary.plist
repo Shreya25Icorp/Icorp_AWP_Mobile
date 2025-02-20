@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>demoapp.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>1.3.0</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>B0CB39698D5EB1492F2DF46559AD412F6A256EC1</string>
+				<key>dateExpires</key>
+				<string>06/11/25</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>buildNumber</key>
+					<string>0.12.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>B0CB39698D5EB1492F2DF46559AD412F6A256EC1</string>
+						<key>dateExpires</key>
+						<string>06/11/25</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>hermes.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>D3863F89RQ</string>
+						<key>name</key>
+						<string>ACTIVE WORKFORCE PRO PTY LTD</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>0.12.0</string>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>D3863F89RQ.com.activeworkforcepro.app</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>D3863F89RQ</string>
+				<key>get-task-allow</key>
+				<true/>
+			</dict>
+			<key>name</key>
+			<string>demoapp.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>733c773b-0ded-4377-982b-14a4939c77cc</string>
+				<key>dateExpires</key>
+				<string>13/11/25</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: com.activeworkforcepro.app</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>D3863F89RQ</string>
+				<key>name</key>
+				<string>ACTIVE WORKFORCE PRO PTY LTD</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.3.0</string>
+		</dict>
+	</array>
+</dict>
+</plist>
