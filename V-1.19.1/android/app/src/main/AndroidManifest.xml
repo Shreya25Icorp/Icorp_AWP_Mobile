@@ -1,0 +1,101 @@
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
+     <uses-permission android:name="android.permission.NFC" />
+	<uses-permission android:name="android.permission.NFC_HCE" />
+	<uses-permission android:name="android.permission.BIND_NFC_SERVICE" />
+    <uses-feature android:name="android.hardware.nfc" android:required="false" />
+
+
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.SEND" />
+
+
+
+
+    <!-- Add SMS permission -->
+    <!-- <uses-permission android:name="android.permission.RECEIVE_SMS"/> -->
+    <!-- Add location permission -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
+    
+    <!-- Optional: Background location access (Android 10 and higher) -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> -->
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    
+    <application
+     android:requestLegacyExternalStorage="true"
+    android:usesCleartextTraffic="true"
+      android:name=".MainApplication"
+      android:label="Active Workforce Pro"
+      tools:replace="android:label"
+      android:icon="@mipmap/awp_logo"
+      android:allowBackup="false"
+      android:theme="@style/AppTheme">
+      <activity
+        android:name=".MainActivity"
+        android:label="Active Workforce Pro"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+        android:launchMode="singleTask"
+        android:windowSoftInputMode="adjustResize"
+        android:exported="true"
+        >
+		<intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="activeworkforcepro" android:host="com.activeworkforcepro.app" android:pathPrefix="/UnconfirmedShifts" />
+     <data android:mimeType="*/*" />
+		</intent-filter>
+        <intent-filter>
+		    <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.nfc.action.TECH_DISCOVERED" />
+        </intent-filter>
+
+      </activity>
+
+       <service
+            android:name=".ForegroundService" />
+        <!-- <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service> -->
+
+        
+        <receiver android:name="io.invertase.firebase.notifications.RNFirebaseNotificationReceiver"></receiver>
+        <receiver android:enabled="true" android:exported="true"  android:name="io.invertase.firebase.notifications.RNFirebaseNotificationsRebootReceiver"></receiver>
+
+        <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" />
+
+        
+
+        <service
+        android:name="com.dieam.reactnativepushnotification.services.PushNotificationService"
+        android:permission="android.permission.BLUETOOTH_ADMIN"
+        android:exported="true" />
+
+    <service android:name="com.dieam.reactnativepushnotification.modules.PushNotificationService"/>
+    <receiver android:name="com.dieam.reactnativepushnotification.modules.PushNotificationReceiver" android:exported="false"/>
+    </application>
+</manifest>

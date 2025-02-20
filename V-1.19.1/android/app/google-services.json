@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "943201114703",
+    "project_id": "awp-rostering",
+    "storage_bucket": "awp-rostering.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943201114703:android:05788b7f20b62fc0f5e83a",
+        "android_client_info": {
+          "package_name": "com.activeworkforcepro.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4ET66b9a0qcUzoPjbkB5RlJdSN-Rqm4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
