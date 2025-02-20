@@ -1,0 +1,41 @@
+/* eslint-disable prettier/prettier */
+
+// eslint-disable-next-line quotes
+
+export const SERVER_URL = "https://app.helloworldproject.xyz";
+// export const SERVER_URL_ROASTERING = "https://rostering.helloworldproject.xyz/api/v1";
+// export const SERVER_URL_ROASTERING_DOMAIN = "https://rostering.helloworldproject.xyz";
+
+export const SERVER_URL_ROASTERING = "https://rostering.activeworkforcepro.com.au/api/v1";
+export const SERVER_URL_ROASTERING_DOMAIN = "https://rostering.activeworkforcepro.com.au";
+
+
+export const NEXT_PUBLIC_BUNNING_ID = "66c6db1ce5509e3031606ff5"
+export const NEXT_PUBLIC_BAG_CHECK_ID = "6752ba322e017aa6d0a1202c"
+export const NEXT_PUBLIC_THEFT_ID = "66b77872447bc79806245d3b"
+export const NEXT_PUBLIC_ARMED_ID = "6752ba632e017aa6d0a120ab"
+export const NEXT_PUBLIC_DAMAGE_ID = "6752ba572e017aa6d0a120a2"
+export const NEXT_PUBLIC_SUSPICIOUS_ID = "6752ba462e017aa6d0a1208d"
+
+
+export const NEXT_PUBLIC_MONITORING_OPTION_ID_DO_NOT = "6756b6e903d8ecc2b4e2951e"
+export const NEXT_PUBLIC_MONITORING_OPTION_ID_INTRERWAL = "6756b71d03d8ecc2b4e29525"
+export const NEXT_PUBLIC_MONITORING_OPTION_ID_FIXED = "675fa8cddbaa2fea5fa0face"
+
+export const NEXT_PUBLIC_SCAN_LOG_ONLY = "6756b7b28afa954a4a3af069"
+export const NEXT_PUBLIC_SCAN_DISPLAY_MESSAGE = "6756b7bf8afa954a4a3af070"
+export const NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION = "6756b7da8afa954a4a3af07e"
+export const NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION_YES = "6756b7f38afa954a4a3af08c"
+export const NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION_NO = "6756b7e68afa954a4a3af085"
+export const NEXT_PUBLIC_SCAN_EXCEPTION_MULTI_QUESTION = "6756b8018afa954a4a3af093"
+
+export const NEXT_PUBLIC_SCAN_EXCEPTION_MULTI_QUESTION_YES_IS_AN_EXCEPTION = "6756bf47cb0baf8c70b7888a"
+export const NEXT_PUBLIC_SCAN_EXCEPTION_MULTI_QUESTION_NO_IS_AN_EXCEPTION = "6756bf54cb0baf8c70b78891"
+export const NEXT_PUBLIC_SCAN_EXCEPTION_MULTI_QUESTION_RANGE = "6756bf67cb0baf8c70b78898"
+export const NEXT_PUBLIC_SCAN_EXCEPTION_MULTI_QUESTION_TEXT_FIELD = "6756bf98cb0baf8c70b7889f"
+export const NEXT_PUBLIC_SCAN_EXCEPTION_MULTI_QUESTION_PACKAGE_DELIVERY = "6756bfb2cb0baf8c70b788a6"
+export const NEXT_PUBLIC_SCAN_EXCEPTION_MULTI_QUESTION_PICTURE = "6756bfcbcb0baf8c70b788ad"
+
+
+export const NEXT_PUBLIC_END_OF_SHIFT_CATEGORY_ID = "677667ca36e64c9894962596"
+

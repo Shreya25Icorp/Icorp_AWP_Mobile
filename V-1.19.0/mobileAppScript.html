@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+    function getMobileOperatingSystem() {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (/android/i.test(userAgent)) {
+            return "android";
+        }
+        // iOS detection from: http://stackoverflow.com/a/9039885/177710
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            return "ios";
+        }
+        return "unknown";
+    }
+    function writeLink () {
+	  var parser = document.createElement('a');
+	  parser.href = window.location.href;
+	  var query = parser.search.substring(1);
+    //  var iosURL = "com.mycompany.app://?"+query;
+      var iosURL = "https://www.google.com/";
+     //iosLink.href = iosURL;
+     // var androidUrl = "intent://?"+query+"#Intent;scheme=com.mycompany.app;package=com.mycompany.app;S.browser_fallback_url=?"+query+";end";
+      var androidUrl = "https://www.amazon.in/";
+      //androidLink.href = androidUrl;
+      var os = getMobileOperatingSystem();
+      alert(os);
+      if (os=="ios") {
+        window.location.href=iosURL;
+      } else if (os=="android") {
+    	window.location.href=androidUrl;
+      }
+    };
+    </script>
+  </head>
+  <body onLoad=writeLink()>
+  </body>
+</html>
