@@ -225,20 +225,20 @@ const PositionDuties = () => {
       );
 
       const newData = response.data.checkpoints || [];
-      console.log("newData----", newData);
+      // console.log("newData----", newData);
 
-      if (page === 1 && !siteName) {
-        const firstSiteName = newData[0]?.siteId?.siteName;
-        setSiteName(firstSiteName);
-      }
+      // if (page === 1 && !siteName) {
+      //   const firstSiteName = newData[0]?.siteId?.siteName;
+      //   setSiteName(firstSiteName);
+      // }
       const totalItems = response.data.total || 0;
       AsyncStorage.setItem("shiftCount", JSON.stringify(totalItems));
-      const allScannedValues = response.data.checkpoints.map((checkpoint: any) => checkpoint.scanned);
-      console.log("All scanned values:", allScannedValues);
+      // const allScannedValues = response.data.checkpoints.map((checkpoint: any) => checkpoint.scanned);
+      // console.log("All scanned values:", allScannedValues);
       // Example: Check if all checkpoints are scanned (scanned > 0)
-      const allScanned = response.data.checkpoints.every((checkpoint: any) => checkpoint.scanned >= checkpoint.requiredScan);
-      console.log("Are all checkpoints scanned?", allScanned);
-      AsyncStorage.setItem("scannedCount", JSON.stringify(allScanned));
+      // const allScanned = response.data.checkpoints.every((checkpoint: any) => checkpoint.scanned >= checkpoint.requiredScan);
+      // console.log("Are all checkpoints scanned?", allScanned);
+      // AsyncStorage.setItem("scannedCount", JSON.stringify(allScanned));
       setData((prevData) => (page === 1 ? newData : [...prevData, ...newData]));
       setHasMore(page * limit < totalItems);
     } catch (error) {
@@ -948,17 +948,19 @@ const PositionDuties = () => {
                   </Text>
                 </View>
                 {item.specialInstructions ? (
-                  <View style={styles.locContainer}>
-                    <Entypo
-                      name="info-with-circle"
-                      size={16}
-                      color="#08CCE4"
-                      style={styles.locationIcon}
-                    />
-                    <Text style={styles.NumberGuardsText}>
-                      {item.specialInstructions}
-                    </Text>
-                  </View>
+                  <>
+                    <View style={styles.locContainer}>
+                      <Entypo
+                        name="info-with-circle"
+                        size={16}
+                        color="#08CCE4"
+                        style={styles.locationIcon}
+                      />
+                      <Text style={styles.NumberGuardsText}>
+                        {item.specialInstructions}
+                      </Text>
+                    </View>
+                  </>
                 ) : null}
 
                 <View style={styles.locContainer}>
@@ -968,8 +970,11 @@ const PositionDuties = () => {
                     color="#3C4764"
                     style={styles.locationIcon}
                   />
-                  <Text style={styles.NumberGuardsText}>
+                  {/* <Text style={styles.NumberGuardsText}>
                     {`This checkpoint must be scanned at least ${item?.requiredScan} times. `}
+                  </Text> */}
+                  <Text style={styles.NumberGuardsText}>
+                    {`This checkpoint required to be scanned at least ${item?.requiredScan} times during your shifts today. `}
                   </Text>
                 </View>
               </View>
@@ -1138,11 +1143,13 @@ const PositionDuties = () => {
       //     checkpointName: item?.checkpointName, } }],
       // });
       navigation.dispatch(
-            StackActions.push("ConfigureNFC", { PositionDuties: "PositionDuties",
-              shift,  
-              item,
-              checkpointName: item?.checkpointName, })
-          );
+        StackActions.push("ConfigureNFC", {
+          PositionDuties: "PositionDuties",
+          shift,
+          item,
+          checkpointName: item?.checkpointName,
+        })
+      );
       // Navigate to the ConfigureNFC screen
       // navigation.navigate("ConfigureNFC", {
       //   PositionDuties: "PositionDuties",
@@ -1582,7 +1589,7 @@ const PositionDuties = () => {
         }
       } else if (storedTagId === scanTagId) {
         // if (storedTagId === scanTagId) {
-        console.log("inside condition",storedTagId === scanTagId );
+        console.log("inside condition", storedTagId === scanTagId);
 
         // const tagId = tag.id;
         setTagId(storedTagId); // Save Tag ID
@@ -2055,7 +2062,7 @@ const PositionDuties = () => {
         AsyncStorage.removeItem('tagId')
         fetchData();
         console.log('tag id --------------------------------- ', scanTagId);
-        
+
       } else {
         Alert.alert("Error", response.data.message); // Handle error
       }
@@ -2146,6 +2153,14 @@ const PositionDuties = () => {
               }
               ListFooterComponentStyle={styles.footer}
             /> */}
+            {data?.length !== 0 && (
+              <View>
+                <Text style={styles.titleTextWrapper}>
+                  You required to scan all below checkpoints during your shifts
+                  today
+                </Text>
+              </View>
+            )}
             <FlatList
               contentContainerStyle={{ flexGrow: 1 }}
               data={data}
@@ -2186,7 +2201,7 @@ const PositionDuties = () => {
             exceptionMultiQuestion={exceptionMultiQuestion}
             onFormSubmit={(formData) =>
               handleSubmit(
-                
+
                 checkPointId,
                 exceptionScanOption,
                 "",
@@ -2262,6 +2277,16 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "bold",
     marginLeft: 30
+  },
+  titleTextWrapper: {
+    fontSize: 14,
+    textAlign: "center",
+    color: "#585959",
+    fontWeight: "600",
+    marginHorizontal: 20,
+    lineHeight: 22,
+    paddingVertical: 5,
+    overflow: "hidden",
   },
   backIcon: {
     width: 25,
@@ -2359,7 +2384,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     marginTop: 15,
   },
-
   searchIcon: {
     marginRight: 8,
   },
@@ -2383,6 +2407,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
+
   mainLoc: {
     flexDirection: "column",
   },

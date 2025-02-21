@@ -34,6 +34,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Keyboard,
+  Vibration,
+  NativeModules,
 } from "react-native";
 import {
   StackActions,
@@ -103,7 +105,7 @@ import { TextInputMask } from "react-native-masked-text";
 import messaging from '@react-native-firebase/messaging';
 import PushNotification from 'react-native-push-notification';
 import BackgroundTimer from "react-native-background-timer";
-import { PERMISSIONS, request, RESULTS } from "react-native-permissions";
+import { check, PERMISSIONS, request, RESULTS } from "react-native-permissions";
 import EncryptedStorage from "react-native-encrypted-storage";
 
 const windowWidth = Dimensions.get("window").width;
@@ -564,7 +566,7 @@ const UserHome = () => {
 
       return newSelected;
     });
-  }; 
+  };
 
 
   const handleAnswerChange = (
@@ -1032,36 +1034,7 @@ const UserHome = () => {
             />
 
 
-            {!selectedCheckpoints[props.index] && (
-              <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={() => handleAddTime(props.index)}
-              >
-                <Icon name="pluscircleo" size={20} color="#000" />
-              </TouchableOpacity>
-            )}
           </View>
-          {/* <View style={styles.reasonRow}>
-            <TextInput
-              style={styles.reasonInput}
-              placeholder="Enter reason for not scanning"
-              placeholderTextColor={'#333'}
-              value={reasons[props.index] || ""}  // Use the value of reason from the state
-              onChangeText={(text) => {
-                handleReasonChange(props.index, text);  // Update reason when changed
-                console.log(`Reason for index ${props.index}: ${text ? text : 'null'}`);  // Log the input value
-              }}
-            />=
-            {!selectedCheckpoints[props.index] && (
-              <TouchableOpacity
-                style={styles.iconContainer}
-                onPress={() => handleAddTime(props.index)}
-              >
-                <Icon name="pluscircleo" size={20} color="#000" />
-              </TouchableOpacity>
-            )}
-          </View> */}
-
 
           {/* Show the error message for the specific checkpoint */}
           {selectedCheckpoints[props.index] && !reasons[props.index] && (
@@ -1072,7 +1045,7 @@ const UserHome = () => {
           {!selectedCheckpoints[props.index] && (
             <>
               {props.item?.extraScanOptions?._id === NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION && (
-                <View>
+                <View style={{ marginTop: 8 }} >
                   <View style={styles.reasonRow}>
                     <Text style={styles.reasonLabel}>Question:</Text>
                     <Text style={styles.questionText}>
@@ -1097,7 +1070,7 @@ const UserHome = () => {
               )}
 
               {props.item?.extraScanOptions?._id === NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION_YES && (
-                <View>
+                <View style={{ marginTop: 8 }} >
                   <View style={styles.reasonRow}>
                     <Text style={styles.reasonLabel}>Question:</Text>
                     <Text style={styles.questionText}>
@@ -1123,9 +1096,7 @@ const UserHome = () => {
               )}
 
               {props.item?.extraScanOptions?._id === NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION_NO && (
-                // console.log('No is an exception ---- '),
-
-                <View>
+                <View style={{ marginTop: 8 }} >
                   <View style={styles.reasonRow}>
                     <Text style={styles.reasonLabel}>Question:</Text>
                     <Text style={styles.questionText}>
@@ -1152,9 +1123,18 @@ const UserHome = () => {
             </>
           )}
 
+
           <View style={styles.timeRowsContainer}>
             {timeData[props.index].slice(1).map((time, timeIndex) => (
               <React.Fragment key={timeIndex + 1}>
+                <TouchableOpacity
+                  style={styles.fullWidthMinusButton}
+                  onPress={() =>
+                    handleRemoveTimeAndReason(props.index, timeIndex)
+                  }
+                >
+                  <Icon name="minus" size={24} color="#fff" />
+                </TouchableOpacity>
                 <View style={styles.timeRow}>
                   <Text style={styles.addMoreTimeText}>Add more time: </Text>
                   <TouchableOpacity
@@ -1260,9 +1240,6 @@ const UserHome = () => {
                       placeholder="Enter Time"
                       keyboardType="numeric"
                     />
-
-
-
                   </TouchableOpacity>
 
                 </View>
@@ -1282,14 +1259,7 @@ const UserHome = () => {
                         handleReasonChange(props.index, timeIndex, text) // Time-specific reason
                       }
                     />
-                    <TouchableOpacity
-                      style={styles.iconContainer}
-                      onPress={() =>
-                        handleRemoveTimeAndReason(props.index, timeIndex)
-                      }
-                    >
-                      <Icon name="minuscircleo" size={20} color="#FF0000" />
-                    </TouchableOpacity>
+
                   </View>
                 </View>
                 <View>
@@ -1385,6 +1355,18 @@ const UserHome = () => {
               </React.Fragment>
             ))}
           </View>
+          {!selectedCheckpoints[props.index] && (
+            <>
+              <View style={{ marginTop: 5 }}>
+                <TouchableOpacity
+                  style={styles.fullWidthButton}
+                  onPress={() => handleAddTime(props.index)}
+                >
+                  <Icon name="plus" size={24} color="#fff" />
+                </TouchableOpacity>
+              </View>
+            </>
+          )}
         </View>
       );
     }
@@ -1907,11 +1889,12 @@ const UserHome = () => {
   const checkClockInStatus = useCallback(async () => {
     const clockInStatus = await AsyncStorage.getItem("clockIn");
     setIsClockedIn(clockInStatus === "true");
-    const shiftPosition = await AsyncStorage.getItem("shiftPosition");
-    setShiftPosition(JSON.parse(shiftPosition));
-    const shiftCount = await AsyncStorage.getItem("shiftCount");
-    setPositionDutiesCount(JSON.parse(shiftCount));
+    // const shiftPosition = await AsyncStorage.getItem("shiftPosition");
+    // setShiftPosition(JSON.parse(shiftPosition));
+    // const shiftCount = await AsyncStorage.getItem("shiftCount");
+    // setPositionDutiesCount(JSON.parse(shiftCount));
   }, []);
+
   useFocusEffect(
     useCallback(() => {
       checkClockInStatus();
@@ -1962,57 +1945,37 @@ const UserHome = () => {
         }
       );
       if (response?.data?.success) {
+        // Extract logTime (if returned by the API) or use the local clock-in time
+        // const responseLogTime =
+        //   response?.data?.logTime || moment().format("HH:mm:ss");
+        // setLogTime(responseLogTime); // Store the logTime
         fetchUpcomingShift(userId);
         Toast.show("Clocked in successfully!", Toast.SHORT);
         AsyncStorage.setItem("clockIn", "true");
         AsyncStorage.setItem("shift", JSON.stringify(shift));
         setIsClockedIn(true);
-        // Extract start and end times for the shift
-        const shiftStartTime = moment(shift.shiftStartDateTime);
-        const shiftEndTime = moment(shift.shiftEndDateTime);
-        console.log(
-          "shiftStartTime, shiftEndTime",
-          shiftStartTime,
-          shiftEndTime
-        );
-        // Calculate shift duration in hours
-        const shiftDurationInMilliseconds = shiftEndTime.diff(
-          shiftStartTime,
-          "milliseconds"
-        );
-        const scannedCountJSON = await AsyncStorage.getItem("scannedCount");
-        const scannedCount = scannedCountJSON
-          ? JSON.parse(scannedCountJSON)
-          : 0;
-        console.log("scan count...", scannedCount);
-        const isClockedIn = await AsyncStorage.getItem("clockIn");
-        console.log(
-          "minsss",
-          shiftStartRange,
-          randomCheckpointRange,
-          missedOpportunityRange
-        );
-      }
-      else {
+        if (positionDutiesCount > 0) {
+          navigation.navigate("PositionDuties", { shift: shift } as never);
+        }
+      } else {
         Toast.show(
           response?.data?.message || "An error occurred.",
           Toast.SHORT
         );
       }
     } catch (error: any) {
-      if (error?.response) {
-        console.log("Error response:", error.response);
+      if (error.response) {
+        console.error("Error response:", error.response);
         Toast.show(
-          error?.response?.data?.message ||
+          error.response.data?.message ||
           "Error during clock in. Please try again.",
           Toast.SHORT
         );
-        throw error;
-      } else if (error?.request) {
-        console.error("Error request:", error?.request);
+      } else if (error.request) {
+        console.error("Error request:", error.request);
         Toast.show("No response from server. Please try again.", Toast.SHORT);
       } else {
-        console.error("Error during clock in:", error?.message);
+        console.error("Error during clock in:", error.message);
         Toast.show("Error during clock in. Please try again.", Toast.SHORT);
       }
     } finally {
@@ -2020,40 +1983,33 @@ const UserHome = () => {
       else setLoadingFollowing(false);
     }
   };
-
   const handleClockIn = async (shift: any, isUpcoming: boolean) => {
-
-    const startTimeData = moment.utc(shift?.shiftStartDateTime).format("HH:mm");;
-    const endTimeData = moment.utc(shift?.shiftEndDateTime).format("HH:mm");
-
-    setStartDateData(startTimeData);
-    setEndDateData(endTimeData);
-    await AsyncStorage.setItem("shiftStartTime", startTimeData);
-    await AsyncStorage.setItem("shiftEndTime", endTimeData);
-
-    const response = await axios.get(
-      `${SERVER_URL_ROASTERING}/get/checkpoint/by/position?positionIds=${shift?.positionId?._id}&shiftId=${shift?._id}`,
-      {
-        withCredentials: true,
-      }
-    );
-    if (response?.data?.checkpoints?.length > 0) {
-      setNfcScanningEnabled(true);
-      setPositionDutiesCount(response?.data?.total);
-      setShiftPosition(shift);
-      AsyncStorage.setItem("shiftPosition", JSON.stringify(shift));
-      AsyncStorage.setItem("shiftCount", JSON.stringify(response?.data?.total));
-      const allScannedValues = response.data.checkpoints.map((checkpoint: any) => checkpoint.scanned);
-      console.log("All scanned values:", allScannedValues);
-      // Example: Check if all checkpoints are scanned (scanned > 0)
-      const allScanned = response.data.checkpoints.every((checkpoint: any) => checkpoint.scanned >= checkpoint.requiredScan);
-      console.log("Are all checkpoints scanned?", allScanned);
-      AsyncStorage.setItem("scannedCount", JSON.stringify(allScanned));
-      await initNfc(shift, isUpcoming);
-    } else {
-      await handleClockInApi(shift, isUpcoming);
-    }
+    // setModalVisible(true); // Show popup/modal
+    // console.log("shift?.positionId?._id", shift?.positionId?._id);
+    // const response = await axios.get(
+    //   `${SERVER_URL_ROASTERING}/get/checkpoint/by/position?positionIds=${shift?.positionId?._id}`,
+    //   {
+    //     withCredentials: true,
+    //   }
+    // );
+    // // console.log("====================================");
+    // // console.log("checkpoint position", response.data);
+    // // console.log("====================================");
+    // if (response?.data?.checkpoints?.length > 0) {
+    //   setNfcScanningEnabled(true);
+    //   setPositionDutiesCount(response?.data?.total);
+    //   setShiftPosition(shift);
+    //   AsyncStorage.setItem("shiftPosition", JSON.stringify(shift));
+    //   AsyncStorage.setItem("shiftCount", JSON.stringify(response?.data?.total));
+    //   await initNfc(shift, isUpcoming);
+    // } else {
+    handleClockInApi(shift, isUpcoming);
+    // }
   };
+
+
+
+
 
   const handleCheckpointScan = async (shift: any) => {
     // const shiftPosition =
@@ -2324,21 +2280,22 @@ const UserHome = () => {
         AsyncStorage.removeItem("storedCheckpoints");
         AsyncStorage.removeItem("isSubmitting");
         AsyncStorage.setItem("clockIn", "false");
-        AsyncStorage.removeItem("shiftPosition");
-        AsyncStorage.removeItem("shiftCount");
+        // AsyncStorage.removeItem("shiftPosition");
+        // AsyncStorage.removeItem("shiftCount");
         AsyncStorage.removeItem('scannedCount')
         setIsClockedIn(false);
-        const response = await axios.get(
-          `${SERVER_URL_ROASTERING}/get/checkpoint/by/position?positionIds=${shift?.positionId?._id}&shiftId=${shift?._id}`,
-          {
-            withCredentials: true,
-          }
-        );
-        if (response?.data?.checkpoints?.length > 0) {
-          const allScanned = response.data.checkpoints.every((checkpoint: any) => checkpoint.scanned > 0);
-          console.log("Are all checkpoints scanned clockout?", allScanned);
-          AsyncStorage.setItem("scannedCount", JSON.stringify(allScanned));
-        }
+        setPositionDutiesCount(0);
+        // const response = await axios.get(
+        //   `${SERVER_URL_ROASTERING}/get/checkpoint/by/position?positionIds=${shift?.positionId?._id}&shiftId=${shift?._id}`,
+        //   {
+        //     withCredentials: true,
+        //   }
+        // );
+        // if (response?.data?.checkpoints?.length > 0) {
+        //   const allScanned = response.data.checkpoints.every((checkpoint: any) => checkpoint.scanned > 0);
+        //   console.log("Are all checkpoints scanned clockout?", allScanned);
+        //   AsyncStorage.setItem("scannedCount", JSON.stringify(allScanned));
+        // }
         setCheckpoints([]);
         setTimeAnswers([]);
         setAnswer([]);
@@ -2640,6 +2597,41 @@ const UserHome = () => {
       hasFollowingStartTime &&
       !hasFollowingEndTime);
 
+  const activeShift =
+    !isAttendanceEmpty && hasStartTime && !hasEndTime
+      ? upcomingShift
+      : !isFollowingAttendanceEmpty &&
+        hasFollowingStartTime &&
+        !hasFollowingEndTime
+        ? followingShift
+        : null;
+  // console.log("activeShift:", activeShift);
+  const getPositionDuties = useCallback(async () => {
+    if (activeShift) {
+      const response = await axios.get(
+        `${SERVER_URL_ROASTERING}/get/checkpoint/by/position?positionIds=${activeShift?.positionId?._id}`,
+        {
+          withCredentials: true,
+        }
+      );
+      // console.log("====================================");
+      // console.log("checkpoint position", response.data);
+      // console.log("====================================");
+      if (response?.data?.success === true) {
+        setNfcScanningEnabled(true);
+        setPositionDutiesCount(response?.data?.total);
+        setShiftPosition(activeShift);
+        // AsyncStorage.setItem("shiftPosition", JSON.stringify(shift));
+        // AsyncStorage.setItem("shiftCount", JSON.stringify(response?.data?.total));
+      }
+    }
+  }, [activeShift]);
+  useFocusEffect(
+    useCallback(() => {
+      getPositionDuties();
+    }, [activeShift])
+  );
+
   const handleActivityLog = () => {
     setModalVisible(false);
     navigation.navigate("SiteActivityLog" as never);
@@ -2677,6 +2669,13 @@ const UserHome = () => {
     }
   };
 
+  const vibrateStrongly = () => {
+    Vibration.vibrate([500, 1000, 500, 1000, 500], true);
+    setTimeout(() => Vibration.cancel(), 5000);
+  };
+
+
+
   useEffect(() => {
 
     requestAndroidNotificationPermission();
@@ -2695,6 +2694,23 @@ const UserHome = () => {
       const { title, body } = remoteMessage.notification || {};
 
       if (title && body) {
+        // PushNotification.localNotification({
+        //   channelId: 'activeworkforcepro',
+        //   title,
+        //   message: body,
+        //   playSound: true,
+        //   soundName: 'default',
+        //   smallIcon: '@mipmap/awp_logo',
+        //   largeIcon: '@mipmap/awp_logo',
+        //   subText: new Date().toLocaleTimeString([], {
+        //     hour: '2-digit',
+        //     minute: '2-digit',
+        //     hour12: true,
+        //   }),
+        //   bigText: body,
+        //   userInfo: remoteMessage.data,
+        // });
+        vibrateStrongly();
         PushNotification.localNotification({
           channelId: 'activeworkforcepro',
           title,
@@ -2710,7 +2726,13 @@ const UserHome = () => {
           }),
           bigText: body,
           userInfo: remoteMessage.data,
+          vibrate: true,
+          priority: 'high',
+          importance: 'high',
+          visibility: 'public',
+          allowWhileIdle: true,
         });
+
       } else {
         console.log('Notification data is incomplete:', remoteMessage.notification);
       }
@@ -2851,19 +2873,21 @@ const UserHome = () => {
                     {
                       flexDirection: "row",
                       justifyContent: "space-between",
-                      paddingHorizontal: 10,
+                      // paddingHorizontal: 10,
                       alignItems: "center",
                     },
                   ]}
                 >
-                  <Text style={styles.helloText}>
-                    Hello{" "}
-                    <Text style={globalStyles.profileImageText}>
-                      {capitalizeFirstLetter(data.firstName) +
-                        " " +
-                        capitalizeFirstLetter(data.lastName)}
+                  <View>
+                    <Text style={styles.helloText}>
+                      Hello{" "}
+                      <Text style={globalStyles.UserImageText}>
+                        {capitalizeFirstLetter(data.firstName) +
+                          " " +
+                          capitalizeFirstLetter(data.lastName)}
+                      </Text>
                     </Text>
-                  </Text>
+                  </View>
                   <View style={styles.buttonset}>
                     {image ? (
                       <TouchableOpacity onPress={handleViewProfile}>
@@ -2874,7 +2898,7 @@ const UserHome = () => {
                           // resizeMode="contain"
                           style={[
                             globalStyles.profileImage,
-                            { height: 45, width: 45 },
+                            // { height: 50, width: 50 },
                           ]}
                         />
                       </TouchableOpacity>
@@ -2883,7 +2907,7 @@ const UserHome = () => {
                         onPress={handleViewProfile}
                         style={[
                           globalStyles.initialsCircle,
-                          { width: 45, height: 45 },
+                          // { width: 50, height: 50 },
                         ]}
                       >
                         <Text style={globalStyles.initialsText}>
@@ -2894,6 +2918,24 @@ const UserHome = () => {
                     )}
                   </View>
                 </View>
+                {isCardEnabled ?
+                  <View>
+                    {positionDutiesCount > 0 && <TouchableOpacity
+                      style={styles.ScanButton}
+                      onPress={() => handleCheckpointScan(upcomingShift)}
+                      disabled={loadingUpcoming}
+                    >
+                      <MaterialCommunityIcons
+                        name="cellphone-nfc"
+                        size={20}
+                        color="#fff" />
+                      <Text style={styles.scanButtonText}>Scan Checkpoint</Text>
+                    </TouchableOpacity>}
+                  </View>
+                  : null
+                }
+
+
               </View>
 
               <View
@@ -2961,7 +3003,8 @@ const UserHome = () => {
                           ) : null}
                           {!isAttendanceEmpty && hasStartTime && !hasEndTime ? (
                             <>
-                              {positionDutiesCount > 0 && <TouchableOpacity
+                              {/* {positionDutiesCount > 0 && 
+                              <TouchableOpacity
                                 style={styles.ScanButton}
                                 onPress={() => handleCheckpointScan(upcomingShift)}
                                 disabled={loadingUpcoming}
@@ -2971,7 +3014,8 @@ const UserHome = () => {
                                   size={18}
                                   color="#fff" />
                                 <Text style={styles.clockButtonText}>Scan</Text>
-                              </TouchableOpacity>}
+                              </TouchableOpacity>
+                              } */}
                               <TouchableOpacity
                                 style={styles.clockButton}
                                 onPress={() =>
@@ -3150,7 +3194,7 @@ const UserHome = () => {
                               hasFollowingStartTime &&
                               !hasFollowingEndTime ? (
                               <>
-                                {positionDutiesCount > 0 && <TouchableOpacity
+                                {/* {positionDutiesCount > 0 && <TouchableOpacity
                                   style={styles.ScanButton}
                                   onPress={() => handleCheckpointScan(followingShift)}
                                   disabled={loadingUpcoming}
@@ -3160,7 +3204,7 @@ const UserHome = () => {
                                     size={18}
                                     color="#fff" />
                                   <Text style={styles.clockButtonText}>Scan</Text>
-                                </TouchableOpacity>}
+                                </TouchableOpacity>} */}
                                 <TouchableOpacity
                                   style={styles.clockButton}
                                   onPress={() =>
@@ -3636,8 +3680,11 @@ const UserHome = () => {
                       <View style={styles.modalMissHeaderContent}>
                         <View style={styles.modalMissHeader}>
                           <Text style={styles.headerText}>
-                            You have missed the following checkpoints
+                            You have missed the below checkpoints
                           </Text>
+                          {/* <Text style={styles.headerText}>
+                            You required to scan all below checkpoints during your shifts today
+                          </Text> */}
                           <TouchableOpacity onPress={handleMissModalClose} style={{ marginLeft: 6 }}>
                             <Icon name="close" size={24} color="#000" />
                           </TouchableOpacity>
@@ -3787,12 +3834,21 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0,
     shadowRadius: 0,
+    // width: '52%',
+    marginVertical: 4,
     // right: 0,
-    marginLeft: 50,
+    // marginLeft: 50,
   },
   clockButtonText: {
     marginLeft: 5,
     fontSize: 15,
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  scanButtonText: {
+    marginLeft: 5,
+    marginRight: 4,
+    fontSize: 16,
     fontWeight: "bold",
     color: "#fff",
   },
@@ -3828,9 +3884,12 @@ const styles = StyleSheet.create({
     height: 24,
   },
   helloText: {
-    fontSize: 14,
+    fontSize: 16,
     color: "#262D3F",
-    textAlign: "center",
+    // textAlign: "center",
+    marginTop: 10,
+    marginBottom: 3,
+    marginLeft: 5
   },
   logout: {
     color: "red",
@@ -4088,7 +4147,8 @@ const styles = StyleSheet.create({
   },
   checkpointItem: {
     marginBottom: 15,
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
     borderWidth: 1,
     borderColor: "#ddd",
     borderRadius: 5,
@@ -4143,6 +4203,7 @@ const styles = StyleSheet.create({
     // marginBottom: 4,
     flex: 1,
     flexWrap: "wrap",
+    fontWeight: 'bold'
   },
   timeRow: {
     flexDirection: "row",
@@ -4186,13 +4247,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 5,
     marginLeft: 10,
-    marginRight: 48,
+    marginRight: 10,
     textAlign: 'right'
   },
   reasonErrorText: {
     color: 'red',
     fontSize: 12,
-    marginTop: 5,
+    marginTop: 2,
     marginLeft: 10,
     marginRight: 48,
     // textAlign: 'right'
@@ -4232,7 +4293,7 @@ const styles = StyleSheet.create({
   reasonRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 8,
+    // marginVertical: 6,
   },
   reasonLabel: {
     fontSize: 14,
@@ -4295,6 +4356,24 @@ const styles = StyleSheet.create({
   radioButtonLabel: {
     fontSize: 16,
     color: "#000",
+  },
+  fullWidthButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#23527C",
+    padding: 2,
+    borderRadius: 5,
+    width: "100%", // Makes the button full width
+    marginBottom: 8
+  },
+  fullWidthMinusButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FF0000",
+    padding: 2,
+    borderRadius: 5,
+    width: "100%", // Makes the button full width
+    marginBottom: 10
   },
 });
 

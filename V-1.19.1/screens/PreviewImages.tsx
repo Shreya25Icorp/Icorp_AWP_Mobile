@@ -201,7 +201,7 @@ const PreviewImages = () => {
                           onLoadStart={() => handleLoadStart(index)}
                           onLoadEnd={() => handleLoadEnd(index)}
                         />
-                        <Text style={styles.fileName}>{formattedFileName}</Text>
+                        {/* <Text style={styles.fileName}>{formattedFileName}</Text> */}
                       </TouchableOpacity>
                     </View>
                   );

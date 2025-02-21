@@ -18,6 +18,7 @@ import {
   SafeAreaView,
   Easing,
   RefreshControl,
+  PanResponder,
 } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import axios from "axios";
@@ -504,8 +505,22 @@ const Schedule_Attendance = () => {
     return string.toUpperCase();
   }
 
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onMoveShouldSetPanResponder: () => true,
+    onPanResponderRelease: (evt, gestureState) => {
+      if (gestureState.dx > 50) {
+        goToPreviousWeek(); // Swipe Right - Previous Week
+      } else if (gestureState.dx < -50) {
+        goToNextWeek(); // Swipe Left - Next Week
+      }
+    },
+  });
+
+
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} {...panResponder.panHandlers}>
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         refreshControl={
@@ -517,11 +532,6 @@ const Schedule_Attendance = () => {
         }
       >
         <View>
-          {/* <Image
-            source={require('../assests/images/overlay.png')}
-            style={styles.overlayImage}
-            resizeMode="cover"
-          /> */}
           <View style={globalStyles.overlayImageGlobal}>
             <View style={styles.logoContainer}>
               <Image
@@ -540,44 +550,9 @@ const Schedule_Attendance = () => {
                 />
               </TouchableOpacity>
             </View>
-            {/* <TouchableOpacity
-            style={globalStyles.menuIconContainer}
-            onPress={toggleSidebar}>
-            <MaterialIcons
-              name="menu-open"
-              size={26}
-              color="#FFFFFF"
-              style={globalStyles.menuIcon}
-            />
-          </TouchableOpacity> */}
           </View>
-          {/* {isSidebarOpen && (
-          <SidebarUser isOpen={isSidebarOpen} onClose={toggleSidebar} />
-        )}
-        {isSidebarOpen && (
-          <Animated.View
-            style={[
-              globalStyles.sidebarContainer,
-              {
-                transform: [{translateX: sidebarTranslateX}],
-              },
-            ]}>
-            <SidebarUser isOpen={isSidebarOpen} onClose={toggleSidebar} />
-          </Animated.View>
-        )} */}
           <View style={globalStyles.whiteBox}>
             <View style={styles.textContainer}>
-              {/* <TouchableOpacity
-                style={styles.backIconContainer}
-                onPress={() => navigation.navigate("UserHome" as never)}
-              >
-                <FeatherIcon
-                  name="arrow-left"
-                  size={22}
-                  color="#000"
-                  style={styles.backIcon}
-                />
-              </TouchableOpacity> */}
               <View style={styles.titleContainer}>
                 <CustomText style={styles.titleText}>
                   Schedule and Attendance
@@ -644,9 +619,8 @@ const Schedule_Attendance = () => {
               <View style={globalStyles.emptyContainer}>
                 <FontAwesome5
                   name="calendar-check"
-                  size={50} // Adjust the size to your desired value
-                  color="#C6C6C6" // Set the desired color here
-                // style={styles.iconImage}
+                  size={50}
+                  color="#C6C6C6"
                 />
                 <Text style={globalStyles.noDataText}>
                   No shifts available at the moment!
@@ -656,17 +630,25 @@ const Schedule_Attendance = () => {
               <View>
                 {shiftsPagination.map((item: any, index: number) => {
                   return (
-                    // <TouchableOpacity
-                    //   style={styles.personalInfocontainer}
-                    //   key={index}
-                    //   onPress={() =>
-                    //     navigation.navigate("ShiftDetails", {
-                    //       id: item?._id,
-                    //     } as never)
-                    //   }
-                    // >
                     <TouchableOpacity
-                      style={[styles.personalInfocontainer, { backgroundColor: item.shiftStatus === 'completed' ? '#DEF2D6' : '#fff', borderColor: item.shiftStatus === 'completed' ? '#118B50' : '#fff' }]}
+                      style={[
+                        styles.personalInfocontainer,
+                        {
+                          backgroundColor:
+                            item.shiftStatus === 'completed'
+                              ? '#DEF2D6'
+                              : item.shiftStatus === 'accepted'
+                                ? '#F3E5AB'
+                                : '#DEF2D6',
+                          borderColor:
+                            item.shiftStatus === 'completed'
+                              ? '#118B50'
+                              : item.shiftStatus === 'accepted'
+                                ? '#FFAA33'
+                                : '#118B50',
+                        },
+                      ]}
+
                       key={index}
                       onPress={() =>
                         navigation.navigate("ShiftDetails", {

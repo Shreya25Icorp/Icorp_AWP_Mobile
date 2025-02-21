@@ -44,10 +44,10 @@ const ConfigureNFC = () => {
   const shift = route.params?.shift;
   const item = route.params?.item;
   // console.log("shift ---", shift);
-  console.log('--checkpointId--',checkpointId);
-  
-  
-  
+  // console.log('--checkpointId--', checkpointId);
+
+
+
 
   const windowWidth = Dimensions.get("window").width;
 
@@ -59,11 +59,11 @@ const ConfigureNFC = () => {
   useLayoutEffect(() => {
     if (checkpointName) {
       navigation.setOptions({
-        title: `Checkpoint: ${(checkpointName)}`, 
+        // title: `Checkpoint: ${(checkpointName)}`,
       });
     }
   }, [navigation, checkpointName]);
-  
+
   // const handleNfcDiscovery = async () => {
   //   try {
   //     const techs = [NfcTech.Ndef, NfcTech.NdefFormatable];
@@ -78,11 +78,11 @@ const ConfigureNFC = () => {
   //       await AsyncStorage.setItem('tagId', tagId)
   //       // navigation.navigate("PositionDuties",{shift, item});
   //       console.log("tagId=====>", tagId);
-         
+
   //       navigation.navigate("PositionDuties",{tagId, shift});
   //     } else{
   //       console.log('------- else -----------');
-        
+
   //       handleSave(tagId);
   //       }
   //     } else {
@@ -104,24 +104,24 @@ const ConfigureNFC = () => {
       if (tag) {
         const tagId = tag.id;
         setTagId(tagId);
-        if(PositionDuties === 'PositionDuties') {
-        await AsyncStorage.setItem('tagId', tagId)
-        navigation.navigate("PositionDuties",{shift, item});
-        console.log("tagId========================================>", tagId);
-        // navigation.navigate("PositionDuties",{tagId, shift});
-      } else if (PositionDuties === 'UserHome'){
-        await AsyncStorage.setItem('tagId', tagId)
-        navigation.navigate("PositionDuties",{shift, tagId});
-      }
-      else{
-        console.log('------- else -----------');
-        handleSave(tagId);
+        if (PositionDuties === 'PositionDuties') {
+          await AsyncStorage.setItem('tagId', tagId)
+          navigation.navigate("PositionDuties", { shift, item });
+          console.log("tagId========================================>", tagId);
+          // navigation.navigate("PositionDuties",{tagId, shift});
+        } else if (PositionDuties === 'UserHome') {
+          await AsyncStorage.setItem('tagId', tagId)
+          navigation.navigate("PositionDuties", { shift, tagId });
+        }
+        else {
+          console.log('------- else -----------');
+          handleSave(tagId);
         }
       } else {
         console.log("No NFC tag detected.");
       }
     } catch (ex) {
-      console.log("ex====>", ex);
+      // console.log("ex====>", ex);
     } finally {
       NfcManager.cancelTechnologyRequest();
     }
@@ -134,31 +134,31 @@ const ConfigureNFC = () => {
   //   try {
   //     const techs = [NfcTech.Ndef, NfcTech.NdefFormatable];
   //     await NfcManager.requestTechnology(techs);
-  
+
   //     const tag = await NfcManager.getTag();
-  
+
   //     if (tag) {
   //       const tagId = tag.id;
   //       setTagId(tagId);
-  
+
   //       console.log("PositionDuties value:", PositionDuties);
-  
+
   //       if (PositionDuties === 'PositionDuties') {
   //         console.log('PositionDuties-----------------------------------------------');
-          
+
   //         console.log(PositionDuties === 'PositionDuties');
   //         await AsyncStorage.setItem('tagId', tagId);
   //         console.log('PositionDuties--------item----------',item);
-          
+
   //         navigation.navigate("PositionDuties", { shift, item });
   //       } else if (PositionDuties === 'UserHome') {
   //         console.log('user home-----------------------------------------------');
-          
+
   //         console.log(PositionDuties === 'UserHome');
-          
+
   //         await AsyncStorage.setItem('tagId', tagId);
   //         console.log('item',item);
-          
+
   //         navigation.navigate("UserHome", { shift, item });
   //       } else {
   //         console.log("Unknown PositionDuties value, calling handleSave");
@@ -173,8 +173,8 @@ const ConfigureNFC = () => {
   //     NfcManager.cancelTechnologyRequest();
   //   }
   // };
-  
-  
+
+
 
   // const fetchLocationName = async () => {
   //     try {
@@ -265,26 +265,26 @@ const ConfigureNFC = () => {
     } catch (error: any) {
       console.log(error.response.data.message);
 
-    //   Toast.show(error.response.data.message, Toast.SHORT);
-    showMessage({
-      message: '',
-      type: "danger",
-      position: "center",
-      duration: 4000,
-      backgroundColor: "#E35335",
-      color: "white",
-      statusBarHeight: 35,
-      renderCustomContent: () => (
-        <View style={{ alignItems: "center", justifyContent: "center", paddingHorizontal: 15, }}>
-          {/* Icon on Top */}
-          <Icon name="close-circle-outline" size={40} color="white" />
-          {/* Spacing between Icon and Text */}
-          <Text style={{ color: "white", fontSize: 16, marginTop: 10, textAlign: "center" }}>
-          {error?.response?.data?.message}
-          </Text>
-        </View>
-      ),
-    });
+      //   Toast.show(error.response.data.message, Toast.SHORT);
+      showMessage({
+        message: '',
+        type: "danger",
+        position: "center",
+        duration: 4000,
+        backgroundColor: "#E35335",
+        color: "white",
+        statusBarHeight: 35,
+        renderCustomContent: () => (
+          <View style={{ alignItems: "center", justifyContent: "center", paddingHorizontal: 15, }}>
+            {/* Icon on Top */}
+            <Icon name="close-circle-outline" size={40} color="white" />
+            {/* Spacing between Icon and Text */}
+            <Text style={{ color: "white", fontSize: 16, marginTop: 10, textAlign: "center" }}>
+              {error?.response?.data?.message}
+            </Text>
+          </View>
+        ),
+      });
       navigation.goBack();
     }
   };
@@ -316,14 +316,15 @@ const ConfigureNFC = () => {
             resizeMode="contain"
           />
           <View style={styles.textContainer}>
+            <Text style={styles.titleCheckpointNameText}>{checkpointName}</Text>
             <Text style={styles.titleText}>Place the device over the tag</Text>
             <Text style={styles.contentText}>
               Touch the back of the phone to the tag. The NFC antenna location
               varies depending on the phone model.
             </Text>
-            <Text style={styles.tagIdText}>
+            {/* <Text style={styles.tagIdText}>
               Tag Id: {tagId || "Scanning..."}
-            </Text>
+            </Text> */}
           </View>
         </View>
       </View>
@@ -339,15 +340,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "white",
   },
-  titleText: {
+  titleCheckpointNameText: {
     fontSize: 20,
-    fontWeight: "600",
+    fontWeight: "800",
+    marginBottom: 10,
+    paddingBottom: 6,
+    color: "#262D3F",
+    borderBottomColor: '#C7C7C7',
+    borderBottomWidth: 1
+  },
+  titleText: {
+    fontSize: 18,
+    fontWeight: "500",
     marginBottom: 10,
     color: "#262D3F",
   },
   tagIdText: {
     fontSize: 18,
-    color: "#333",
+    color: "#ccc",
   },
   backgroundImage: {
     width: 428,
@@ -370,8 +380,8 @@ const styles = StyleSheet.create({
     marginVertical: 36,
     paddingHorizontal: 24,
     paddingVertical: 16,
-    width: "100%",
-    height: "100%",
+    // width: "100%",
+    // height: "100%",
   },
   modalContainer: {
     flex: 1,

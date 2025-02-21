@@ -461,6 +461,12 @@ export const globalStyles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '800',
   },
+  UserImageText: {
+    fontSize: 16,
+    color: '#262D3F',
+    textAlign: 'center',
+    fontWeight: '800',
+  },
   profilegmailtext: {
     fontSize: 16,
     color: '#262D3F',

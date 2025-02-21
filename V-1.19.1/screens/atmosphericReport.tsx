@@ -1036,35 +1036,35 @@ const AtmosphericReport = () => {
     // }, [visibleOptionsAssault]);
     useEffect(() => {
         // if (status !== "draft") {
-            if (assaultWeaponProducedTypeOne?.length > 0) {
-                setValue(
-                    `assaultWeaponProducedType.${visibleOptionsAssault === 1 ? "One" : "Two"
-                    }`,
-                    (visibleOptionsAssault === 1
-                        ? assaultWeaponProducedTypeOne
-                        : assaultWeaponProducedTypeTwo)?.[0]?._id || ""
+        if (assaultWeaponProducedTypeOne?.length > 0) {
+            setValue(
+                `assaultWeaponProducedType.${visibleOptionsAssault === 1 ? "One" : "Two"
+                }`,
+                (visibleOptionsAssault === 1
+                    ? assaultWeaponProducedTypeOne
+                    : assaultWeaponProducedTypeTwo)?.[0]?._id || ""
+            );
+            if (visibleOptionsAssault !== 0) {
+                setSelectedData((prev) => ({
+                    ...prev,
+                    assaultWeaponProducedType: {
+                        name: "assaultWeaponProducedType",
+                        value:
+                            visibleOptionsAssault === 1
+                                ? assaultWeaponProducedTypeOne[0].lableValue
+                                : visibleOptionsAssault === 2
+                                    ? assaultWeaponProducedTypeTwo[0].lableValue
+                                    : "",
+                    },
+                }));
+            } else {
+                setSelectedData((prev) =>
+                    Object.entries(prev)
+                        .filter(([key]) => key !== "assaultWeaponProducedType")
+                        .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
                 );
-                if (visibleOptionsAssault !== 0) {
-                    setSelectedData((prev) => ({
-                        ...prev,
-                        assaultWeaponProducedType: {
-                            name: "assaultWeaponProducedType",
-                            value:
-                                visibleOptionsAssault === 1
-                                    ? assaultWeaponProducedTypeOne[0].lableValue
-                                    : visibleOptionsAssault === 2
-                                        ? assaultWeaponProducedTypeTwo[0].lableValue
-                                        : "",
-                        },
-                    }));
-                } else {
-                    setSelectedData((prev) =>
-                        Object.entries(prev)
-                            .filter(([key]) => key !== "assaultWeaponProducedType")
-                            .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
-                    );
-                }
             }
+        }
         // }
         // Set default value for the radio buttons once the data is loaded
     }, [visibleOptionsAssault]);
@@ -2333,67 +2333,6 @@ const AtmosphericReport = () => {
                                     <View
                                         style={[
                                             styles.row,
-                                            { justifyContent: "space-between", marginVertical: 8 },
-                                        ]}
-                                    >
-                                        <View style={{ width: "49%" }}>
-                                            <Text style={{ fontSize: 14, color: '#000' }}>
-                                                Shift Date <Text style={{ color: "red" }}>*</Text>
-                                            </Text>
-                                            <TouchableOpacity
-                                                onPress={() => {
-                                                    Platform.OS === "ios"
-                                                        ? setShowTimePickerShiftDate(true)
-                                                        : setShowTimePickerShiftDate(true);
-                                                }}
-                                            >
-                                                <View pointerEvents="none">
-                                                    <TextInput
-                                                        mode="outlined"
-                                                        outlineColor={shiftDate ? "#2E9E4A" : "#BFBBBB"}
-                                                        style={{ height: 40 }}
-                                                        placeholder="DD/MM/YYYY"
-                                                        placeholderTextColor="#000"
-                                                        value={shiftDate}
-                                                        editable={false}
-                                                        error={dateError}
-                                                    />
-                                                </View>
-                                            </TouchableOpacity>
-                                            {dateError && (
-                                                <HelperText type="error" visible={dateError}>
-                                                    Shift Date is required.
-                                                </HelperText>
-                                            )}
-                                        </View>
-
-                                        {/* Time Input */}
-                                        <View style={{ width: "49%" }}>
-                                            <Text style={{ fontSize: 14, color: '#000' }}>
-                                                Site Name <Text style={{ color: "red" }}>*</Text>
-                                            </Text>
-                                            <TextInput
-                                                mode="outlined"
-                                                outlineColor={siteName ? "#2E9E4A" : "#BFBBBB"}
-                                                activeOutlineColor={"#2E9E4A"}
-                                                placeholder="Site Name"
-                                                style={{ height: 40 }}
-                                                placeholderTextColor="#BFBBBB"
-                                                value={siteName} // This value will be bound to the state for site name
-                                                onChangeText={(value) => setSiteName(value)} // Update the state when the user types
-                                                disabled
-                                            />
-                                            {siteName === "" && (
-                                                <HelperText type="error" visible={siteName === ""}>
-                                                    Site Name is required.
-                                                </HelperText>
-                                            )}
-                                        </View>
-                                    </View>
-
-                                    <View
-                                        style={[
-                                            styles.row,
                                             {
                                                 justifyContent: "space-between",
                                                 marginTop: 8,
@@ -2584,6 +2523,66 @@ const AtmosphericReport = () => {
                                                 />
                                             </>
                                         )}
+                                    </View>
+
+                                    <View
+                                        style={[
+                                            styles.row,
+                                            { justifyContent: "space-between", marginVertical: 8 },
+                                        ]}
+                                    >
+                                        <View style={{ width: "49%" }}>
+                                            <Text style={{ fontSize: 14, color: '#000' }}>
+                                                Shift Date <Text style={{ color: "red" }}>*</Text>
+                                            </Text>
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    Platform.OS === "ios"
+                                                        ? setShowTimePickerShiftDate(true)
+                                                        : setShowTimePickerShiftDate(true);
+                                                }}
+                                            >
+                                                <View pointerEvents="none">
+                                                    <TextInput
+                                                        mode="outlined"
+                                                        outlineColor={shiftDate ? "#2E9E4A" : "#BFBBBB"}
+                                                        style={{ height: 40 }}
+                                                        placeholder="DD/MM/YYYY"
+                                                        placeholderTextColor="#000"
+                                                        value={shiftDate}
+                                                        editable={false}
+                                                        error={dateError}
+                                                    />
+                                                </View>
+                                            </TouchableOpacity>
+                                            {dateError && (
+                                                <HelperText type="error" visible={dateError}>
+                                                    Shift Date is required.
+                                                </HelperText>
+                                            )}
+                                        </View>
+
+                                        {/* <View style={{ width: "49%" }}>
+                                            <Text style={{ fontSize: 14, color: '#000' }}>
+                                                Site Name <Text style={{ color: "red" }}>*</Text>
+                                            </Text>
+                                            <TextInput
+                                                mode="outlined"
+                                                outlineColor={siteName ? "#2E9E4A" : "#BFBBBB"}
+                                                activeOutlineColor={"#2E9E4A"}
+                                                placeholder="Site Name"
+                                                style={{ height: 40 }}
+                                                placeholderTextColor="#BFBBBB"
+                                                value={siteName} // This value will be bound to the state for site name
+                                                onChangeText={(value) => setSiteName(value)} // Update the state when the user types
+                                                disabled
+                                            />
+                                            {siteName === "" && (
+                                                <HelperText type="error" visible={siteName === ""}>
+                                                    Site Name is required.
+                                                </HelperText>
+                                            )}
+                                        </View> */}
                                     </View>
                                     <View style={styles.mainFormContainer}>
                                         <Text style={styles.subTitleText}>
