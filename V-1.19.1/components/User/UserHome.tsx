@@ -2669,10 +2669,10 @@ const UserHome = () => {
     }
   };
 
-  const vibrateStrongly = () => {
-    Vibration.vibrate([500, 1000, 500, 1000, 500], true);
-    setTimeout(() => Vibration.cancel(), 5000);
-  };
+  // const vibrateStrongly = () => {
+  //   Vibration.vibrate([500, 1000, 500, 1000, 500], true);
+  //   setTimeout(() => Vibration.cancel(), 2000);
+  // };
 
 
 
@@ -2710,7 +2710,7 @@ const UserHome = () => {
         //   bigText: body,
         //   userInfo: remoteMessage.data,
         // });
-        vibrateStrongly();
+        // vibrateStrongly();
         PushNotification.localNotification({
           channelId: 'activeworkforcepro',
           title,
