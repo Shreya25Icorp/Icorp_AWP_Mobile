@@ -317,6 +317,13 @@ const UserHome = () => {
     return `${hours}:${minutes}`;
   };
 
+  const formatIosTime = (date?: Date) => {
+    if (!date) return "";
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    return `${hours}:${minutes}`;
+  };
+
   const handleAddTime = (checkpointIndex: number) => {
     const updatedData = [...timeData];
     updatedData[checkpointIndex].push({ date: null, showPicker: false });
@@ -400,6 +407,45 @@ const UserHome = () => {
         setReasonError((prevErrors) => {
           const newErrors = { ...prevErrors };
           delete newErrors[checkpointIndex];
+          return newErrors;
+        });
+      }
+    } else {
+      // Time-specific reason update
+      setTimeReasons((prev) => {
+        const updatedTimeReasons = [...prev];
+        if (!updatedTimeReasons[checkpointIndex]) {
+          updatedTimeReasons[checkpointIndex] = [];
+        }
+        updatedTimeReasons[checkpointIndex][timeIndex] = text;
+        return updatedTimeReasons;
+      });
+    }
+  };
+
+  const handleIosReasonChange = (
+    checkpointIndex: number,
+    timeIndex: number | null,
+    text: string
+  ) => {
+    if (timeIndex === null) {
+      // Main reason update
+      setReasons((prev) => {
+        const updatedReasons = [...prev];
+        updatedReasons[checkpointIndex] = text; // Update reason for the specific checkpoint
+        return updatedReasons;
+      });
+
+      if (!text.trim() && selectedCheckpoints[checkpointIndex]) {
+        setReasonError((prevErrors) => ({
+          ...prevErrors,
+          [checkpointIndex]: "Reason is required", // Set error message if reason is blank
+        }));
+      } else {
+        // If the reason is provided, clear the error message
+        setReasonError((prevErrors) => {
+          const newErrors = { ...prevErrors };
+          delete newErrors[checkpointIndex]; // Remove error if reason is provided
           return newErrors;
         });
       }
@@ -680,109 +726,178 @@ const UserHome = () => {
               }}
             >
               <Text style={styles.textInputText}>
-                {timeData[props.index][0]?.date === null
-                  ? "Select Time"
-                  : formatTime(timeData[props.index][0]?.date)}
+                {timeData[props.index]?.[0]?.date
+                  ? formatIosTime(
+                    timeData[props.index][0].date,
+                    timeData[props.index][0]?.isUtc
+                  )
+                  : "Select Time"}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={() => handleAddTime(props.index)}
-            >
-              <Icon name="pluscircleo" size={20} color="#000" />
-            </TouchableOpacity>
-          </View>
-          {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
-          <View style={styles.reasonRow}>
-            <Text style={styles.reasonLabel}>Reason:</Text>
-            <TextInput
-              style={styles.reasonInput}
-              placeholder="Enter reason"
-              placeholderTextColor={"#333"}
-              value={reasons[props.index] || ""}
-              onChangeText={(text) =>
-                handleReasonChange(props.index, null, text)
-              }
-            />
           </View>
           <View>
-            {props.item?.extraScanOptions?.lableValue === "Exception Verification - Validate Range" && (
-              <View>
-                <View style={styles.reasonRow}>
-                  <Text style={styles.reasonLabel}>Question:</Text>
-                  <Text style={styles.questionText}>
-                    {props.item?.exceptionVerificationValidateRange?.question || "No question provided"}
-                  </Text>
-                </View>
-                <View style={styles.reasonRow}>
-                  <TextInput
-                    style={styles.reasonInput}
-                    placeholder="Answer:"
-                    placeholderTextColor={"#333"}
-                    keyboardType="numeric"
-                    value={answer[props.index] || ""}
-                    onChangeText={(text) => {
-                      const allowedRange = props.item?.exceptionVerificationValidateRange?.allowedRange || "";
-                      handleAnswerChange(props.index, null, text, allowedRange);
+            {showPicker &&
+              activeTimeIndex?.checkpointIndex === props.index &&
+              activeTimeIndex?.timeIndex !== undefined && (
+                <>
+                  <ModalDateTimePicker
+                    isVisible={showPicker}
+                    mode="time"
+                    is24Hour={true}
+                    display="spinner"
+                    onConfirm={(selectedDate) => {
+                      confirmTime(selectedDate); // Pass the selected time directly to confirmTime
+                      setShowPicker(false); // Close the modal
                     }}
+                    onCancel={() => setShowPicker(false)} // Close on cancel
+                    date={new Date()} // Default to current time if no selected time
                   />
-                </View>
-                {error ? <Text style={styles.errorText}>{error}</Text> : null}
-              </View>
-            )}
+                </>
+              )}
           </View>
-          {props.item?.extraScanOptions?.lableValue === "Exception Verification - Yes/No Question. (Yes is an Exception)" && (
-            <View>
-              <View style={styles.reasonRow}>
-                <Text style={styles.reasonLabel}>Question:</Text>
-                <Text style={styles.questionText}>
-                  {props.item?.exceptionVerificationYes?.question}
-                </Text>
-              </View>
-              <View style={styles.reasonRow}>
-                <View style={styles.buttonsContainer}>
-                  <RadioButton
-                    label="Yes"
-                    selected={answer[props.index] === "Yes"}
-                    onPress={() => handleSelection("Yes", props.index, null)}
-                  />
-                  <RadioButton
-                    label="No"
-                    selected={answer[props.index] === "No"}
-                    onPress={() => handleSelection("No", props.index, null)}
-                  />
-                </View>
-              </View>
-            </View>
+
+          {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
+          <View style={styles.checkboxContainer}>
+            <CheckboxButton
+              selected={selectedCheckpoints[props.index] || false}
+              onPress={() => handleCheckboxPress(props.index, "True")}
+              label="I did not patrol this Checkpoint"
+            />
+          </View>
+          <View style={styles.reasonRow}>
+            <TextInput
+              style={styles.reasonInput}
+              placeholder="Enter reason for not scanning"
+              placeholderTextColor={"#333"}
+              value={reasons[props.index] || ""} // Use the value of reason from the state
+              onChangeText={(text) => {
+                handleIosReasonChange(props.index, null, text); // Update reason when changed
+                console.log(
+                  `Reason for index ${props.index}: ${text ? text : "null"}`
+                ); // Log the input value
+              }}
+            />
+            {/* Show the plus icon only when the checkbox is NOT selected */}
+          </View>
+          {/* Show the error message for the specific checkpoint */}
+          {selectedCheckpoints[props.index] && !reasons[props.index] && (
+            <Text style={styles.reasonErrorText}>Reason is required</Text>
           )}
-          {props.item?.extraScanOptions?.lableValue ===
-            "Exception Verification - Yes/No Question. (No is an Exception)" && (
-              <View>
-                <View style={styles.reasonRow}>
-                  <Text style={styles.reasonLabel}>Question:</Text>
-                  <Text style={styles.questionText}>
-                    {props.item?.exceptionVerificationNo?.question}
-                  </Text>
-                </View>
-                <View style={styles.reasonRow}>
-                  <View style={styles.buttonsContainer}>
-                    <RadioButton
-                      label="Yes"
-                      selected={answer[props.index] === "Yes"}
-                      onPress={() => handleSelection("Yes", props.index, null)}
-                    />
-                    <RadioButton
-                      label="No"
-                      selected={answer[props.index] === "No"}
-                      onPress={() => handleSelection("No", props.index, null)}
-                    />
+
+          {!selectedCheckpoints[props.index] && (
+            <>
+              {props.item?.extraScanOptions?._id ===
+                NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION && (
+                  <View style={{ marginTop: 8 }}>
+                    <View style={styles.reasonRow}>
+                      <Text style={styles.reasonLabel}>Question:</Text>
+                      <Text style={styles.questionText}>
+                        {props.item?.exceptionVerificationValidateRange
+                          ?.question || "No question provided"}
+                      </Text>
+                    </View>
+                    <View style={styles.reasonRow}>
+                      <TextInput
+                        style={styles.reasonInput}
+                        placeholder="Answer:"
+                        placeholderTextColor={"#333"}
+                        keyboardType="numeric"
+                        value={answer[props.index] || ""}
+                        onChangeText={(text) => {
+                          const allowedRange =
+                            props.item?.exceptionVerificationValidateRange
+                              ?.allowedRange || "";
+                          handleAnswerChange(
+                            props.index,
+                            null,
+                            text,
+                            allowedRange
+                          );
+                        }}
+                      />
+                    </View>
+                    {error ? <Text style={styles.errorText}>{error}</Text> : null}
                   </View>
-                </View>
-              </View>
-            )}
+                )}
+
+              {props.item?.extraScanOptions?._id ===
+                NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION_YES && (
+                  <View style={{ marginTop: 8 }}>
+                    <View style={styles.reasonRow}>
+                      <Text style={styles.reasonLabel}>Question:</Text>
+                      <Text style={styles.questionText}>
+                        {props.item?.exceptionVerificationYes?.question}
+                      </Text>
+                    </View>
+                    <View style={styles.reasonRow}>
+                      <View style={styles.buttonsContainer}>
+                        <RadioButton
+                          label="Yes"
+                          selected={answer[props.index] === "Yes"}
+                          onPress={() =>
+                            handleSelection("Yes", props.index, null)
+                          }
+                        />
+                        <RadioButton
+                          label="No"
+                          selected={answer[props.index] === "No"}
+                          onPress={() => handleSelection("No", props.index, null)}
+                        />
+                      </View>
+                      {error[props.index] && (
+                        <Text style={{ color: "red" }}>
+                          This field is required.
+                        </Text>
+                      )}
+                    </View>
+                  </View>
+                )}
+
+              {props.item?.extraScanOptions?._id ===
+                NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION_NO && (
+                  <View style={{ marginTop: 8 }}>
+                    <View style={styles.reasonRow}>
+                      <Text style={styles.reasonLabel}>Question:</Text>
+                      <Text style={styles.questionText}>
+                        {props.item?.exceptionVerificationNo?.question}
+                      </Text>
+                    </View>
+                    <View style={styles.reasonRow}>
+                      <View style={styles.buttonsContainer}>
+                        <RadioButton
+                          label="Yes"
+                          selected={answer[props.index] === "Yes"}
+                          onPress={() =>
+                            handleSelection("Yes", props.index, null)
+                          }
+                        />
+                        <RadioButton
+                          label="No"
+                          selected={answer[props.index] === "No"}
+                          onPress={() => handleSelection("No", props.index, null)}
+                        />
+                      </View>
+                      {error[props.index] && (
+                        <Text style={{ color: "red" }}>
+                          This field is required.
+                        </Text>
+                      )}
+                    </View>
+                  </View>
+                )}
+            </>
+          )}
           <View style={styles.timeRowsContainer}>
             {timeData[props.index].slice(1).map((time, timeIndex) => (
               <React.Fragment key={timeIndex + 1}>
+                <TouchableOpacity
+                  style={styles.fullWidthMinusButton}
+                  onPress={() =>
+                    handleRemoveTimeAndReason(props.index, timeIndex)
+                  }
+                >
+                  <Icon name="minus" size={24} color="#fff" />
+                </TouchableOpacity>
                 <View style={styles.timeRow}>
                   <Text style={styles.addMoreTimeText}>Add more time: </Text>
                   <TouchableOpacity
@@ -796,19 +911,10 @@ const UserHome = () => {
                     }}
                   >
                     <Text style={styles.textInputText}>
-                      {time.date ? formatTime(time.date) : "Select Time"}
+                      {time.date ? formatIosTime(time.date) : "Select Time"}
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.iconContainer}
-                    onPress={() =>
-                      handleRemoveTimeAndReason(props.index, timeIndex)
-                    }
-                  >
-                    <Icon name="minuscircleo" size={20} color="#FF0000" />
-                  </TouchableOpacity>
                 </View>
-                {/* Error message for the "Add more time" field */}
                 {getTimeFieldError(props.index, timeIndex + 1) && (
                   <Text style={styles.errorText}>
                     {getTimeFieldError(props.index, timeIndex + 1)}
@@ -816,25 +922,25 @@ const UserHome = () => {
                 )}
                 <View style={styles.reasonRowsContainer}>
                   <View style={styles.timeRow}>
-                    <Text style={styles.reasonLabel}>Reason:</Text>
                     <TextInput
                       style={styles.reasonInput}
-                      placeholder="Enter reason"
+                      placeholder="Enter reason for not scanning"
                       placeholderTextColor={"#333"}
                       value={timeReasons[props.index]?.[timeIndex] || ""}
                       onChangeText={(text) =>
-                        handleReasonChange(props.index, timeIndex, text)
+                        handleIosReasonChange(props.index, timeIndex, text)
                       }
                     />
                   </View>
                 </View>
                 <View>
-                  {props.item?.extraScanOptions?.lableValue === "Exception Verification - Validate Range" && (
+                  {props.item?.extraScanOptions?._id === NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION && (
                     <View>
                       <View style={styles.reasonRow}>
                         <Text style={styles.reasonLabel}>Question:</Text>
                         <Text style={styles.questionText}>
-                          {props.item?.exceptionVerificationValidateRange?.question || "No question provided"}
+                          {props.item?.exceptionVerificationValidateRange
+                            ?.question || "No question provided"}
                         </Text>
                       </View>
                       <View style={styles.reasonRow}>
@@ -843,18 +949,29 @@ const UserHome = () => {
                           placeholder="Answer:"
                           placeholderTextColor={"#333"}
                           keyboardType="numeric"
-                          value={timeAnswers[props.index]?.[timeIndex] || ""}
+                          value={String(
+                            timeAnswers[props.index]?.[timeIndex] || ""
+                          )}
                           onChangeText={(text) => {
-                            const allowedRange = props.item?.exceptionVerificationValidateRange?.allowedRange || "";
-                            handleAnswerChange(props.index, timeIndex, text, allowedRange);
+                            const allowedRange =
+                              props.item?.exceptionVerificationValidateRange
+                                ?.allowedRange || "";
+                            handleAnswerChange(
+                              props.index,
+                              timeIndex,
+                              text,
+                              allowedRange
+                            );
                           }}
                         />
                       </View>
-                      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+                      {error ? (
+                        <Text style={styles.errorText}>{error}</Text>
+                      ) : null}
                     </View>
                   )}
                 </View>
-                {props.item?.extraScanOptions?.lableValue === "Exception Verification - Yes/No Question. (Yes is an Exception)" && (
+                {props.item?.extraScanOptions?._id === NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION_YES && (
                   <View>
                     <View style={styles.reasonRow}>
                       <Text style={styles.reasonLabel}>Question:</Text>
@@ -866,65 +983,73 @@ const UserHome = () => {
                       <View style={styles.buttonsContainer}>
                         <RadioButton
                           label="Yes"
-                          selected={timeAnswers[props.index]?.[timeIndex] === "Yes"}
-                          onPress={() => handleSelection("Yes", props.index, timeIndex)}
+                          selected={
+                            timeAnswers[props.index]?.[timeIndex] === "Yes"
+                          }
+                          onPress={() =>
+                            handleSelection("Yes", props.index, timeIndex)
+                          }
                         />
                         <RadioButton
                           label="No"
-                          selected={timeAnswers[props.index]?.[timeIndex] === "No"}
-                          onPress={() => handleSelection("No", props.index, timeIndex)}
+                          selected={
+                            timeAnswers[props.index]?.[timeIndex] === "No"
+                          }
+                          onPress={() =>
+                            handleSelection("No", props.index, timeIndex)
+                          }
                         />
                       </View>
                     </View>
                   </View>
                 )}
-                {props.item?.extraScanOptions?.lableValue ===
-                  "Exception Verification - Yes/No Question. (No is an Exception)" && (
-                    <View>
-                      <View style={styles.reasonRow}>
-                        <Text style={styles.reasonLabel}>Question:</Text>
-                        <Text style={styles.questionText}>
-                          {props.item?.exceptionVerificationNo?.question}
-                        </Text>
-                      </View>
-                      <View style={styles.reasonRow}>
-                        <View style={styles.buttonsContainer}>
-                          <RadioButton
-                            label="Yes"
-                            selected={timeAnswers[props.index]?.[timeIndex] === "Yes"}
-                            onPress={() => handleSelection("Yes", props.index, timeIndex)}
-                          />
-                          <RadioButton
-                            label="No"
-                            selected={timeAnswers[props.index]?.[timeIndex] === "No"}
-                            onPress={() => handleSelection("No", props.index, timeIndex)}
-                          />
-                        </View>
+                {props.item?.extraScanOptions?._id === NEXT_PUBLIC_SCAN_EXCEPTION_VERIFICATION_NO && (
+                  <View>
+                    <View style={styles.reasonRow}>
+                      <Text style={styles.reasonLabel}>Question:</Text>
+                      <Text style={styles.questionText}>
+                        {props.item?.exceptionVerificationNo?.question}
+                      </Text>
+                    </View>
+                    <View style={styles.reasonRow}>
+                      <View style={styles.buttonsContainer}>
+                        <RadioButton
+                          label="Yes"
+                          selected={
+                            timeAnswers[props.index]?.[timeIndex] === "Yes"
+                          }
+                          onPress={() =>
+                            handleSelection("Yes", props.index, timeIndex)
+                          }
+                        />
+                        <RadioButton
+                          label="No"
+                          selected={
+                            timeAnswers[props.index]?.[timeIndex] === "No"
+                          }
+                          onPress={() =>
+                            handleSelection("No", props.index, timeIndex)
+                          }
+                        />
                       </View>
                     </View>
-                  )}
+                  </View>
+                )}
               </React.Fragment>
             ))}
           </View>
-          {showPicker &&
-            activeTimeIndex?.checkpointIndex === props.index &&
-            activeTimeIndex?.timeIndex !== undefined && (
-              <DateTimePicker
-                value={
-                  timeData[activeTimeIndex.checkpointIndex][
-                    activeTimeIndex.timeIndex
-                  ]?.date || new Date() // Fallback to current date if no time is selected
-                }
-                mode="time"
-                is24Hour
-                display="spinner"
-                onChange={(event, selectedDate) =>
-                  handleTimeChange(event, selectedDate)
-                }
-                themeVariant="light"
-                style={{ backgroundColor: "white" }}
-              />
-            )}
+          {!selectedCheckpoints[props.index] && (
+            <>
+              <View style={{ marginTop: 5 }}>
+                <TouchableOpacity
+                  style={styles.fullWidthButton}
+                  onPress={() => handleAddTime(props.index)}
+                >
+                  <Icon name="plus" size={24} color="#fff" />
+                </TouchableOpacity>
+              </View>
+            </>
+          )}
         </View>
       );
     } else {
@@ -1553,6 +1678,7 @@ const UserHome = () => {
       const response = await axios.get(`${SERVER_URL_ROASTERING}/me`, {
         withCredentials: true,
       });
+
       if (response?.status === 200) {
         setIsLoading(false);
         const data = response?.data;
@@ -2694,28 +2820,13 @@ const UserHome = () => {
       const { title, body } = remoteMessage.notification || {};
 
       if (title && body) {
-        // PushNotification.localNotification({
-        //   channelId: 'activeworkforcepro',
-        //   title,
-        //   message: body,
-        //   playSound: true,
-        //   soundName: 'default',
-        //   smallIcon: '@mipmap/awp_logo',
-        //   largeIcon: '@mipmap/awp_logo',
-        //   subText: new Date().toLocaleTimeString([], {
-        //     hour: '2-digit',
-        //     minute: '2-digit',
-        //     hour12: true,
-        //   }),
-        //   bigText: body,
-        //   userInfo: remoteMessage.data,
-        // });
-        // vibrateStrongly();
+        Vibration.vibrate(500);
         PushNotification.localNotification({
           channelId: 'activeworkforcepro',
           title,
           message: body,
           playSound: true,
+          // soundName: 'custom_sound.mp3',
           soundName: 'default',
           smallIcon: '@mipmap/awp_logo',
           largeIcon: '@mipmap/awp_logo',
@@ -2727,12 +2838,12 @@ const UserHome = () => {
           bigText: body,
           userInfo: remoteMessage.data,
           vibrate: true,
+          vibration: 500,
           priority: 'high',
           importance: 'high',
           visibility: 'public',
           allowWhileIdle: true,
         });
-
       } else {
         console.log('Notification data is incomplete:', remoteMessage.notification);
       }
@@ -2779,6 +2890,7 @@ const UserHome = () => {
     // Handle background notifications
     messaging().setBackgroundMessageHandler(async (remoteMessage) => {
       console.log('Background notification:', remoteMessage);
+      Vibration.vibrate(500);
     });
 
     // Handle app opened by clicking a notification
@@ -3702,7 +3814,7 @@ const UserHome = () => {
                       >
                         <FlatList
                           data={checkpoints}
-                          keyExtractor={(item) => item.key}
+                          keyExtractor={(item: any) => item.key}
                           renderItem={renderCheckpoint}
                           keyboardShouldPersistTaps="handled"
                         />

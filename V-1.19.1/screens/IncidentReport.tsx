@@ -378,7 +378,7 @@ const IncidentReport = () => {
                     return [
                       ...prev,
                       {
-                        label: capitalizeFirstLetter(subLocation.name),
+                        label: (subLocation.name),
                         value: subLocation._id,
                       },
                     ];
@@ -930,13 +930,13 @@ const IncidentReport = () => {
 
     // Find the selected location and update sub-locations
     const selectedLocation = locations.find(
-      (location) => location.value === locationValue
+      (location: any) => location.value === locationValue
     );
 
     if (selectedLocation) {
       setSubLocations(
         selectedLocation.subLocations.map((sub: any) => ({
-          label: capitalizeFirstLetter(sub.name),
+          label: (sub.name),
           value: sub._id,
         }))
       );
@@ -1494,14 +1494,14 @@ const IncidentReport = () => {
 
         // Transform categories and subtypes
         const transformedCategories = data.map((item: any) => ({
-          label: capitalizeFirstLetter(item.name),
+          label: (item.name),
           value: item._id,
           severityLevel: item.severityLevel,
           subtypes:
             subtypesData
               .filter((sub: any) => sub.incidentCategory === item._id)
               .map((sub: any) => ({
-                label: capitalizeFirstLetter(sub.name),
+                label: (sub.name),
                 value: sub._id,
                 severityLevel: sub.severityLevel,
               })) || [],
@@ -1564,7 +1564,7 @@ const IncidentReport = () => {
             } else {
               // Process all data once all pages are fetched
               const transformedCategories = allData.map((item: any) => ({
-                label: capitalizeFirstLetter(item.name),
+                label: (item.name),
                 value: item._id,
                 severityLevel: item.severityLevel,
               }));
@@ -1627,7 +1627,7 @@ const IncidentReport = () => {
       // Extract total count and first set of locations
       const totalCount = initialResponse?.data?.total || 0;
       allLocations = initialResponse?.data?.locations.map((item: any) => ({
-        label: capitalizeFirstLetter(item.name),
+        label: (item.name),
         value: item._id,
         subLocations: item.subLocations || [],
       }));
@@ -1651,7 +1651,7 @@ const IncidentReport = () => {
         if (response?.status === 200) {
           const transformedLocations = response?.data?.locations.map(
             (item: any) => ({
-              label: capitalizeFirstLetter(item.name),
+              label: (item.name),
               value: item._id,
               subLocations: item.subLocations || [],
             })
@@ -1702,7 +1702,7 @@ const IncidentReport = () => {
                 return [
                   ...prev,
                   {
-                    label: capitalizeFirstLetter(matchedSubLocation.label),
+                    label: (matchedSubLocation.label),
                     value: subLocation,
                   },
                 ];
@@ -1737,7 +1737,7 @@ const IncidentReport = () => {
       if (selectedLoc?.subLocations) {
         const formattedSubLocations = selectedLoc.subLocations.map(
           (sub: any) => ({
-            label: capitalizeFirstLetter(sub.name),
+            label: (sub.name),
             value: sub._id,
           })
         );
@@ -1763,7 +1763,7 @@ const IncidentReport = () => {
       if (selectedCategory?.subtypes) {
         const formattedSubTypes = selectedCategory.subtypes.map(
           (sub: any) => ({
-            label: capitalizeFirstLetter(sub.label),
+            label: (sub.label),
             value: sub._id,
           })
         );

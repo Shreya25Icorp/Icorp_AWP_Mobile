@@ -18,9 +18,8 @@ import {
 
 const { width: viewportWidth } = Dimensions.get("window");
 const IMAGE_WIDTH = viewportWidth;
-const THUMBNAIL_SIZE = 35;
-const THUMBNAIL_Height_SIZE = 50;
-
+const THUMBNAIL_SIZE = 30;
+const THUMBNAIL_Height_SIZE = 40;
 
 const ImageViewer = () => {
   const route = useRoute();
@@ -39,7 +38,7 @@ const ImageViewer = () => {
   });
 
   // Handles zoom state changes
-  const onPinchStateChange = (event) => {
+  const onPinchStateChange = (event: any) => {
     if (event.nativeEvent.state === 5) {
       let newScale = event.nativeEvent.scale;
       if (newScale > 1) {
@@ -71,6 +70,12 @@ const ImageViewer = () => {
         pagingEnabled
         keyExtractor={(_, index) => index.toString()}
         showsHorizontalScrollIndicator={false}
+        initialScrollIndex={initialIndex} // Ensure correct initial image
+        getItemLayout={(data, index) => ({
+          length: viewportWidth,
+          offset: viewportWidth * index,
+          index,
+        })}
         onMomentumScrollEnd={(event) => {
           const index = Math.round(
             event.nativeEvent.contentOffset.x / viewportWidth
@@ -86,7 +91,7 @@ const ImageViewer = () => {
         renderItem={({ item, index }) => (
           <View style={styles.imageWrapper}>
             {/* Display Image Name */}
-            <Text style={styles.imageName}>{images[index].split("/").pop()}</Text>
+            <Text style={styles.imageName}>{item.split("/").pop()}</Text>
             <PinchGestureHandler
               onGestureEvent={onPinchEvent}
               onHandlerStateChange={onPinchStateChange}
@@ -97,11 +102,11 @@ const ImageViewer = () => {
                   lastScale.current > 1
                     ? resetZoom()
                     : Animated.spring(scale, {
-                      toValue: 2,
-                      useNativeDriver: false,
-                    }).start(() => {
-                      lastScale.current = 2;
-                    })
+                        toValue: 2,
+                        useNativeDriver: false,
+                      }).start(() => {
+                        lastScale.current = 2;
+                      })
                 }
               >
                 <Animated.View style={styles.imageContainer}>
@@ -195,7 +200,7 @@ const styles = StyleSheet.create({
   thumbnail: {
     width: THUMBNAIL_SIZE,
     height: THUMBNAIL_Height_SIZE,
-    marginHorizontal: 2,
+    marginHorizontal: 1,
     borderRadius: 5,
   },
   selectedThumbnail: {

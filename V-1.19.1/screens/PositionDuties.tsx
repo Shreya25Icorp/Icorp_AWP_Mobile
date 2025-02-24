@@ -1121,13 +1121,13 @@ const PositionDuties = () => {
 
   const handleNfcScan = async (item: any) => {
     try {
-      console.log(
-        "---------------- scan started -------------------------------------"
-      );
+      // console.log(
+      //   "---------------- scan started -------------------------------------"
+      // );
 
       // Store the scanned item in AsyncStorage
       await AsyncStorage.setItem("scannedItem", JSON.stringify(item));
-      console.log("Scanned item stored successfully:", item);
+      // console.log("Scanned item stored successfully:", item);
 
       // Clear the missed scan timeout if NFC scan occurs
       if (missedScanTimeout) {

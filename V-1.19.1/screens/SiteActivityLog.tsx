@@ -205,7 +205,7 @@ const SubmitReports = () => {
     if (selectedLocation) {
       setSubLocations(
         selectedLocation.subLocations.map((sub: any) => ({
-          label: capitalizeFirstLetter(sub.name),
+          label: (sub.name),
           value: sub._id,
         }))
       );
@@ -528,7 +528,7 @@ const SubmitReports = () => {
 
         // Transform the 'types' array to bind 'activityType'
         const transformedCategories = types.map((item: any) => ({
-          label: capitalizeFirstLetter(item.name),
+          label: (item.name),
           value: item._id,
           severityLevel: item.severityLevel,
         }));
@@ -654,7 +654,7 @@ const SubmitReports = () => {
                 setSubLocations((prev: any) => {
                   const exists = prev.some((subloc: any) => subloc.value === subLocation._id);
                   if (!exists) {
-                    return [...prev, { label: capitalizeFirstLetter(subLocation.name), value: subLocation._id }];
+                    return [...prev, { label: (subLocation.name), value: subLocation._id }];
                   }
                   return prev;
                 });
@@ -712,7 +712,7 @@ const SubmitReports = () => {
       // Extract total count and first set of locations
       const totalCount = initialResponse?.data?.total || 0;
       allLocations = initialResponse?.data?.locations.map((item: any) => ({
-        label: capitalizeFirstLetter(item.name),
+        label: (item.name),
         value: item._id,
         subLocations: item.subLocations || [],
       }));
@@ -735,7 +735,7 @@ const SubmitReports = () => {
       pageResponses.forEach((response) => {
         if (response?.status === 200) {
           const transformedLocations = response?.data?.locations.map((item: any) => ({
-            label: capitalizeFirstLetter(item.name),
+            label: (item.name),
             value: item._id,
             subLocations: item.subLocations || [],
           }));
@@ -807,7 +807,7 @@ const SubmitReports = () => {
             setSubLocations((prev: any) => {
               const exists = prev.some((subloc: any) => subloc.value === subLocation);
               if (!exists) {
-                return [...prev, { label: capitalizeFirstLetter(matchedSubLocation.label), value: subLocation }];
+                return [...prev, { label: (matchedSubLocation.label), value: subLocation }];
               }
               return prev;
             });
@@ -834,7 +834,7 @@ const SubmitReports = () => {
 
       if (selectedLoc?.subLocations) {
         const formattedSubLocations = selectedLoc.subLocations.map((sub: any) => ({
-          label: capitalizeFirstLetter(sub.name),
+          label: (sub.name),
           value: sub._id,
         }));
         setSubLocations(formattedSubLocations);

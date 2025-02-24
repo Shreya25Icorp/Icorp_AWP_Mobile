@@ -189,7 +189,7 @@ const Checkpoints = () => {
         />
         <View style={styles.locationText}>
           <Text style={styles.locationBlockText}>
-            {capitalizeFirstLetter(item.checkpointName)}
+            {(item.checkpointName)}
           </Text>
           <View style={styles.locContainer}>
             <MaterialIcons
@@ -199,9 +199,9 @@ const Checkpoints = () => {
               style={styles.locationIcon}
             />
             <Text style={styles.NumberGuardsText}>
-              {capitalizeFirstLetter(item.location.name)}
+              {(item.location.name)}
               {item.subLocation && item.subLocation.name
-                ? `, ${capitalizeFirstLetter(item.subLocation.name)}`
+                ? `, ${(item.subLocation.name)}`
                 : ""}
             </Text>
           </View>
@@ -236,14 +236,14 @@ const Checkpoints = () => {
     </TouchableOpacity>
   );
 
-  function capitalizeFirstLetter(string: string): string {
-    if (!string || typeof string !== "string") return "";
+  // function capitalizeFirstLetter(string: string): string {
+  //   if (!string || typeof string !== "string") return "";
 
-    return string
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  }
+  //   return string
+  //     .split(" ")
+  //     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+  //     .join(" ");
+  // }
 
   function capitalizeAllLetter(string: string) {
     if (!string) return "";

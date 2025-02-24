@@ -63,25 +63,6 @@ const Schedule_Attendance = () => {
   const [prevWeekShiftCount, setPrevWeekShiftCount] = useState(0);
   const [isNextWeekSelected, setIsNextWeekSelected] = useState(false);
   const [currentWeekShiftCount, setCurrentWeekShiftCount] = useState(0);
-
-  // const toggleSidebar = () => {
-  //   if (isSidebarOpen) {
-  //     const toValue = -windowWidth * 0.7; // Adjust the sidebar width as needed
-  //     sidebarTranslateX.setValue(toValue);
-  //     setIsSidebarOpen(false);
-  //   } else {
-  //     setIsSidebarOpen(true);
-  //     const toValue = 0;
-
-  //     Animated.timing(sidebarTranslateX, {
-  //       toValue,
-  //       duration: 300, // Adjust the duration as needed
-  //       easing: Easing.linear,
-  //       useNativeDriver: false,
-  //     }).start();
-  //   }
-  // };
-
   const [currentPage, setCurrentPage] = useState(1);
   const [clickedPage, setClickedPage] = useState(1);
   const [showPrev, setShowPrev] = useState(false);
@@ -410,49 +391,7 @@ const Schedule_Attendance = () => {
     }, [fetchAllScheduleShifts])
   );
 
-  // useEffect(() => {
-  //   // Initialize the socket.io connection
-  //   const socket = io(SERVER_URL_ROASTERING_DOMAIN);
-  //   // Handle socket.io events
-  //   socket.on('connect', () => {
-  //     console.log('Socket.io connection opened');
-  //   });
-
-  //   socket.on('publishShift', async data => {
-  //     if (data) {
-  //       fetchAllScheduleShifts();
-  //     }
-  //   });
-
-  //   socket.on('editShift', async data => {
-  //     if (data) {
-  //       fetchAllScheduleShifts();
-  //     }
-  //   });
-
-  //   socket.on('punchIn', async data => {
-  //     if (data) {
-  //       fetchAllScheduleShifts();
-  //     }
-  //   });
-
-  //   socket.on('deleteShift', async data => {
-  //     if (data) {
-  //       fetchAllScheduleShifts();
-  //     }
-  //   });
-
-  //   socket.on('disconnect', () => {
-  //     console.log('Socket.io connection closed');
-  //   });
-
-  //   // Clean up the socket.io connection when the component is unmounted
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, []);
-
-  const saveCurrentWeekToStorage = async (week) => {
+  const saveCurrentWeekToStorage = async (week: any) => {
     try {
       await AsyncStorage.setItem("selectedWeek", week.format("YYYY-MM-DD"));
     } catch (error) {
@@ -505,9 +444,24 @@ const Schedule_Attendance = () => {
     return string.toUpperCase();
   }
 
+  // const panResponder = PanResponder.create({
+  //   onStartShouldSetPanResponder: () => true,
+  //   onMoveShouldSetPanResponder: () => true,
+  //   onPanResponderRelease: (evt, gestureState) => {
+  //     if (gestureState.dx > 50) {
+  //       goToPreviousWeek(); // Swipe Right - Previous Week
+  //     } else if (gestureState.dx < -50) {
+  //       goToNextWeek(); // Swipe Left - Next Week
+  //     }
+  //   },
+  // });
+
   const panResponder = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onMoveShouldSetPanResponder: () => true,
+    onStartShouldSetPanResponder: () => false, // Prevent immediate capture
+    onMoveShouldSetPanResponder: (evt, gestureState) => {
+      return Math.abs(gestureState.dx) > 50 && Math.abs(gestureState.dy) < 20;
+      // Detect a horizontal swipe, ignore vertical scrolls
+    },
     onPanResponderRelease: (evt, gestureState) => {
       if (gestureState.dx > 50) {
         goToPreviousWeek(); // Swipe Right - Previous Week
@@ -519,9 +473,10 @@ const Schedule_Attendance = () => {
 
 
 
+
   return (
-    <SafeAreaView style={styles.container} {...panResponder.panHandlers}>
-      <ScrollView
+    <SafeAreaView style={styles.container}>
+      {/* <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         refreshControl={
           <RefreshControl
@@ -530,6 +485,11 @@ const Schedule_Attendance = () => {
             tintColor={"#3C4764"}
           />
         }
+      > */}
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContent}
+        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} tintColor={"#3C4764"} />}
+        {...panResponder.panHandlers} // Apply here instead of SafeAreaView
       >
         <View>
           <View style={globalStyles.overlayImageGlobal}>

@@ -1,9 +1,5 @@
 [
     {
-        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xhdpi_awp_logo.png.flat",
-        "source": "com.activeworkforcepro.app-main-46:/mipmap-xhdpi/awp_logo.png"
-    },
-    {
         "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xhdpi_ic_launcher_round.png.flat",
         "source": "com.activeworkforcepro.app-main-46:/mipmap-xhdpi/ic_launcher_round.png"
     },
@@ -16,20 +12,24 @@
         "source": "com.activeworkforcepro.app-main-46:/mipmap-hdpi/awp_logo.png"
     },
     {
-        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-mdpi_awp_logo.png.flat",
-        "source": "com.activeworkforcepro.app-main-46:/mipmap-mdpi/awp_logo.png"
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_check.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_check.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-xxxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-xxxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
     },
     {
         "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xxhdpi_icorp.webp.flat",
         "source": "com.activeworkforcepro.app-main-46:/mipmap-xxhdpi/icorp.webp"
     },
     {
-        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.activeworkforcepro.app-main-46:/mipmap-hdpi/ic_launcher.png"
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_awp_logo.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_awp_logo.png"
     },
     {
-        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "com.activeworkforcepro.app-main-46:/mipmap-mdpi/ic_launcher_round.png"
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_node_modules_reactnativepaper_src_assets_backchevron.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/node_modules_reactnativepaper_src_assets_backchevron.png"
     },
     {
         "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xxxhdpi_ic_launcher.png.flat",
@@ -40,28 +40,44 @@
         "source": "com.activeworkforcepro.app-main-46:/mipmap-mdpi/ic_launcher.png"
     },
     {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
         "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "com.activeworkforcepro.app-main-46:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-xhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-xhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
     },
     {
         "merged": "com.activeworkforcepro.app-merged_res-44:/xml_network_security_config.xml.flat",
         "source": "com.activeworkforcepro.app-main-46:/xml/network_security_config.xml"
     },
     {
-        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xxhdpi_awp_logo.png.flat",
-        "source": "com.activeworkforcepro.app-main-46:/mipmap-xxhdpi/awp_logo.png"
-    },
-    {
-        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable_rn_edit_text_material.xml.flat",
-        "source": "com.activeworkforcepro.app-main-46:/drawable/rn_edit_text_material.xml"
-    },
-    {
-        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "com.activeworkforcepro.app-main-46:/mipmap-xxxhdpi/ic_launcher_round.png"
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_wallpaper.jpg.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_wallpaper.jpg"
     },
     {
         "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xxxhdpi_awp_logo.png.flat",
         "source": "com.activeworkforcepro.app-main-46:/mipmap-xxxhdpi/awp_logo.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_pdf.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_pdf.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_homebottom.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_homebottom.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-hdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-hdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_home.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_home.png"
     },
     {
         "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xxhdpi_ic_launcher.png.flat",
@@ -70,5 +86,77 @@
     {
         "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xhdpi_ic_launcher.png.flat",
         "source": "com.activeworkforcepro.app-main-46:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/raw_custom_sound.wav.flat",
+        "source": "com.activeworkforcepro.app-main-46:/raw/custom_sound.wav"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xhdpi_awp_logo.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/mipmap-xhdpi/awp_logo.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_prev.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_prev.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-mdpi_awp_logo.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/mipmap-mdpi/awp_logo.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_next.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_next.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xxhdpi_awp_logo.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/mipmap-xxhdpi/awp_logo.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backiconmask.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backiconmask.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_awp_logo_blue.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_awp_logo_blue.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_site.jpeg.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_site.jpeg"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable_rn_edit_text_material.xml.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable/rn_edit_text_material.xml"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-xxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-xxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_nfctagimage.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_nfctagimage.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_manager_profileimageblock.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_manager_profileimageblock.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_images_overlay.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_images_overlay.png"
+    },
+    {
+        "merged": "com.activeworkforcepro.app-merged_res-44:/drawable-mdpi_assets_manager_overlayprofile.png.flat",
+        "source": "com.activeworkforcepro.app-main-46:/drawable-mdpi/assets_manager_overlayprofile.png"
     }
 ]

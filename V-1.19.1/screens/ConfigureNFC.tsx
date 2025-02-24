@@ -317,6 +317,11 @@ const ConfigureNFC = () => {
           />
           <View style={styles.textContainer}>
             <Text style={styles.titleCheckpointNameText}>{checkpointName}</Text>
+            {PositionDuties === 'PositionDuties' && (
+              <>
+              <View style={styles.horizontalLine} />
+              </>
+            )}
             <Text style={styles.titleText}>Place the device over the tag</Text>
             <Text style={styles.contentText}>
               Touch the back of the phone to the tag. The NFC antenna location
@@ -344,10 +349,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "800",
     marginBottom: 10,
-    paddingBottom: 6,
+    // paddingBottom: 6,
     color: "#262D3F",
-    borderBottomColor: '#C7C7C7',
-    borderBottomWidth: 1
+    // borderBottomWidth: 2,
+    // borderBottomColor: '#C7C7C7',
+  },
+  horizontalLine: {
+    borderBottomWidth: 1,
+    borderColor: "#C7C7C7",
+    width: "100%",
+    marginBottom: 10,
   },
   titleText: {
     fontSize: 18,

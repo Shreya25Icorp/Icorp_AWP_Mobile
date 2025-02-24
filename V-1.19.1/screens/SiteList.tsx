@@ -107,10 +107,10 @@ const SiteList = () => {
   // };
 
   const fetchReportDetails = useCallback(async () => {
-    console.log("search----", searchQuery);
+    // console.log("search----", searchQuery);
     setIsLoading(true);
     try {
-      console.log("Try====>");
+      // console.log("Try====>");
       const response = await axios.get(`${SERVER_URL_ROASTERING}/get/sites/checkpoints`, {
         params: {
           page,
