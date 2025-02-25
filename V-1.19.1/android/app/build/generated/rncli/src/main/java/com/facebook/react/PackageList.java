@@ -31,8 +31,6 @@ import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 import io.invertase.firebase.messaging.ReactNativeFirebaseMessagingPackage;
 // @react-native-picker/picker
 import com.reactnativecommunity.picker.RNCPickerPackage;
-// @sayem314/react-native-keep-awake
-import com.sayem.keepawake.KCKeepAwakePackage;
 // react-native-background-timer
 import com.ocetnik.timer.BackgroundTimerPackage;
 // react-native-biometrics
@@ -140,7 +138,6 @@ public class PackageList {
       new ReactNativeFirebaseAppPackage(),
       new ReactNativeFirebaseMessagingPackage(),
       new RNCPickerPackage(),
-      new KCKeepAwakePackage(),
       new BackgroundTimerPackage(),
       new ReactNativeBiometricsPackage(),
       new ReactNativeBlobUtilPackage(),

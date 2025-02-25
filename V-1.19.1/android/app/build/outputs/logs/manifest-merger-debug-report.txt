@@ -18,7 +18,6 @@ MERGED from [:react-native-cookies_cookies] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\
 MERGED from [:react-native-firebase_messaging] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-41:12
 MERGED from [:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-25:12
 MERGED from [:react-native-picker_picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-picker\picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:sayem314_react-native-keep-awake] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@sayem314\react-native-keep-awake\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-background-timer] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-background-timer\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-biometrics] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-biometrics\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-10:12
 MERGED from [:react-native-blob-util] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-blob-util\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-46:12
@@ -591,8 +590,6 @@ MERGED from [:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\nod
 MERGED from [:react-native-firebase_app] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-picker_picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-picker\picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-picker_picker] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@react-native-picker\picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:sayem314_react-native-keep-awake] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@sayem314\react-native-keep-awake\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:sayem314_react-native-keep-awake] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\@sayem314\react-native-keep-awake\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-background-timer] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-background-timer\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-background-timer] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-background-timer\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-biometrics] D:\Shreya\Icorp_AWP_Mobile\V-1.19.1\node_modules\react-native-biometrics\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
