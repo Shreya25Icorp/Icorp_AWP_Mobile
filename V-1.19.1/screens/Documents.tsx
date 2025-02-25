@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
@@ -26,6 +26,8 @@ const windowWidth = Dimensions.get('window').width;
 
 const Documents = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const activeShift = route?.params?.activeShift;
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const [activeIcon, setActiveIcon] = useState<number>(null);
@@ -42,46 +44,19 @@ const Documents = () => {
       'https://icorp-rostering.s3.ap-southeast-2.amazonaws.com/Position_doc/ICorp+Security+-+Serious+incidents+241127v3.pdf',
   };
 
-  const handleLoadEnd = index => {
+  const handleLoadEnd = (index: any) => {
     setImageLoading(prev => ({
       ...prev,
       [index]: false, // Set to false when the image has loaded
     }));
   };
-  const handleLoadStart = index => {
+  const handleLoadStart = (index: any) => {
     setImageLoading(prev => ({
       ...prev,
       [index]: true, // Set to true when the image starts loading
     }));
   };
 
-  // const toggleSidebar = () => {
-  //   // If the sidebar is open, close it
-  //   if (isSidebarOpen) {
-  //     // Define the target translation value to close the sidebar
-  //     const toValue = -windowWidth * 0.7; // Adjust the sidebar width as needed
-
-  //     // Update the sidebar position without animation
-  //     sidebarTranslateX.setValue(toValue);
-
-  //     // Update the state to indicate that the sidebar is closed
-  //     setIsSidebarOpen(false);
-  //   } else {
-  //     // If the sidebar is closed, open it
-  //     setIsSidebarOpen(true);
-
-  //     // Define the target translation value to open the sidebar
-  //     const toValue = 0; // Adjust the sidebar width as needed
-
-  //     // Animate the sidebar translation
-  //     Animated.timing(sidebarTranslateX, {
-  //       toValue,
-  //       duration: 300, // Adjust the duration as needed
-  //       easing: Easing.linear,
-  //       useNativeDriver: false,
-  //     }).start();
-  //   }
-  // };
   const getFileNameFromUrl = (url: string) => {
     // Decode the URL and extract the file name
     const decodedUrl = decodeURIComponent(url);
@@ -123,10 +98,8 @@ const Documents = () => {
         defaultData.push(...documents); // Add them to the document list
       }
 
-      const isClockedIn = await AsyncStorage.getItem('clockIn');
-      if (isClockedIn === 'true') {
-        const siteId = await AsyncStorage.getItem('siteId');
-        const url = `${SERVER_URL_ROASTERING}/get/site/documents/user/${siteId}`;
+      if (activeShift) {
+        const url = `${SERVER_URL_ROASTERING}/get/site/documents/user/${activeShift?.siteId?._id}`;
 
         const response = await axios.get(url, {
           withCredentials: true,

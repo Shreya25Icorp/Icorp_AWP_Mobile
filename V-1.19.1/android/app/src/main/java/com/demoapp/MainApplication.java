@@ -16,6 +16,12 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.security.cert.X509Certificate;
 import javax.net.ssl.SSLContext;
+import com.activeworkforcepro.app.WakeLockPackage;
+
+import android.content.Intent;
+import android.os.PowerManager;
+import android.provider.Settings;
+import android.net.Uri;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -28,8 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
+          packages.add(new WakeLockPackage()); // Add the custom package
           return packages;
         }
 
@@ -57,6 +63,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    
     try {
         // Disable SSL validation
         TrustManager[] trustAllCertificates = new TrustManager[]{
@@ -75,6 +82,21 @@ public class MainApplication extends Application implements ReactApplication {
         SSLContext sc = SSLContext.getInstance("TLS");
         sc.init(null, trustAllCertificates, new java.security.SecureRandom());
         SSLContext.setDefault(sc);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    // ✅ Request to ignore battery optimizations
+    try {
+        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        String packageName = getPackageName();
+        
+        if (powerManager != null && !powerManager.isIgnoringBatteryOptimizations(packageName)) {
+            Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            intent.setData(Uri.parse("package:" + packageName));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
     } catch (Exception e) {
         e.printStackTrace();
     }

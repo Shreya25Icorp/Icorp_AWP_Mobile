@@ -107,6 +107,8 @@ import PushNotification from 'react-native-push-notification';
 import BackgroundTimer from "react-native-background-timer";
 import { check, PERMISSIONS, request, RESULTS } from "react-native-permissions";
 import EncryptedStorage from "react-native-encrypted-storage";
+import { activateKeepAwake, deactivateKeepAwake } from '@sayem314/react-native-keep-awake';
+
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -2800,6 +2802,22 @@ const UserHome = () => {
   //   setTimeout(() => Vibration.cancel(), 2000);
   // };
 
+  // const checkBatteryOptimization = async () => {
+  //   if (Platform.OS === 'android') {
+  //     const status = await check(PERMISSIONS.ANDROID.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+  //     if (status !== RESULTS.GRANTED) {
+  //       await request(PERMISSIONS.ANDROID.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+  //     }
+  //   }
+  // };
+
+  // // Call this once when the app starts
+  // useEffect(() => {
+  //   checkBatteryOptimization();
+  // }, []);
+
+  const { WakeLockModule } = NativeModules;
+
 
 
   useEffect(() => {
@@ -2820,6 +2838,11 @@ const UserHome = () => {
       const { title, body } = remoteMessage.notification || {};
 
       if (title && body) {
+        setTimeout(() => {
+          console.log('-==============================-===================');
+
+          WakeLockModule.acquireWakeLock();
+        }, 0);
         Vibration.vibrate(500);
         PushNotification.localNotification({
           channelId: 'activeworkforcepro',
@@ -2839,10 +2862,11 @@ const UserHome = () => {
           userInfo: remoteMessage.data,
           vibrate: true,
           vibration: 500,
-          priority: 'high',
-          importance: 'high',
+          priority: 'max',
+          importance: 'max',
           visibility: 'public',
           allowWhileIdle: true,
+          onlyAlertOnce: true,
         });
       } else {
         console.log('Notification data is incomplete:', remoteMessage.notification);
@@ -2863,12 +2887,12 @@ const UserHome = () => {
             const shiftJSON = await AsyncStorage.getItem("shift");
             const shift = JSON.parse(shiftJSON);
 
-            console.log('Parsed Shift Object:', shift);
+            console.log('Parsed Shift Object:', activeShift);
 
             // Navigate to the desired screen
             if (navigation) {
               // navigation.navigate("PositionDuties", { shift: shift } as never);
-              navigation.navigate('PositionDuties', { shift });
+              navigation.navigate('PositionDuties', { shift: activeShift });
             }
           } catch (error) {
             console.error('Error parsing notification data:', error);
@@ -2889,6 +2913,26 @@ const UserHome = () => {
 
     // Handle background notifications
     messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+      setTimeout(() => {
+        console.log('-=-===--=--==-=-=--==-=-=-=--==-=-=-=-=-');
+
+        WakeLockModule.acquireWakeLock();
+      }, 500);
+      // PushNotification.localNotification({
+      //   channelId: 'activeworkforcepro',
+      //   title: remoteMessage.notification?.title,
+      //   message: remoteMessage.notification?.body,
+      //   playSound: true,
+      //   soundName: 'default',
+      //   smallIcon: '@mipmap/awp_logo',
+      //   largeIcon: '@mipmap/awp_logo',
+      //   vibrate: true,
+      //   vibration: 500,
+      //   priority: 'high',
+      //   importance: 'high',
+      //   visibility: 'public',
+      //   allowWhileIdle: true,
+      // });
       console.log('Background notification:', remoteMessage);
       Vibration.vibrate(500);
     });
@@ -2898,17 +2942,17 @@ const UserHome = () => {
       console.log('Notification caused app to open from background:', remoteMessage);
       const shiftJSON = await AsyncStorage.getItem("shift");
       const shift = JSON.parse(shiftJSON);
-      console.log(' ****** shift ******* ', shift);
+      console.log(' ****** shift ******* ', activeShift);
 
 
       if (remoteMessage?.data) {
         const notificationData = remoteMessage?.data;
         if (notificationData) {
-          console.log('Parsed Shift Object:', shift);
+          console.log('Parsed Shift Object:', activeShift);
 
           if (navigation) {
             // navigation.navigate("PositionDuties", { shift: shift } as never);
-            navigation.navigate('PositionDuties', { shift });
+            navigation.navigate('PositionDuties', { shift: activeShift });
           }
         }
       }
@@ -2917,18 +2961,16 @@ const UserHome = () => {
     // Handle app opened from a terminated state
     const checkInitialNotification = async () => {
       const remoteMessage = await messaging().getInitialNotification();
-      const shiftJSON = await AsyncStorage.getItem("shift");
-      const shift = JSON.parse(shiftJSON);
 
       if (remoteMessage) {
         const notificationData = remoteMessage?.data;
 
         if (notificationData) {
-          console.log('Parsed Shift Object:', shift);
+          console.log('Parsed Shift Object:', activeShift);
 
           if (navigation) {
             // navigation.navigate("PositionDuties", { shift: shift } as never);
-            navigation.navigate('PositionDuties', { shift });
+            navigation.navigate('PositionDuties', { shift: activeShift });
           }
         }
       }
@@ -2939,8 +2981,9 @@ const UserHome = () => {
     return () => {
       unsubscribeOnMessage();
       unsubscribeOnNotificationOpenedApp();
+      WakeLockModule.releaseWakeLock();
     };
-  }, [navigation]);
+  }, [navigation, activeShift]);
 
   return (
     <BottomSheetModalProvider>
@@ -3537,7 +3580,7 @@ const UserHome = () => {
 
                 <TouchableOpacity
                   // disabled={!isCardEnabled} // Disable the card based on both upcoming and following shifts
-                  onPress={() => navigation.navigate("Documents" as never)}
+                  onPress={() => navigation.navigate("Documents", { activeShift } as never)}
                   style={[
                     styles.icon,
                     // shiftCount?.documents > 0 && isCardEnabled
@@ -3591,7 +3634,7 @@ const UserHome = () => {
                         },
                       ]}
                     >
-                      {isClockedIn
+                      {isCardEnabled
                         ? `(${shiftCount?.documents + totalDocuments})`
                         : `(${totalDocuments})`}
                     </Text>

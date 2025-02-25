@@ -2399,7 +2399,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     marginVertical: 4,
-    marginHorizontal: 16,
+    marginHorizontal: 10,
     padding: 8,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },

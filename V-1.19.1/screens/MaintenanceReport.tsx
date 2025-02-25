@@ -712,7 +712,7 @@ const MaintenanceReport = () => {
     try {
       setIsLoading(true);
       const siteId = await AsyncStorage.getItem("siteId");
-      const url = `${SERVER_URL_ROASTERING}/get/check/types?report=maintenanceIssue&siteId=${siteId}`;
+      const url = `${SERVER_URL_ROASTERING}/get/check/types?report=maintenanceIssue&siteId=${shift.siteId._id}`;
 
       const response = await axios.get(url, {
         withCredentials: true,
@@ -911,7 +911,7 @@ const MaintenanceReport = () => {
         limit: limit,
         page: 1,
       };
-      const url = `${SERVER_URL_ROASTERING}/get/location/site/wise/${siteId}`;
+      const url = `${SERVER_URL_ROASTERING}/get/location/site/wise/${shift.siteId._id}`;
 
       const initialResponse = await axios.get(url, {
         params: initialParams,

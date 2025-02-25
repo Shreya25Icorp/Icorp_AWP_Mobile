@@ -457,256 +457,271 @@ const Schedule_Attendance = () => {
   // });
 
   const panResponder = PanResponder.create({
-    onStartShouldSetPanResponder: () => false, // Prevent immediate capture
+    onStartShouldSetPanResponder: () => false,
     onMoveShouldSetPanResponder: (evt, gestureState) => {
-      return Math.abs(gestureState.dx) > 50 && Math.abs(gestureState.dy) < 20;
-      // Detect a horizontal swipe, ignore vertical scrolls
+      // Ensure swipe is horizontal and ignore vertical movements
+      return Math.abs(gestureState.dx) > 50 && Math.abs(gestureState.dy) < 10;
     },
     onPanResponderRelease: (evt, gestureState) => {
       if (gestureState.dx > 50) {
-        goToPreviousWeek(); // Swipe Right - Previous Week
+        goToPreviousWeek(); // Swipe Right
       } else if (gestureState.dx < -50) {
-        goToNextWeek(); // Swipe Left - Next Week
+        goToNextWeek(); // Swipe Left
       }
     },
   });
+
+
+  // const panResponder = PanResponder.create({
+  //   onStartShouldSetPanResponder: () => false, // Prevent immediate capture
+  //   onMoveShouldSetPanResponder: (evt, gestureState) => {
+  //     return Math.abs(gestureState.dx) > 50 && Math.abs(gestureState.dy) < 20;
+  //     // Detect a horizontal swipe, ignore vertical scrolls
+  //   },
+  //   onPanResponderRelease: (evt, gestureState) => {
+  //     if (gestureState.dx > 50) {
+  //       goToPreviousWeek(); // Swipe Right - Previous Week
+  //     } else if (gestureState.dx < -50) {
+  //       goToNextWeek(); // Swipe Left - Next Week
+  //     }
+  //   },
+  // });
 
 
 
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <ScrollView
-        contentContainerStyle={styles.scrollViewContent}
-        refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={onRefresh}
-            tintColor={"#3C4764"}
-          />
-        }
-      > */}
-      <ScrollView
+      <View {...panResponder.panHandlers} style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={styles.scrollViewContent}
+          refreshControl={
+            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} tintColor={"#3C4764"} />
+          }
+          keyboardShouldPersistTaps="handled"
+        >
+          {/* <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} tintColor={"#3C4764"} />}
         {...panResponder.panHandlers} // Apply here instead of SafeAreaView
-      >
-        <View>
-          <View style={globalStyles.overlayImageGlobal}>
-            <View style={styles.logoContainer}>
-              <Image
-                source={require("../assets/images/awp_logo.png")}
-                style={styles.logoImage}
-                resizeMode="contain"
-              />
-              <TouchableOpacity
-                style={globalStyles.backArrow}
-                onPress={() => navigation.goBack()}>
-                <FeatherIcon
-                  name="chevron-left"
-                  size={26}
-                  color="#FFFFFF"
-                  style={globalStyles.menuIcon}
+      > */}
+          <View>
+            <View style={globalStyles.overlayImageGlobal}>
+              <View style={styles.logoContainer}>
+                <Image
+                  source={require("../assets/images/awp_logo.png")}
+                  style={styles.logoImage}
+                  resizeMode="contain"
                 />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={globalStyles.whiteBox}>
-            <View style={styles.textContainer}>
-              <View style={styles.titleContainer}>
-                <CustomText style={styles.titleText}>
-                  Schedule and Attendance
-                </CustomText>
+                <TouchableOpacity
+                  style={globalStyles.backArrow}
+                  onPress={() => navigation.goBack()}>
+                  <FeatherIcon
+                    name="chevron-left"
+                    size={26}
+                    color="#FFFFFF"
+                    style={globalStyles.menuIcon}
+                  />
+                </TouchableOpacity>
               </View>
             </View>
-
-            <View style={styles.dateContainer}>
-              <View style={styles.buttonContainer}>
-                <View style={globalStyles.leftContainer}>
-                  {prevWeekShiftCount > 0 && (
-                    <IconwithText
-                      next={goToPreviousWeek}
-                      imgSource={require("../assets/images/prev.png")}
-                      text={prevWeekShiftCount}
-                      style={{ left: 5 }} // Adds some space between the counter and the arrow
-                    />
-                  )}
-                  <Ionicons
-                    name="arrow-back-circle"
-                    size={31}
-                    color="#3B4560"
-                    onPress={goToPreviousWeek}
-                  />
-                </View>
-                <View style={styles.weekContent}>
-                  <Ionicons name="calendar-outline" size={25} color="black" />
-                  <CustomText style={styles.weekText}>
-                    {`${start.format("MMM DD")} - ${end.format("MMM DD")}`}
+            <View style={globalStyles.whiteBox}>
+              <View style={styles.textContainer}>
+                <View style={styles.titleContainer}>
+                  <CustomText style={styles.titleText}>
+                    Schedule and Attendance
                   </CustomText>
                 </View>
+              </View>
 
-                {/* Right side: next week counter and arrow */}
-                <View style={globalStyles.rightContainer}>
-                  <Ionicons
-                    name="arrow-forward-circle-sharp"
-                    size={31}
-                    color="#3B4560"
-                    onPress={goToNextWeek}
-                  />
-                  {nextWeekShiftCount > 0 && (
-                    <IconwithText
-                      next={goToNextWeek}
-                      imgSource={require("../assets/images/next.png")}
-                      text={nextWeekShiftCount}
-                      style={{ right: 5 }} // Adds some space between the arrow and the counter
+              <View style={styles.dateContainer}>
+                <View style={styles.buttonContainer}>
+                  <View style={globalStyles.leftContainer}>
+                    {prevWeekShiftCount > 0 && (
+                      <IconwithText
+                        next={goToPreviousWeek}
+                        imgSource={require("../assets/images/prev.png")}
+                        text={prevWeekShiftCount}
+                        style={{ left: 5 }} // Adds some space between the counter and the arrow
+                      />
+                    )}
+                    <Ionicons
+                      name="arrow-back-circle"
+                      size={31}
+                      color="#3B4560"
+                      onPress={goToPreviousWeek}
                     />
-                  )}
+                  </View>
+                  <View style={styles.weekContent}>
+                    <Ionicons name="calendar-outline" size={25} color="black" />
+                    <CustomText style={styles.weekText}>
+                      {`${start.format("MMM DD")} - ${end.format("MMM DD")}`}
+                    </CustomText>
+                  </View>
+
+                  {/* Right side: next week counter and arrow */}
+                  <View style={globalStyles.rightContainer}>
+                    <Ionicons
+                      name="arrow-forward-circle-sharp"
+                      size={31}
+                      color="#3B4560"
+                      onPress={goToNextWeek}
+                    />
+                    {nextWeekShiftCount > 0 && (
+                      <IconwithText
+                        next={goToNextWeek}
+                        imgSource={require("../assets/images/next.png")}
+                        text={nextWeekShiftCount}
+                        style={{ right: 5 }} // Adds some space between the arrow and the counter
+                      />
+                    )}
+                  </View>
                 </View>
               </View>
-            </View>
 
-            {isLoading ? (
-              <View style={[globalStyles.centeredView, { flex: 0, top: 10 }]}>
-                <View style={globalStyles.loaderCircle}>
-                  <ActivityIndicator
-                    size="large"
-                    color="#3B4560"
-                    style={globalStyles.loader}
+              {isLoading ? (
+                <View style={[globalStyles.centeredView, { flex: 0, top: 10 }]}>
+                  <View style={globalStyles.loaderCircle}>
+                    <ActivityIndicator
+                      size="large"
+                      color="#3B4560"
+                      style={globalStyles.loader}
+                    />
+                  </View>
+                </View>
+              ) : scheduleShift.length === 0 ? (
+                <View style={globalStyles.emptyContainer}>
+                  <FontAwesome5
+                    name="calendar-check"
+                    size={50}
+                    color="#C6C6C6"
                   />
+                  <Text style={globalStyles.noDataText}>
+                    No shifts available at the moment!
+                  </Text>
                 </View>
-              </View>
-            ) : scheduleShift.length === 0 ? (
-              <View style={globalStyles.emptyContainer}>
-                <FontAwesome5
-                  name="calendar-check"
-                  size={50}
-                  color="#C6C6C6"
-                />
-                <Text style={globalStyles.noDataText}>
-                  No shifts available at the moment!
-                </Text>
-              </View>
-            ) : (
-              <View>
-                {shiftsPagination.map((item: any, index: number) => {
-                  return (
-                    <TouchableOpacity
-                      style={[
-                        styles.personalInfocontainer,
-                        {
-                          backgroundColor:
-                            item.shiftStatus === 'completed'
-                              ? '#DEF2D6'
-                              : item.shiftStatus === 'accepted'
-                                ? '#F3E5AB'
-                                : '#DEF2D6',
-                          borderColor:
-                            item.shiftStatus === 'completed'
-                              ? '#118B50'
-                              : item.shiftStatus === 'accepted'
-                                ? '#FFAA33'
-                                : '#118B50',
-                        },
-                      ]}
+              ) : (
+                <View>
+                  {shiftsPagination.map((item: any, index: number) => {
+                    return (
+                      <TouchableOpacity
+                        style={[
+                          styles.personalInfocontainer,
+                          {
+                            backgroundColor:
+                              item.shiftStatus === 'completed'
+                                ? '#DEF2D6'
+                                : item.shiftStatus === 'accepted'
+                                  ? '#F3E5AB'
+                                  : '#DEF2D6',
+                            borderColor:
+                              item.shiftStatus === 'completed'
+                                ? '#118B50'
+                                : item.shiftStatus === 'accepted'
+                                  ? '#FFAA33'
+                                  : '#118B50',
+                          },
+                        ]}
 
-                      key={index}
-                      onPress={() =>
-                        navigation.navigate("ShiftDetails", {
-                          id: item?._id,
-                        } as never)
-                      }
-                    >
-                      <View style={styles.content}>
-                        <View style={globalStyles.row}>
-                          <Text style={globalStyles.text1}>Shift Date: </Text>
-                          <Text style={globalStyles.subText}>
-                            {moment
-                              .utc(item?.shiftStartDateTime)
-                              .format("ddd, MMM Do YYYY")}
-                          </Text>
-                        </View>
-
-                        <View style={globalStyles.row}>
-                          <Text style={globalStyles.text1}>Shift Time: </Text>
-                          <Text style={globalStyles.subText}>
-                            {`${moment
-                              .utc(item?.shiftStartDateTime)
-                              .format("HH:mm")} - ${moment
-                                .utc(item?.shiftEndDateTime)
-                                .format("HH:mm")}`}
-                          </Text>
-                        </View>
-
-                        <View style={globalStyles.row}>
-                          <Text style={globalStyles.text1}>Site Name: </Text>
-                          <Text style={globalStyles.subText}>
-                            {capitalizeFirstLetter(item?.siteId?.siteName)}
-                          </Text>
-                        </View>
-
-                        <View style={globalStyles.row}>
-                          <Text style={globalStyles.text1}>Position: </Text>
-                          <Text style={globalStyles.subText}>
-                            {capitalizeFirstLetter(item?.positionId?.postName)}
-                          </Text>
-                        </View>
-                        {item?.positionId?.levelOfPay && !item?.positionId?.hiddenLevelOfPay && (
+                        key={index}
+                        onPress={() =>
+                          navigation.navigate("ShiftDetails", {
+                            id: item?._id,
+                          } as never)
+                        }
+                      >
+                        <View style={styles.content}>
                           <View style={globalStyles.row}>
-                            <Text style={globalStyles.text1}>Level of Pay: </Text>
-                            <Text style={[globalStyles.subText]}>
-                              {capitalizeFirstLetter(
-                                item?.positionId?.levelOfPay?.name
-                              )}
+                            <Text style={globalStyles.text1}>Shift Date: </Text>
+                            <Text style={globalStyles.subText}>
+                              {moment
+                                .utc(item?.shiftStartDateTime)
+                                .format("ddd, MMM Do YYYY")}
                             </Text>
                           </View>
-                        )}
-                        <View style={globalStyles.row}>
-                          <Text style={globalStyles.text1}>Site Address: </Text>
-                          <Text style={globalStyles.subText}>
-                            {item?.siteId?.address &&
-                              `${item?.siteId?.address}`}{" "}
-                            {item?.siteId?.city && `, ${item?.siteId?.city}`}
-                            {item?.siteId?.state && `, ${item?.siteId?.state}`}
-                          </Text>
-                        </View>
-                      </View>
 
-                      <View style={styles.expandIcon}>
-                        <MaterialIcons
-                          name="navigate-next"
-                          size={26}
-                          color="#3B4560"
-                          onPress={() =>
-                            navigation.navigate("ShiftDetails", {
-                              id: item?._id,
-                            } as never)
-                          }
-                        />
-                      </View>
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
-            )}
-            {!isLoading && (
-              <View
-                style={[
-                  globalStyles.paginationContainer,
-                  {
-                    backgroundColor:
-                      totalPages > 1 && shiftsPagination.length > 0
-                        ? "#fff"
-                        : "none",
-                  },
-                ]}
-              >
-                {renderPaginationNumbers()}
-              </View>
-            )}
+                          <View style={globalStyles.row}>
+                            <Text style={globalStyles.text1}>Shift Time: </Text>
+                            <Text style={globalStyles.subText}>
+                              {`${moment
+                                .utc(item?.shiftStartDateTime)
+                                .format("HH:mm")} - ${moment
+                                  .utc(item?.shiftEndDateTime)
+                                  .format("HH:mm")}`}
+                            </Text>
+                          </View>
+
+                          <View style={globalStyles.row}>
+                            <Text style={globalStyles.text1}>Site Name: </Text>
+                            <Text style={globalStyles.subText}>
+                              {capitalizeFirstLetter(item?.siteId?.siteName)}
+                            </Text>
+                          </View>
+
+                          <View style={globalStyles.row}>
+                            <Text style={globalStyles.text1}>Position: </Text>
+                            <Text style={globalStyles.subText}>
+                              {capitalizeFirstLetter(item?.positionId?.postName)}
+                            </Text>
+                          </View>
+                          {item?.positionId?.levelOfPay && !item?.positionId?.hiddenLevelOfPay && (
+                            <View style={globalStyles.row}>
+                              <Text style={globalStyles.text1}>Level of Pay: </Text>
+                              <Text style={[globalStyles.subText]}>
+                                {capitalizeFirstLetter(
+                                  item?.positionId?.levelOfPay?.name
+                                )}
+                              </Text>
+                            </View>
+                          )}
+                          <View style={globalStyles.row}>
+                            <Text style={globalStyles.text1}>Site Address: </Text>
+                            <Text style={globalStyles.subText}>
+                              {item?.siteId?.address &&
+                                `${item?.siteId?.address}`}{" "}
+                              {item?.siteId?.city && `, ${item?.siteId?.city}`}
+                              {item?.siteId?.state && `, ${item?.siteId?.state}`}
+                            </Text>
+                          </View>
+                        </View>
+
+                        <View style={styles.expandIcon}>
+                          <MaterialIcons
+                            name="navigate-next"
+                            size={26}
+                            color="#3B4560"
+                            onPress={() =>
+                              navigation.navigate("ShiftDetails", {
+                                id: item?._id,
+                              } as never)
+                            }
+                          />
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              )}
+              {!isLoading && (
+                <View
+                  style={[
+                    globalStyles.paginationContainer,
+                    {
+                      backgroundColor:
+                        totalPages > 1 && shiftsPagination.length > 0
+                          ? "#fff"
+                          : "none",
+                    },
+                  ]}
+                >
+                  {renderPaginationNumbers()}
+                </View>
+              )}
+            </View>
           </View>
-        </View>
-      </ScrollView>
-      <FooterUser activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
+        </ScrollView>
+        <FooterUser activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
+      </View>
     </SafeAreaView>
   );
 };
