@@ -18,6 +18,7 @@ import {
   Easing,
   SafeAreaView,
   RefreshControl,
+  PanResponder,
 } from "react-native";
 import {
   useFocusEffect,
@@ -249,7 +250,7 @@ const Reports = () => {
             style={[
               globalStyles.paginationNumberText,
               clickedPage === totalPages &&
-                globalStyles.activePaginationNumberText,
+              globalStyles.activePaginationNumberText,
             ]}
           >
             {totalPages}
@@ -478,44 +479,61 @@ const Reports = () => {
       .join(" "); // Join the words back together with a space
   }
 
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => false,
+    onMoveShouldSetPanResponder: (evt, gestureState) => {
+      // Ensure swipe is horizontal and ignore vertical movements
+      return Math.abs(gestureState.dx) > 50 && Math.abs(gestureState.dy) < 10;
+    },
+    onPanResponderRelease: (evt, gestureState) => {
+      if (gestureState.dx > 50) {
+        goToPreviousWeek(); // Swipe Right
+      } else if (gestureState.dx < -50) {
+        goToNextWeek(); // Swipe Left
+      }
+    },
+  });
+
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.scrollViewContent}
-        refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={onRefresh}
-            tintColor={"#3C4764"}
-          />
-        }
-      >
-        <View>
-          {/* <Image
+      <View {...panResponder.panHandlers} style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={styles.scrollViewContent}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={onRefresh}
+              tintColor={"#3C4764"}
+            />
+          }
+        >
+          <View>
+            {/* <Image
             source={require('../assets/images/overlay.png')}
             style={styles.overlayImage}
             resizeMode="cover"
           /> */}
-          <View style={globalStyles.overlayImageGlobal}>
-            <View style={styles.logoContainer}>
-              <Image
-                source={require("../assets/images/awp_logo.png")}
-                style={styles.logoImage}
-                resizeMode="contain"
-              />
-              <TouchableOpacity
-                style={globalStyles.backArrow}
-                onPress={() => navigation.goBack()}
-              >
-                <FeatherIcon
-                  name="chevron-left"
-                  size={26}
-                  color="#FFFFFF"
-                  style={globalStyles.menuIcon}
+            <View style={globalStyles.overlayImageGlobal}>
+              <View style={styles.logoContainer}>
+                <Image
+                  source={require("../assets/images/awp_logo.png")}
+                  style={styles.logoImage}
+                  resizeMode="contain"
                 />
-              </TouchableOpacity>
-            </View>
-            {/* <TouchableOpacity
+                <TouchableOpacity
+                  style={globalStyles.backArrow}
+                  onPress={() => navigation.goBack()}
+                >
+                  <FeatherIcon
+                    name="chevron-left"
+                    size={26}
+                    color="#FFFFFF"
+                    style={globalStyles.menuIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+              {/* <TouchableOpacity
             style={globalStyles.menuIconContainer}
             onPress={toggleSidebar}>
             <MaterialIcons
@@ -525,8 +543,8 @@ const Reports = () => {
               style={globalStyles.menuIcon}
             />
           </TouchableOpacity> */}
-          </View>
-          {/* {isSidebarOpen && (
+            </View>
+            {/* {isSidebarOpen && (
           <SidebarUser isOpen={isSidebarOpen} onClose={toggleSidebar} />
         )}
         {isSidebarOpen && (
@@ -540,9 +558,9 @@ const Reports = () => {
             <SidebarUser isOpen={isSidebarOpen} onClose={toggleSidebar} />
           </Animated.View>
         )} */}
-          <View style={globalStyles.whiteBox}>
-            <View style={styles.textContainer}>
-              {/* <TouchableOpacity
+            <View style={globalStyles.whiteBox}>
+              <View style={styles.textContainer}>
+                {/* <TouchableOpacity
               style={styles.backIconContainer}
               onPress={() => navigation.navigate('UserHome' as never)}>
               <FeatherIcon
@@ -552,136 +570,136 @@ const Reports = () => {
                 style={styles.backIcon}
               />
             </TouchableOpacity> */}
-              <View style={styles.titleContainer}>
-                <CustomText style={styles.titleText}>Reports</CustomText>
+                <View style={styles.titleContainer}>
+                  <CustomText style={styles.titleText}>Reports</CustomText>
+                </View>
               </View>
-            </View>
-            <View style={styles.inputContainer}>
-              <TextInput
-                placeholder="Report ID"
-                placeholderTextColor="#BFBBBB"
-                style={styles.input}
-                autoCapitalize="none"
-                onChangeText={(text) => {
-                  setReportId(text);
-                }}
+              <View style={styles.inputContainer}>
+                <TextInput
+                  placeholder="Report ID"
+                  placeholderTextColor="#BFBBBB"
+                  style={styles.input}
+                  autoCapitalize="none"
+                  onChangeText={(text) => {
+                    setReportId(text);
+                  }}
                 // onFocus={handleFocusEmail}
                 // onBlur={handleBlurEmail}
-              />
-            </View>
-            <View style={styles.dateContainer}>
-              <View style={styles.buttonContainer}>
-                <Ionicons
-                  name="arrow-back-circle"
-                  size={27}
-                  color="#3B4560"
-                  onPress={goToPreviousWeek}
                 />
-                <View style={styles.weekContent}>
+              </View>
+              <View style={styles.dateContainer}>
+                <View style={styles.buttonContainer}>
                   <Ionicons
-                    name="calendar-outline"
-                    size={25}
-                    color="black"
-                    onPress={showCurrentWeek}
-                  />
-                  <CustomText style={styles.weekText}>{`${start.format(
-                    "MMM DD"
-                  )} - ${end.format("MMM DD")}`}</CustomText>
-                </View>
-                <Ionicons
-                  name="arrow-forward-circle-sharp"
-                  size={27}
-                  color="#3B4560"
-                  onPress={goToNextWeek}
-                />
-              </View>
-            </View>
-            {isLoading ? (
-              <View style={[globalStyles.centeredView, { flex: 0, top: 10 }]}>
-                <View style={globalStyles.loaderCircle}>
-                  <ActivityIndicator
-                    size="large"
+                    name="arrow-back-circle"
+                    size={27}
                     color="#3B4560"
-                    style={globalStyles.loader}
+                    onPress={goToPreviousWeek}
+                  />
+                  <View style={styles.weekContent}>
+                    <Ionicons
+                      name="calendar-outline"
+                      size={25}
+                      color="black"
+                      onPress={showCurrentWeek}
+                    />
+                    <CustomText style={styles.weekText}>{`${start.format(
+                      "MMM DD"
+                    )} - ${end.format("MMM DD")}`}</CustomText>
+                  </View>
+                  <Ionicons
+                    name="arrow-forward-circle-sharp"
+                    size={27}
+                    color="#3B4560"
+                    onPress={goToNextWeek}
                   />
                 </View>
               </View>
-            ) : reportData.length === 0 ? (
-              <View style={globalStyles.emptyContainer}>
-                <FontAwesome5
-                  name="file-export"
-                  size={50} // Adjust the size to your desired value
-                  color="#C6C6C6" // Set the desired color here
+              {isLoading ? (
+                <View style={[globalStyles.centeredView, { flex: 0, top: 10 }]}>
+                  <View style={globalStyles.loaderCircle}>
+                    <ActivityIndicator
+                      size="large"
+                      color="#3B4560"
+                      style={globalStyles.loader}
+                    />
+                  </View>
+                </View>
+              ) : reportData.length === 0 ? (
+                <View style={globalStyles.emptyContainer}>
+                  <FontAwesome5
+                    name="file-export"
+                    size={50} // Adjust the size to your desired value
+                    color="#C6C6C6" // Set the desired color here
                   // style={styles.iconImage}
-                />
-                <Text style={globalStyles.noDataText}>
-                  No Reports available at the moment!
-                </Text>
-              </View>
-            ) : (
-              <View>
-                {shiftsPagination.map((item: any, index: number) => {
-                  const backgroundColor =
-                    index % 2 === 0 ? "#f0f0f0" : "#ffffff";
-                  return (
-                    <TouchableOpacity
-                      style={styles.personalInfocontainer}
-                      key={index}
-                      onPress={() =>
-                        navigation.navigate("ReportDetails", {
-                          id: item?._id,
-                          reportType: item?.report,
-                        } as never)
-                      }
-                    >
-                      <View style={styles.content}>
-                        <View
-                          style={[
-                            globalStyles.headerContainer,
-                            {
-                              flexDirection: "row",
-                              justifyContent: "space-between",
-                              paddingVertical: 6,
-                            },
-                          ]}
-                        >
-                          <Text
+                  />
+                  <Text style={globalStyles.noDataText}>
+                    No Reports available at the moment!
+                  </Text>
+                </View>
+              ) : (
+                <View>
+                  {shiftsPagination.map((item: any, index: number) => {
+                    const backgroundColor =
+                      index % 2 === 0 ? "#f0f0f0" : "#ffffff";
+                    return (
+                      <TouchableOpacity
+                        style={styles.personalInfocontainer}
+                        key={index}
+                        onPress={() =>
+                          navigation.navigate("ReportDetails", {
+                            id: item?._id,
+                            reportType: item?.report,
+                          } as never)
+                        }
+                      >
+                        <View style={styles.content}>
+                          <View
                             style={[
-                              globalStyles.headerText,
-                              { textAlign: "left", fontSize: 14, marginVertical: 4,  },
+                              globalStyles.headerContainer,
+                              {
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                paddingVertical: 6,
+                              },
                             ]}
                           >
-                            {item?.report === "siteActivityLog"
-                              ? "Activity Log"
-                              : item?.report === "securityIncident"
-                              ? "Incident Report"
-                              : item?.report === "endOfShift"
-                              ? "Atmospherics Report"
-                              : "Maintenance Report"}
-                          </Text>
+                            <Text
+                              style={[
+                                globalStyles.headerText,
+                                { textAlign: "left", fontSize: 14, marginVertical: 4, },
+                              ]}
+                            >
+                              {item?.report === "siteActivityLog"
+                                ? "Activity Log"
+                                : item?.report === "securityIncident"
+                                  ? "Incident Report"
+                                  : item?.report === "endOfShift"
+                                    ? "Atmospherics Report"
+                                    : "Maintenance Report"}
+                            </Text>
 
-                          <View style={[styles.expandIcon, { right: 5 }]}>
-                            <TouchableOpacity
-                              onPress={() =>
-                                navigation.navigate(
-                                  item?.report === "siteActivityLog"
-                                    ? "SiteActivityLog"
-                                    : item?.report === "securityIncident"
-                                    ? "IncidentReport"
-                                    : item?.report === "endOfShift"
-                                    ? "AtmosphericReport"
-                                    : "MaintenanceReport",
-                                  {
-                                    reportType: item?.report,
-                                    id: item?._id,
-                                    status: item?.status,
-                                    shift,
-                                  }
-                                )
-                              }
-                              style={{
-                                ...(item?.status === "draft"
-                                  ? {
+                            <View style={[styles.expandIcon, { right: 5 }]}>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  navigation.navigate(
+                                    item?.report === "siteActivityLog"
+                                      ? "SiteActivityLog"
+                                      : item?.report === "securityIncident"
+                                        ? "IncidentReport"
+                                        : item?.report === "endOfShift"
+                                          ? "AtmosphericReport"
+                                          : "MaintenanceReport",
+                                    {
+                                      reportType: item?.report,
+                                      id: item?._id,
+                                      status: item?.status,
+                                      shift,
+                                    }
+                                  )
+                                }
+                                style={{
+                                  ...(item?.status === "draft"
+                                    ? {
                                       borderWidth: 1,
                                       borderColor: "orange",
                                       borderRadius: 5,
@@ -689,59 +707,59 @@ const Reports = () => {
                                       paddingHorizontal: 10,
                                       alignSelf: "flex-start",
                                     }
-                                  : {}),
-                                marginTop: 2,
-                                marginRight: 8,
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  color:
-                                    item?.status === "draft"
-                                      ? "orange"
-                                      : "black", // Orange color for draft status
-                                  fontSize: 14,
-                                  fontWeight: "bold",
-                                  fontStyle: "italic",
+                                    : {}),
+                                  marginTop: 2,
+                                  marginRight: 8,
                                 }}
                               >
-                                {item?.status === "draft" && "Draft"}
-                              </Text>
-                            </TouchableOpacity>
+                                <Text
+                                  style={{
+                                    color:
+                                      item?.status === "draft"
+                                        ? "orange"
+                                        : "black", // Orange color for draft status
+                                    fontSize: 14,
+                                    fontWeight: "bold",
+                                    fontStyle: "italic",
+                                  }}
+                                >
+                                  {item?.status === "draft" && "Draft"}
+                                </Text>
+                              </TouchableOpacity>
 
-                            <MaterialIcons
-                              name="navigate-next"
-                              size={22}
-                              color="#FFF"
-                              onPress={() =>
-                                navigation.navigate("ReportDetails", {
-                                  id: item?._id,
-                                  reportType: item?.report,
-                                } as never)
-                              }
-                              style={{ marginVertical: 4 }}
-                            />
-                          </View>
-                        </View>
-                        <View style={globalStyles.table}>
-                          {item?.report !== "endOfShift" && (
-                            <View style={globalStyles.tablerow}>
-                              <Text style={globalStyles.labelColumn}>
-                                Category:{" "}
-                              </Text>
-                              <Text style={globalStyles.valueColumn}>
-                                {capitalizeFirstLetter(
-                                  item?.report === "siteActivityLog"
-                                    ? item?.activityType?.name
-                                    : item?.report === "securityIncident"
-                                    ? item?.incidentCategory?.name
-                                    : item?.maintenanceType?.name
-                                )}
-                              </Text>
+                              <MaterialIcons
+                                name="navigate-next"
+                                size={22}
+                                color="#FFF"
+                                onPress={() =>
+                                  navigation.navigate("ReportDetails", {
+                                    id: item?._id,
+                                    reportType: item?.report,
+                                  } as never)
+                                }
+                                style={{ marginVertical: 4 }}
+                              />
                             </View>
-                          )}
+                          </View>
+                          <View style={globalStyles.table}>
+                            {item?.report !== "endOfShift" && (
+                              <View style={globalStyles.tablerow}>
+                                <Text style={globalStyles.labelColumn}>
+                                  Category:{" "}
+                                </Text>
+                                <Text style={globalStyles.valueColumn}>
+                                  {capitalizeFirstLetter(
+                                    item?.report === "siteActivityLog"
+                                      ? item?.activityType?.name
+                                      : item?.report === "securityIncident"
+                                        ? item?.incidentCategory?.name
+                                        : item?.maintenanceType?.name
+                                  )}
+                                </Text>
+                              </View>
+                            )}
 
-                          {/* <View style={globalStyles.tablerow}>
+                            {/* <View style={globalStyles.tablerow}>
                             <Text style={globalStyles.labelColumn}>
                               Category:{" "}
                             </Text>
@@ -755,62 +773,63 @@ const Reports = () => {
                               )}
                             </Text>
                           </View> */}
-                          <View style={globalStyles.tablerow}>
-                            <Text style={globalStyles.labelColumn}>
-                              Report ID:
-                            </Text>
-                            <Text style={globalStyles.valueColumn}>
-                              {item?.activityNumber}
-                            </Text>
-                          </View>
-                          <View style={globalStyles.tablerow}>
-                            <Text style={globalStyles.labelColumn}>
-                              Submitted On:{" "}
-                            </Text>
-                            <Text
-                              style={[
-                                globalStyles.valueColumn,
-                                { fontSize: 14 },
-                              ]}
-                            >
-                              {moment(item?.createdAt).format(
-                                "ddd, MMM Do HH:mm"
-                              )}
-                            </Text>
-                          </View>
-                          <View style={globalStyles.tablerow}>
-                            <Text style={globalStyles.labelColumn}>
-                              Site Name:
-                            </Text>
-                            <Text style={[globalStyles.valueColumn]}>
-                              {capitalizeFirstLetter(item?.site?.siteName)}
-                            </Text>
+                            <View style={globalStyles.tablerow}>
+                              <Text style={globalStyles.labelColumn}>
+                                Report ID:
+                              </Text>
+                              <Text style={globalStyles.valueColumn}>
+                                {item?.activityNumber}
+                              </Text>
+                            </View>
+                            <View style={globalStyles.tablerow}>
+                              <Text style={globalStyles.labelColumn}>
+                                Submitted On:{" "}
+                              </Text>
+                              <Text
+                                style={[
+                                  globalStyles.valueColumn,
+                                  { fontSize: 14 },
+                                ]}
+                              >
+                                {moment(item?.createdAt).format(
+                                  "ddd, MMM Do HH:mm"
+                                )}
+                              </Text>
+                            </View>
+                            <View style={globalStyles.tablerow}>
+                              <Text style={globalStyles.labelColumn}>
+                                Site Name:
+                              </Text>
+                              <Text style={[globalStyles.valueColumn]}>
+                                {capitalizeFirstLetter(item?.site?.siteName)}
+                              </Text>
+                            </View>
                           </View>
                         </View>
-                      </View>
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
-            )}
-            {!isLoading && (
-              <View
-                style={[
-                  globalStyles.paginationContainer,
-                  {
-                    backgroundColor:
-                      totalPages > 1 && shiftsPagination.length > 0
-                        ? "#fff"
-                        : "none",
-                  },
-                ]}
-              >
-                {renderPaginationNumbers()}
-              </View>
-            )}
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              )}
+              {!isLoading && (
+                <View
+                  style={[
+                    globalStyles.paginationContainer,
+                    {
+                      backgroundColor:
+                        totalPages > 1 && shiftsPagination.length > 0
+                          ? "#fff"
+                          : "none",
+                    },
+                  ]}
+                >
+                  {renderPaginationNumbers()}
+                </View>
+              )}
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
       <FooterUser activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
     </SafeAreaView>
   );

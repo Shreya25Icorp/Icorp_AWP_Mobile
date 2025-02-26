@@ -319,7 +319,7 @@ const ConfigureNFC = () => {
             <Text style={styles.titleCheckpointNameText}>{checkpointName}</Text>
             {PositionDuties === 'PositionDuties' && (
               <>
-              <View style={styles.horizontalLine} />
+                <View style={styles.horizontalLine} />
               </>
             )}
             <Text style={styles.titleText}>Place the device over the tag</Text>
@@ -349,10 +349,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "800",
     marginBottom: 10,
-    // paddingBottom: 6,
-    color: "#262D3F",
-    // borderBottomWidth: 2,
-    // borderBottomColor: '#C7C7C7',
+    color: "#fff",
+    backgroundColor: '#262D3F',
+    paddingHorizontal: 8,
+    paddingVertical: 5,
+    borderRadius: 4
   },
   horizontalLine: {
     borderBottomWidth: 1,

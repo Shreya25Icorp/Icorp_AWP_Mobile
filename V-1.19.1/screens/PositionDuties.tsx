@@ -974,7 +974,9 @@ const PositionDuties = () => {
                     {`This checkpoint must be scanned at least ${item?.requiredScan} times. `}
                   </Text> */}
                   <Text style={styles.NumberGuardsText}>
-                    {`This checkpoint required to be scanned at least ${item?.requiredScan} times during your shifts today. `}
+                    {/* {`This checkpoint is required to be scanned at least ${item?.requiredScan} times during your shift today. `} */}
+                    {`This checkpoint is required to be scanned at least ${item?.requiredScan} ${item?.requiredScan > 1 ? 'times' : 'time'} during your shift today.`}
+
                   </Text>
                 </View>
               </View>
@@ -2157,7 +2159,7 @@ const PositionDuties = () => {
               <View>
                 <Text style={styles.titleTextWrapper}>
                   You required to scan all below checkpoints during your shifts
-                  today
+                  today:
                 </Text>
               </View>
             )}
@@ -2280,7 +2282,7 @@ const styles = StyleSheet.create({
   },
   titleTextWrapper: {
     fontSize: 14,
-    textAlign: "center",
+    textAlign: "left",
     color: "#585959",
     fontWeight: "600",
     marginHorizontal: 20,

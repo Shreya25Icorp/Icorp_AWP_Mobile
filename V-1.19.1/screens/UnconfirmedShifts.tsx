@@ -19,6 +19,7 @@ import {
   SafeAreaView,
   Modal,
   RefreshControl,
+  PanResponder,
 } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { s as tw } from "react-native-wind";
@@ -577,43 +578,60 @@ const UnconfirmedShifts = () => {
     setModalVisible(false);
   };
 
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => false,
+    onMoveShouldSetPanResponder: (evt, gestureState) => {
+      // Ensure swipe is horizontal and ignore vertical movements
+      return Math.abs(gestureState.dx) > 50 && Math.abs(gestureState.dy) < 10;
+    },
+    onPanResponderRelease: (evt, gestureState) => {
+      if (gestureState.dx > 50) {
+        goToPreviousWeek(); // Swipe Right
+      } else if (gestureState.dx < -50) {
+        goToNextWeek(); // Swipe Left
+      }
+    },
+  });
+
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={onRefresh}
-            tintColor={"#3C4764"}
-          />
-        }
-      >
-        <View>
-          {/* <Image
+      <View {...panResponder.panHandlers} style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={onRefresh}
+              tintColor={"#3C4764"}
+            />
+          }
+        >
+          <View>
+            {/* <Image
             source={require('../assets/images/overlay.png')}
             style={styles.overlayImage}
             resizeMode="cover"
           /> */}
-          <View style={globalStyles.overlayImageGlobal}>
-            <View style={styles.logoContainer}>
-              <Image
-                source={require("../assets/images/awp_logo.png")}
-                style={styles.logoImage}
-                resizeMode="contain"
-              />
-              <TouchableOpacity
-                style={globalStyles.backArrow}
-                onPress={() => navigation.goBack()}>
-                <FeatherIcon
-                  name="chevron-left"
-                  size={26}
-                  color="#FFFFFF"
-                  style={globalStyles.menuIcon}
+            <View style={globalStyles.overlayImageGlobal}>
+              <View style={styles.logoContainer}>
+                <Image
+                  source={require("../assets/images/awp_logo.png")}
+                  style={styles.logoImage}
+                  resizeMode="contain"
                 />
-              </TouchableOpacity>
-            </View>
-            {/* <TouchableOpacity
+                <TouchableOpacity
+                  style={globalStyles.backArrow}
+                  onPress={() => navigation.goBack()}>
+                  <FeatherIcon
+                    name="chevron-left"
+                    size={26}
+                    color="#FFFFFF"
+                    style={globalStyles.menuIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+              {/* <TouchableOpacity
             style={globalStyles.menuIconContainer}
             onPress={toggleSidebar}>
             <MaterialIcons
@@ -623,8 +641,8 @@ const UnconfirmedShifts = () => {
               style={globalStyles.menuIcon}
             />
           </TouchableOpacity> */}
-          </View>
-          {/* {isSidebarOpen && (
+            </View>
+            {/* {isSidebarOpen && (
           <SidebarUser isOpen={isSidebarOpen} onClose={toggleSidebar} />
         )}
         {isSidebarOpen && (
@@ -638,9 +656,9 @@ const UnconfirmedShifts = () => {
             <SidebarUser isOpen={isSidebarOpen} onClose={toggleSidebar} />
           </Animated.View>
         )} */}
-          <View style={globalStyles.whiteBox}>
-            <View style={styles.textContainer}>
-              {/* <TouchableOpacity
+            <View style={globalStyles.whiteBox}>
+              <View style={styles.textContainer}>
+                {/* <TouchableOpacity
                 style={styles.backIconContainer}
                 onPress={() => navigation.navigate("UserHome" as never)}
               >
@@ -651,296 +669,297 @@ const UnconfirmedShifts = () => {
                   style={styles.backIcon}
                 />
               </TouchableOpacity> */}
-              <View style={styles.titleContainer}>
-                <CustomText style={styles.titleText}>
-                  Unconfirmed Shifts
-                </CustomText>
-              </View>
-            </View>
-            <View style={styles.dateContainer}>
-              <View style={styles.buttonContainer}>
-                <View style={globalStyles.leftContainer}>
-                  {prevWeekShiftCount > 0 && (
-                    <IconwithText
-                      next={goToPreviousWeek}
-                      imgSource={require("../assets/images/prev.png")}
-                      text={prevWeekShiftCount}
-                      style={{ left: 5 }} // Adds some space between the counter and the arrow
-                    />
-                  )}
-                  <Ionicons
-                    name="arrow-back-circle"
-                    size={31}
-                    color="#3B4560"
-                    onPress={goToPreviousWeek}
-                  />
-                </View>
-                {/* Week content */}
-                <View style={styles.weekContent}>
-                  <Ionicons name="calendar-outline" size={25} color="black" />
-                  <CustomText style={styles.weekText}>
-                    {`${start.format("MMM DD")} - ${end.format("MMM DD")}`}
+                <View style={styles.titleContainer}>
+                  <CustomText style={styles.titleText}>
+                    Unconfirmed Shifts
                   </CustomText>
                 </View>
-
-                {/* Right side: next week counter and arrow */}
-                <View style={globalStyles.rightContainer}>
-                  <Ionicons
-                    name="arrow-forward-circle-sharp"
-                    size={31}
-                    color="#3B4560"
-                    onPress={goToNextWeek}
-                  />
-                  {nextWeekShiftCount > 0 && (
-                    <IconwithText
-                      next={goToNextWeek}
-                      imgSource={require("../assets/images/next.png")}
-                      text={nextWeekShiftCount}
-                      style={{ right: 5 }} // Adds some space between the arrow and the counter
+              </View>
+              <View style={styles.dateContainer}>
+                <View style={styles.buttonContainer}>
+                  <View style={globalStyles.leftContainer}>
+                    {prevWeekShiftCount > 0 && (
+                      <IconwithText
+                        next={goToPreviousWeek}
+                        imgSource={require("../assets/images/prev.png")}
+                        text={prevWeekShiftCount}
+                        style={{ left: 5 }} // Adds some space between the counter and the arrow
+                      />
+                    )}
+                    <Ionicons
+                      name="arrow-back-circle"
+                      size={31}
+                      color="#3B4560"
+                      onPress={goToPreviousWeek}
                     />
-                  )}
+                  </View>
+                  {/* Week content */}
+                  <View style={styles.weekContent}>
+                    <Ionicons name="calendar-outline" size={25} color="black" />
+                    <CustomText style={styles.weekText}>
+                      {`${start.format("MMM DD")} - ${end.format("MMM DD")}`}
+                    </CustomText>
+                  </View>
+
+                  {/* Right side: next week counter and arrow */}
+                  <View style={globalStyles.rightContainer}>
+                    <Ionicons
+                      name="arrow-forward-circle-sharp"
+                      size={31}
+                      color="#3B4560"
+                      onPress={goToNextWeek}
+                    />
+                    {nextWeekShiftCount > 0 && (
+                      <IconwithText
+                        next={goToNextWeek}
+                        imgSource={require("../assets/images/next.png")}
+                        text={nextWeekShiftCount}
+                        style={{ right: 5 }} // Adds some space between the arrow and the counter
+                      />
+                    )}
+                  </View>
                 </View>
               </View>
-            </View>
-            {isLoading ? (
-              <View style={[globalStyles.centeredView, { flex: 0, top: 10 }]}>
-                <View style={globalStyles.loaderCircle}>
-                  <ActivityIndicator
-                    size="large"
-                    color="#3B4560"
-                    style={globalStyles.loader}
+              {isLoading ? (
+                <View style={[globalStyles.centeredView, { flex: 0, top: 10 }]}>
+                  <View style={globalStyles.loaderCircle}>
+                    <ActivityIndicator
+                      size="large"
+                      color="#3B4560"
+                      style={globalStyles.loader}
+                    />
+                  </View>
+                </View>
+              ) : unconfirmedShift.length === 0 ? (
+                <View style={globalStyles.emptyContainer}>
+                  <FontAwesome5
+                    name="user-clock"
+                    size={50} // Adjust the size to your desired value
+                    color="#C6C6C6" // Set the desired color here
+                  // style={styles.iconImage}
                   />
+                  <Text style={globalStyles.noDataText}>
+                    No shifts available at the moment!
+                  </Text>
                 </View>
-              </View>
-            ) : unconfirmedShift.length === 0 ? (
-              <View style={globalStyles.emptyContainer}>
-                <FontAwesome5
-                  name="user-clock"
-                  size={50} // Adjust the size to your desired value
-                  color="#C6C6C6" // Set the desired color here
-                // style={styles.iconImage}
-                />
-                <Text style={globalStyles.noDataText}>
-                  No shifts available at the moment!
-                </Text>
-              </View>
-            ) : (
-              <View>
-                {shiftsPagination.map((item: any, index: number) => {
-                  return (
-                    <View style={styles.personalInfocontainer} key={index}>
-                      <View style={styles.content}>
+              ) : (
+                <View>
+                  {shiftsPagination.map((item: any, index: number) => {
+                    return (
+                      <View style={styles.personalInfocontainer} key={index}>
+                        <View style={styles.content}>
+                          <TouchableOpacity
+                            onPress={() =>
+                              navigation.navigate("ShiftDetails", {
+                                id: item?._id,
+                              } as never)
+                            }
+                          >
+                            <View style={globalStyles.row}>
+                              <Text style={globalStyles.text1}>Shift Date: </Text>
+                              <Text style={globalStyles.subText}>
+                                {moment
+                                  .utc(item?.shiftStartDateTime)
+                                  .format("ddd, MMM Do YYYY")}
+                              </Text>
+                            </View>
+
+                            <View style={globalStyles.row}>
+                              <Text style={globalStyles.text1}>Shift Time: </Text>
+                              <Text style={globalStyles.subText}>
+                                {`${moment
+                                  .utc(item?.shiftStartDateTime)
+                                  .format("HH:mm")} - ${moment
+                                    .utc(item?.shiftEndDateTime)
+                                    .format("HH:mm")}`}
+                              </Text>
+                            </View>
+
+                            <View style={globalStyles.row}>
+                              <Text style={[globalStyles.text1]}>Site: </Text>
+                              <Text style={globalStyles.subText}>
+                                {capitalizeFirstLetter(item?.siteId?.siteName)}
+                              </Text>
+                            </View>
+                            <View style={globalStyles.row}>
+                              <Text style={globalStyles.text1}>Site Address: </Text>
+                              <Text style={globalStyles.subText}>
+                                {item?.siteId?.address &&
+                                  `${item?.siteId?.address}`}
+                                {item?.siteId?.city && `, ${item?.siteId?.city}`}
+                                {item?.siteId?.state &&
+                                  `, ${item?.siteId?.state}`}
+                              </Text>
+                            </View>
+                            <View style={globalStyles.row}>
+                              <Text style={globalStyles.text1}>Status: </Text>
+                              <Text
+                                style={[globalStyles.subText, { color: "#8B4000" }]}
+                              >
+                                {capitalizeAllLetter(item?.shiftStatus)}
+                              </Text>
+                            </View>
+                            <View style={globalStyles.row}>
+                              <Text style={globalStyles.text1}>Position: </Text>
+                              <Text style={[globalStyles.subText]}>
+                                {capitalizeFirstLetter(
+                                  item?.positionId?.postName
+                                )}
+                              </Text>
+                            </View>
+                            {item?.positionId?.levelOfPay && !item?.positionId?.hiddenLevelOfPay && (
+                              <View style={globalStyles.row}>
+                                <Text style={globalStyles.text1}>Level of Pay: </Text>
+                                <Text style={[globalStyles.subText]}>
+                                  {capitalizeFirstLetter(
+                                    item?.positionId?.levelOfPay?.name
+                                  )}
+                                </Text>
+                              </View>
+                            )}
+                            {uniformType.length > 0 && (
+                              <View style={globalStyles.row}>
+                                <Text style={globalStyles.text1}>Uniform Type:</Text>
+                                <Text style={globalStyles.subText}>
+                                  {uniformType
+                                    .map((uniform: any) =>
+                                      capitalizeFirstLetter(
+                                        uniform.uniformId.name
+                                      )
+                                    )
+                                    .join(", ")}
+                                </Text>
+                              </View>
+                            )}
+                            <View style={globalStyles.row}>
+                              <Text style={globalStyles.text1}>Notes: </Text>
+                              <Text
+                                style={[globalStyles.subText]}
+                                numberOfLines={3}
+                                ellipsizeMode="tail"
+                              >
+                                {item?.positionId?.scheduleMemo}
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                          <View style={[globalStyles.row, { paddingTop: 15 }]}>
+                            <TouchableOpacity
+                              style={[styles.button]}
+                              onPress={() => handlePress("accept", item?._id)}
+                            >
+                              <MaterialIcons
+                                name="check"
+                                size={20}
+                                color={"#D01E12"}
+                              />
+                              <Text style={[styles.btnText]}>Accept</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                              style={[
+                                styles.button,
+                                styles.activeButton,
+                                { left: 10 },
+                              ]}
+                              onPress={() =>
+                                handleButtonPress("reject", item?._id)
+                              }
+                            >
+                              <MaterialIcons
+                                name="close"
+                                size={20}
+                                color={"#FFF"}
+                              />
+                              <Text style={[styles.activeBtnText]}>Decline</Text>
+                            </TouchableOpacity>
+                          </View>
+                        </View>
+
                         <TouchableOpacity
+                          style={styles.expandIcon}
                           onPress={() =>
                             navigation.navigate("ShiftDetails", {
                               id: item?._id,
                             } as never)
                           }
                         >
-                          <View style={globalStyles.row}>
-                            <Text style={globalStyles.text1}>Shift Date: </Text>
-                            <Text style={globalStyles.subText}>
-                              {moment
-                                .utc(item?.shiftStartDateTime)
-                                .format("ddd, MMM Do YYYY")}
-                            </Text>
-                          </View>
-
-                          <View style={globalStyles.row}>
-                            <Text style={globalStyles.text1}>Shift Time: </Text>
-                            <Text style={globalStyles.subText}>
-                              {`${moment
-                                .utc(item?.shiftStartDateTime)
-                                .format("HH:mm")} - ${moment
-                                  .utc(item?.shiftEndDateTime)
-                                  .format("HH:mm")}`}
-                            </Text>
-                          </View>
-
-                          <View style={globalStyles.row}>
-                            <Text style={[globalStyles.text1]}>Site: </Text>
-                            <Text style={globalStyles.subText}>
-                              {capitalizeFirstLetter(item?.siteId?.siteName)}
-                            </Text>
-                          </View>
-                          <View style={globalStyles.row}>
-                            <Text style={globalStyles.text1}>Site Address: </Text>
-                            <Text style={globalStyles.subText}>
-                              {item?.siteId?.address &&
-                                `${item?.siteId?.address}`}
-                              {item?.siteId?.city && `, ${item?.siteId?.city}`}
-                              {item?.siteId?.state &&
-                                `, ${item?.siteId?.state}`}
-                            </Text>
-                          </View>
-                          <View style={globalStyles.row}>
-                            <Text style={globalStyles.text1}>Status: </Text>
-                            <Text
-                              style={[globalStyles.subText, { color: "#8B4000" }]}
-                            >
-                              {capitalizeAllLetter(item?.shiftStatus)}
-                            </Text>
-                          </View>
-                          <View style={globalStyles.row}>
-                            <Text style={globalStyles.text1}>Position: </Text>
-                            <Text style={[globalStyles.subText]}>
-                              {capitalizeFirstLetter(
-                                item?.positionId?.postName
-                              )}
-                            </Text>
-                          </View>
-                          {item?.positionId?.levelOfPay && !item?.positionId?.hiddenLevelOfPay && (
-                            <View style={globalStyles.row}>
-                              <Text style={globalStyles.text1}>Level of Pay: </Text>
-                              <Text style={[globalStyles.subText]}>
-                                {capitalizeFirstLetter(
-                                  item?.positionId?.levelOfPay?.name
-                                )}
-                              </Text>
-                            </View>
-                          )}
-                          {uniformType.length > 0 && (
-                            <View style={globalStyles.row}>
-                              <Text style={globalStyles.text1}>Uniform Type:</Text>
-                              <Text style={globalStyles.subText}>
-                                {uniformType
-                                  .map((uniform: any) =>
-                                    capitalizeFirstLetter(
-                                      uniform.uniformId.name
-                                    )
-                                  )
-                                  .join(", ")}
-                              </Text>
-                            </View>
-                          )}
-                          <View style={globalStyles.row}>
-                            <Text style={globalStyles.text1}>Notes: </Text>
-                            <Text
-                              style={[globalStyles.subText]}
-                              numberOfLines={3}
-                              ellipsizeMode="tail"
-                            >
-                              {item?.positionId?.scheduleMemo}
-                            </Text>
-                          </View>
+                          <MaterialIcons
+                            name="navigate-next"
+                            size={26}
+                            color="#3B4560"
+                          />
                         </TouchableOpacity>
-                        <View style={[globalStyles.row, { paddingTop: 15 }]}>
+                      </View>
+                    );
+                  })}
+                  <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                      setModalVisible(!modalVisible);
+                    }}
+                  >
+                    <TouchableOpacity
+                      style={globalStyles.modalOverlay}
+                      activeOpacity={1}
+                      onPress={() => setModalVisible(false)}
+                    >
+                      <View
+                        style={globalStyles.modalContent}
+                        onStartShouldSetResponder={() => true}
+                      >
+                        <TouchableOpacity
+                          style={globalStyles.closeButtonContact}
+                          onPress={() => setModalVisible(false)}
+                        >
+                          <MaterialIcons name="close" size={15} color="#FFFFFF" />
+                        </TouchableOpacity>
+                        <Text style={globalStyles.modalText}>
+                          Are you sure you want to{" "}
+                          <Text style={{ fontWeight: "bold" }}>
+                            {selectedButton}
+                          </Text>{" "}
+                          this shift?
+                        </Text>
+                        <View style={globalStyles.modalButtons}>
                           <TouchableOpacity
-                            style={[styles.button]}
-                            onPress={() => handlePress("accept", item?._id)}
+                            style={globalStyles.modalButton}
+                            onPress={handleNoPress}
                           >
-                            <MaterialIcons
-                              name="check"
-                              size={20}
-                              color={"#D01E12"}
-                            />
-                            <Text style={[styles.btnText]}>Accept</Text>
+                            <Text style={globalStyles.modalButtonText}>No</Text>
                           </TouchableOpacity>
-
                           <TouchableOpacity
-                            style={[
-                              styles.button,
-                              styles.activeButton,
-                              { left: 10 },
-                            ]}
-                            onPress={() =>
-                              handleButtonPress("reject", item?._id)
-                            }
+                            style={globalStyles.modalButton}
+                            onPress={() => handleYesPress(modalId)}
                           >
-                            <MaterialIcons
-                              name="close"
-                              size={20}
-                              color={"#FFF"}
-                            />
-                            <Text style={[styles.activeBtnText]}>Decline</Text>
+                            <Text style={globalStyles.modalButtonText}>Yes</Text>
                           </TouchableOpacity>
                         </View>
                       </View>
-
-                      <TouchableOpacity
-                        style={styles.expandIcon}
-                        onPress={() =>
-                          navigation.navigate("ShiftDetails", {
-                            id: item?._id,
-                          } as never)
-                        }
-                      >
-                        <MaterialIcons
-                          name="navigate-next"
-                          size={26}
-                          color="#3B4560"
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  );
-                })}
-                <Modal
-                  animationType="fade"
-                  transparent={true}
-                  visible={modalVisible}
-                  onRequestClose={() => {
-                    setModalVisible(!modalVisible);
-                  }}
+                    </TouchableOpacity>
+                  </Modal>
+                </View>
+              )}
+              {!isLoading && (
+                <View
+                  style={[
+                    globalStyles.paginationContainer,
+                    {
+                      backgroundColor:
+                        totalPages > 1 && shiftsPagination.length > 0
+                          ? "#fff"
+                          : "none",
+                    },
+                  ]}
                 >
-                  <TouchableOpacity
-                    style={globalStyles.modalOverlay}
-                    activeOpacity={1}
-                    onPress={() => setModalVisible(false)}
-                  >
-                    <View
-                      style={globalStyles.modalContent}
-                      onStartShouldSetResponder={() => true}
-                    >
-                      <TouchableOpacity
-                        style={globalStyles.closeButtonContact}
-                        onPress={() => setModalVisible(false)}
-                      >
-                        <MaterialIcons name="close" size={15} color="#FFFFFF" />
-                      </TouchableOpacity>
-                      <Text style={globalStyles.modalText}>
-                        Are you sure you want to{" "}
-                        <Text style={{ fontWeight: "bold" }}>
-                          {selectedButton}
-                        </Text>{" "}
-                        this shift?
-                      </Text>
-                      <View style={globalStyles.modalButtons}>
-                        <TouchableOpacity
-                          style={globalStyles.modalButton}
-                          onPress={handleNoPress}
-                        >
-                          <Text style={globalStyles.modalButtonText}>No</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                          style={globalStyles.modalButton}
-                          onPress={() => handleYesPress(modalId)}
-                        >
-                          <Text style={globalStyles.modalButtonText}>Yes</Text>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                </Modal>
-              </View>
-            )}
-            {!isLoading && (
-              <View
-                style={[
-                  globalStyles.paginationContainer,
-                  {
-                    backgroundColor:
-                      totalPages > 1 && shiftsPagination.length > 0
-                        ? "#fff"
-                        : "none",
-                  },
-                ]}
-              >
-                {renderPaginationNumbers()}
-              </View>
-            )}
+                  {renderPaginationNumbers()}
+                </View>
+              )}
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
       <FooterUser
         key={footerRefreshKey}
         activeIcon={activeIcon}

@@ -3129,8 +3129,8 @@ const UserHome = () => {
                         >
                           <Text style={globalStyles.headerText}>
                             {upcomingShift?.shiftStatus === "punchIn"
-                              ? "SHIFT STATUS"
-                              : "UPCOMING SHIFT"}
+                              ? "Shift Status"
+                              : "Upcoming Shift"}
                           </Text>
                           {isEnabled &&
                             (isAttendanceEmpty ||
@@ -3312,7 +3312,7 @@ const UserHome = () => {
                             ]}
                           >
                             <Text style={globalStyles.headerText}>
-                              FOLLOWING UPCOMING SHIFT
+                              Following Upcoming Shift
                             </Text>
                             {isFollowingEnabled &&
                               (isFollowingAttendanceEmpty ||
@@ -3975,9 +3975,26 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     right: 4,
   },
+  // ScanButton: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   backgroundColor: "#D01E12",
+  //   paddingVertical: 10,
+  //   paddingHorizontal: 10,
+  //   borderRadius: 5,
+  //   borderWidth: 1,
+  //   borderColor: "#D01E12",
+  //   elevation: 0,
+  //   shadowColor: "transparent",
+  //   shadowOffset: { width: 0, height: 0 },
+  //   shadowOpacity: 0,
+  //   shadowRadius: 0,
+  //   marginVertical: 4,
+  // },
   ScanButton: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center", // Center content horizontally
     backgroundColor: "#D01E12",
     paddingVertical: 10,
     paddingHorizontal: 10,
@@ -3989,10 +4006,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0,
     shadowRadius: 0,
-    // width: '52%',
     marginVertical: 4,
-    // right: 0,
-    // marginLeft: 50,
   },
   clockButtonText: {
     marginLeft: 5,
@@ -4001,12 +4015,18 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   scanButtonText: {
-    marginLeft: 5,
-    marginRight: 4,
     fontSize: 16,
     fontWeight: "bold",
     color: "#fff",
+    marginLeft: 8, // Just enough space between icon and text
   },
+  // scanButtonText: {
+  //   marginLeft: 50,
+  //   marginRight: 4,
+  //   fontSize: 16,
+  //   fontWeight: "bold",
+  //   color: "#fff",
+  // },
   textContainer: {
     position: "absolute",
     top: 70,

@@ -720,8 +720,8 @@ const Schedule_Attendance = () => {
             </View>
           </View>
         </ScrollView>
-        <FooterUser activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
       </View>
+        <FooterUser activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
     </SafeAreaView>
   );
 };

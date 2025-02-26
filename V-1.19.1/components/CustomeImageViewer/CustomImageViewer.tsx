@@ -8,38 +8,42 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  PanResponder,
 } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import {
   PinchGestureHandler,
   TapGestureHandler,
   GestureHandlerRootView,
+  State,
 } from "react-native-gesture-handler";
 
-const { width: viewportWidth } = Dimensions.get("window");
-const IMAGE_WIDTH = viewportWidth;
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get("window");
 const THUMBNAIL_SIZE = 30;
-const THUMBNAIL_Height_SIZE = 40;
+const THUMBNAIL_HEIGHT_SIZE = 40;
 
 const ImageViewer = () => {
   const route = useRoute();
+  const navigation = useNavigation();
   const { images = [], initialIndex = 0 } = route.params || {};
+
   const flatListRef = useRef(null);
   const thumbnailListRef = useRef(null);
   const scale = useRef(new Animated.Value(1)).current;
   const lastScale = useRef(1);
   const translateX = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(0)).current;
+  const lastOffsetX = useRef(0);
+  const lastOffsetY = useRef(0);
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
-  // Handles pinch zoom gesture
-  const onPinchEvent = Animated.event([{ nativeEvent: { scale } }], {
-    useNativeDriver: false,
-  });
+  const onPinchEvent = Animated.event(
+    [{ nativeEvent: { scale } }],
+    { useNativeDriver: false }
+  );
 
-  // Handles zoom state changes
   const onPinchStateChange = (event: any) => {
-    if (event.nativeEvent.state === 5) {
+    if (event.nativeEvent.state === State.END) {
       let newScale = event.nativeEvent.scale;
       if (newScale > 1) {
         lastScale.current = newScale;
@@ -49,7 +53,6 @@ const ImageViewer = () => {
     }
   };
 
-  // Resets zoom to default
   const resetZoom = () => {
     Animated.parallel([
       Animated.spring(scale, { toValue: 1, useNativeDriver: false }),
@@ -57,12 +60,31 @@ const ImageViewer = () => {
       Animated.spring(translateY, { toValue: 0, useNativeDriver: false }),
     ]).start(() => {
       lastScale.current = 1;
+      lastOffsetX.current = 0;
+      lastOffsetY.current = 0;
     });
   };
 
+  const panResponder = PanResponder.create({
+    onMoveShouldSetPanResponder: (_, gestureState) =>
+      Math.abs(gestureState.dy) > 10 || Math.abs(gestureState.dx) > 10,
+    onPanResponderMove: (_, gestureState) => {
+      if (lastScale.current > 1) {
+        translateX.setValue(lastOffsetX.current + gestureState.dx);
+        translateY.setValue(lastOffsetY.current + gestureState.dy);
+      }
+    },
+    onPanResponderRelease: (_, gestureState) => {
+      lastOffsetX.current += gestureState.dx;
+      lastOffsetY.current += gestureState.dy;
+      if (gestureState.dy > 100 && lastScale.current === 1) {
+        navigation.goBack();
+      }
+    },
+  });
+
   return (
     <GestureHandlerRootView style={styles.container}>
-      {/* Main Image Viewer with Horizontal Sliding */}
       <FlatList
         ref={flatListRef}
         data={images}
@@ -70,27 +92,24 @@ const ImageViewer = () => {
         pagingEnabled
         keyExtractor={(_, index) => index.toString()}
         showsHorizontalScrollIndicator={false}
-        initialScrollIndex={initialIndex} // Ensure correct initial image
+        initialScrollIndex={images.length > 0 ? initialIndex : 0}
         getItemLayout={(data, index) => ({
           length: viewportWidth,
           offset: viewportWidth * index,
           index,
         })}
         onMomentumScrollEnd={(event) => {
-          const index = Math.round(
-            event.nativeEvent.contentOffset.x / viewportWidth
-          );
+          const index = Math.round(event.nativeEvent.contentOffset.x / viewportWidth);
           setSelectedIndex(index);
-          resetZoom(); // Reset zoom when switching images
+          resetZoom();
           thumbnailListRef.current?.scrollToIndex({
             index,
             animated: true,
             viewPosition: 0.5,
           });
         }}
-        renderItem={({ item, index }) => (
-          <View style={styles.imageWrapper}>
-            {/* Display Image Name */}
+        renderItem={({ item }) => (
+          <View style={styles.imageWrapper} {...panResponder.panHandlers}>
             <Text style={styles.imageName}>{item.split("/").pop()}</Text>
             <PinchGestureHandler
               onGestureEvent={onPinchEvent}
@@ -115,11 +134,7 @@ const ImageViewer = () => {
                     style={[
                       styles.image,
                       {
-                        transform: [
-                          { scale },
-                          { translateX },
-                          { translateY },
-                        ],
+                        transform: [{ scale }, { translateX }, { translateY }],
                       },
                     ]}
                     resizeMode="contain"
@@ -131,7 +146,6 @@ const ImageViewer = () => {
         )}
       />
 
-      {/* Thumbnail Slider */}
       <FlatList
         ref={thumbnailListRef}
         data={images}
@@ -143,9 +157,10 @@ const ImageViewer = () => {
           <TouchableOpacity
             onPress={() => {
               setSelectedIndex(index);
-              flatListRef.current.scrollToOffset({
-                offset: index * viewportWidth,
+              flatListRef.current?.scrollToIndex({
+                index,
                 animated: false,
+                viewPosition: 0,
               });
               resetZoom();
             }}
@@ -199,8 +214,8 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     width: THUMBNAIL_SIZE,
-    height: THUMBNAIL_Height_SIZE,
-    marginHorizontal: 1,
+    height: THUMBNAIL_HEIGHT_SIZE,
+    marginHorizontal: 2,
     borderRadius: 5,
   },
   selectedThumbnail: {
